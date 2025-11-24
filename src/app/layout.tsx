@@ -1,12 +1,14 @@
-import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "",
-  description: ""
+  title: "WooZoo",
+  description: "",
+  icons: {
+    icon: "/icons/woozoo.svg"
+  }
 };
 
 export default function RootLayout({
@@ -19,7 +21,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
     >
-      <body className={`${inter.className} antialiased`}>
+      <body>
         <ThemeProvider
           enableColorScheme={false}
           attribute="class"

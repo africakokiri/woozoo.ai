@@ -1,7 +1,9 @@
+import { Header } from "@/components/header";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "WooZoo",
@@ -10,6 +12,10 @@ export const metadata: Metadata = {
     icon: "/icons/woozoo.svg"
   }
 };
+
+const inter = Inter({
+  subsets: ["latin"]
+});
 
 export default function RootLayout({
   children
@@ -21,12 +27,14 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
     >
-      <body>
+      <body className={`${inter.className} font-sans font-light antialiased`}>
         <ThemeProvider
           enableColorScheme={false}
           attribute="class"
           disableTransitionOnChange
         >
+          <Header />
+
           {children}
         </ThemeProvider>
       </body>

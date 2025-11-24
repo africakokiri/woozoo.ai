@@ -1,4 +1,4 @@
-import { Header } from "@/components/header";
+import { Sidebar } from "@/components/sidebar";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
@@ -33,7 +33,7 @@ export default function RootLayout({
           attribute="class"
           disableTransitionOnChange
         >
-          <Header />
+          <Sidebar />
 
           {children}
         </ThemeProvider>

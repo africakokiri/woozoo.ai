@@ -1,5 +1,6 @@
-import { Sidebar } from "@/components/sidebar";
+import { WooZooSidebar } from "@/components/woozoo-sidebar";
 import "@/styles/globals.css";
+import { SidebarProvider } from "@/ui/sidebar";
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -27,16 +28,18 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
     >
-      <body className={`${inter.className} font-sans font-light antialiased`}>
-        <ThemeProvider
-          enableColorScheme={false}
-          attribute="class"
-          disableTransitionOnChange
-        >
-          <Sidebar />
+      <body className={`${inter.className} font-sans antialiased`}>
+        <SidebarProvider>
+          <ThemeProvider
+            enableColorScheme={false}
+            attribute="class"
+            disableTransitionOnChange
+          >
+            <WooZooSidebar />
 
-          {children}
-        </ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </SidebarProvider>
       </body>
     </html>
   );

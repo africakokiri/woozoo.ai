@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/ui/button";
-import { cn } from "@/utils/shadcn/cn";
 
 import { ArrowBigUp, Mic, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -10,7 +9,6 @@ import TextareaAutosize from "react-textarea-autosize";
 export const Prompt = () => {
   const [mounted, setMounted] = useState(false);
   const [prompt, setPrompt] = useState("");
-  const [focused, setFocused] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -24,8 +22,6 @@ export const Prompt = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log("!");
-
     setPrompt("");
   };
 
@@ -34,7 +30,7 @@ export const Prompt = () => {
       ref={formRef}
       onSubmit={handleSubmit}
       onClick={() => textareaRef.current?.focus()}
-      className={cn("h-fit space-y-4 rounded-md border p-4", focused && "border-primary")}
+      className="has-[:focus]:border-primary h-fit space-y-4 rounded-md border p-4"
     >
       <TextareaAutosize
         ref={textareaRef}
@@ -44,8 +40,6 @@ export const Prompt = () => {
         maxRows={10}
         autoFocus
         value={prompt}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
         onChange={(e) => setPrompt(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey) {

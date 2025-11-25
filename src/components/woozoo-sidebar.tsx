@@ -138,7 +138,7 @@ export const WooZooSidebar = () => {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter>
+      <SidebarFooter className={cn("flex", open ? "justify-start" : "items-center")}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarUser />
@@ -173,10 +173,12 @@ const SidebarRecentChat = () => {
 };
 
 const SidebarUser = () => {
+  const { open } = useSidebar();
+
   return (
     <Button
       variant="ghost"
-      className={cn("flex items-center justify-start px-2", !open && "hidden")}
+      className="flex justify-start px-0"
     >
       <Avatar className="h-8 w-8">
         <AvatarFallback className="bg-sidebar-foreground text-sidebar text-sm font-normal">
@@ -184,7 +186,7 @@ const SidebarUser = () => {
         </AvatarFallback>
       </Avatar>
 
-      <div className="flex items-center justify-between">
+      <div className={cn("flex items-center justify-between", !open && "hidden")}>
         <div className="flex flex-col text-start">
           <span className="font-semibold">Choi Bangu</span>
           <span className="text-xs font-light">kokiri@gmail.com</span>

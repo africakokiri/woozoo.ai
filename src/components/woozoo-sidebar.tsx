@@ -45,11 +45,11 @@ export const WooZooSidebar = () => {
       collapsible="icon"
       variant="sidebar"
       className={cn(
-        `bg-sidebar flex h-screen flex-col overflow-hidden border-r px-2 py-4 transition-none
+        `bg-sidebar flex h-screen flex-col overflow-hidden border-r py-4 transition-none
 **:transition-none`
       )}
     >
-      <SidebarHeader className="flex items-center">
+      <SidebarHeader className="flex items-center px-4">
         <div className={cn(open ? "flex w-full items-center justify-between" : "hidden")}>
           <h1 className="text-sidebar-foreground text-xl font-light">WooZoo</h1>
 
@@ -84,7 +84,7 @@ export const WooZooSidebar = () => {
 
       <Separator className="my-4" />
 
-      <SidebarContent className="gap-0">
+      <SidebarContent className="gap-0 px-2">
         <SidebarGroup className="space-y-4 p-0">
           <SidebarGroupContent className={cn(!open && "hidden")}>
             <Card className="bg-sidebar-accent-foreground/10 border p-4 shadow-none">
@@ -178,7 +178,7 @@ const SidebarUser = () => {
   return (
     <Button
       variant="ghost"
-      className="flex justify-start px-0"
+      className="flex justify-start px-2 py-6"
     >
       <Avatar className="h-8 w-8">
         <AvatarFallback className="bg-sidebar-foreground text-sidebar text-sm font-normal">
@@ -189,7 +189,7 @@ const SidebarUser = () => {
       <div className={cn("flex items-center justify-between", !open && "hidden")}>
         <div className="flex flex-col text-start">
           <span className="font-semibold">Choi Bangu</span>
-          <span className="text-xs font-light">kokiri@gmail.com</span>
+          <span className="text-xs font-light">africakokiri@gmail.com</span>
         </div>
       </div>
     </Button>

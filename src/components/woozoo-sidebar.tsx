@@ -44,7 +44,10 @@ export const WooZooSidebar = () => {
     <Sidebar
       collapsible="icon"
       variant="sidebar"
-      className={cn("bg-sidebar flex h-screen flex-col overflow-hidden border-r px-2 py-4")}
+      className={cn(
+        `bg-sidebar flex h-screen flex-col overflow-hidden border-r px-2 py-4 transition-none
+**:transition-none`
+      )}
     >
       <SidebarHeader className="flex items-center">
         <div className={cn(open ? "flex w-full items-center justify-between" : "hidden")}>

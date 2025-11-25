@@ -44,8 +44,10 @@ export const WooZooSidebar = () => {
     <Sidebar
       collapsible="icon"
       variant="sidebar"
-      className="bg-sidebar flex h-screen w-72 flex-col border-r px-2 py-4 transition-none
-**:transition-none"
+      className={cn(
+        "bg-sidebar flex h-screen w-72 flex-col border-r px-2 py-4 transition-none **:transition-none",
+        !open && "w-16!"
+      )}
     >
       <SidebarHeader className="flex items-center">
         <div className={cn(open ? "flex w-full items-center justify-between" : "hidden")}>
@@ -104,7 +106,7 @@ export const WooZooSidebar = () => {
 
           <SidebarGroupContent>
             <SidebarMenu className={cn("flex flex-col", !open && "items-center")}>
-              <SidebarMenuItem className={cn(open ? "" : "")}>
+              <SidebarMenuItem className={cn(open ? "space-y-1" : "space-y-2")}>
                 <SidebarItem
                   href="/"
                   Icon={<SquarePen strokeWidth={1.5} />}
@@ -123,7 +125,9 @@ export const WooZooSidebar = () => {
         <Separator className={cn("mt-2 mb-4", !open && "hidden")} />
 
         <SidebarGroup className="p-0">
-          <SidebarGroupLabel className="text-muted-foreground h-fit text-xs tracking-wider">
+          <SidebarGroupLabel
+            className={cn("text-muted-foreground h-fit text-xs tracking-wider", !open && "hidden")}
+          >
             Recent Chats
           </SidebarGroupLabel>
           <SidebarGroupContent>

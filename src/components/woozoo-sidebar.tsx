@@ -16,17 +16,21 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger
+  SidebarTrigger,
+  useSidebar
 } from "@/ui/sidebar";
+import { cn } from "@/utils/shadcn/cn";
 
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { ChevronsLeft, Moon, Search, SquarePen, Sun } from "lucide-react";
+import { Moon, Search, SquarePen, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export const WooZooSidebar = () => {
   const [mounted, setMounted] = useState(false);
+
+  const { open } = useSidebar();
 
   const { theme, setTheme } = useTheme();
 
@@ -39,41 +43,51 @@ export const WooZooSidebar = () => {
   return (
     <Sidebar
       collapsible="icon"
-      className="bg-sidebar flex h-screen w-72 flex-col border-r px-2 py-4"
+      variant="sidebar"
+      className="bg-sidebar flex h-screen w-72 flex-col border-r px-2 py-4 transition-none
+**:transition-none"
     >
-      <SidebarHeader>
-        <div className="flex items-center justify-between p-2">
+      <SidebarHeader className="flex items-center">
+        <div className={cn(open ? "flex w-full items-center justify-between" : "hidden")}>
           <h1 className="text-sidebar-foreground text-xl font-light">WooZoo</h1>
 
-          <div className="space-x-4">
+          <div className="">
             <Button
               variant="ghost"
               size="icon-sm"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="h-10 w-10"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "dark" ? (
+                <Sun
+                  strokeWidth={1.5}
+                  className="h-4 w-4"
+                />
+              ) : (
+                <Moon
+                  strokeWidth={1.5}
+                  className="h-4 w-4"
+                />
+              )}
             </Button>
 
-            <SidebarTrigger>
-              <Button
-                variant="ghost"
-                size="icon-sm"
-              >
-                <ChevronsLeft className="h-4 w-4" />
-              </Button>
-            </SidebarTrigger>
+            <SidebarTrigger className="h-10 w-10" />
           </div>
+        </div>
+
+        <div className={cn("", open && "hidden")}>
+          <SidebarTrigger className="h-10 w-10" />
         </div>
       </SidebarHeader>
 
       <Separator className="my-4" />
 
-      <SidebarContent>
-        <SidebarGroup className="space-y-4">
-          <SidebarGroupContent>
-            <Card className="bg-sidebar-accent border-sidebar-border p-4 shadow-none">
+      <SidebarContent className="gap-0">
+        <SidebarGroup className="space-y-4 p-0">
+          <SidebarGroupContent className="group-data-[collapsible=icon]:hidden">
+            <Card className="bg-sidebar-accent-foreground/10 border p-4 shadow-none">
               <div className="flex items-center justify-between">
-                <div className="space-y-1">
+                <div className="">
                   <p className="text-muted-foreground text-xs tracking-wider">CREDITS</p>
                   <p className="text-sidebar-foreground text-2xl font-light">$24.80</p>
                 </div>
@@ -89,26 +103,16 @@ export const WooZooSidebar = () => {
           </SidebarGroupContent>
 
           <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem className="space-y-1">
+            <SidebarMenu className={cn("flex flex-col", !open && "items-center")}>
+              <SidebarMenuItem className={cn(open ? "" : "")}>
                 <SidebarItem
                   href="/"
-                  Icon={
-                    <SquarePen
-                      strokeWidth={1.5}
-                      className="h-5 w-5"
-                    />
-                  }
+                  Icon={<SquarePen strokeWidth={1.5} />}
                   text="New Chat"
                 />
                 <SidebarItem
-                  href="/"
-                  Icon={
-                    <Search
-                      strokeWidth={1.5}
-                      className="h-5 w-5"
-                    />
-                  }
+                  href="/search"
+                  Icon={<Search strokeWidth={1.5} />}
                   text="Search Chats"
                 />
               </SidebarMenuItem>
@@ -116,10 +120,10 @@ export const WooZooSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <Separator />
+        <Separator className={cn("mt-2 mb-4", !open && "hidden")} />
 
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-muted-foreground text-xs tracking-wider">
+        <SidebarGroup className="p-0">
+          <SidebarGroupLabel className="text-muted-foreground h-fit text-xs tracking-wider">
             Recent Chats
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -142,14 +146,19 @@ export const WooZooSidebar = () => {
 };
 
 const SidebarItem = ({ href, Icon, text }: { href: string; Icon: React.ReactNode; text: string }) => {
+  const { open } = useSidebar();
+
   return (
     <SidebarMenuButton asChild>
       <Link
         href={href}
-        className="flex items-center gap-2"
+        className={cn(
+          "hover:bg-accent-foreground/10! flex items-center gap-2",
+          !open && "h-10! w-10! justify-center rounded-md"
+        )}
       >
         {Icon}
-        <span>{text}</span>
+        <span className={cn(!open && "hidden")}>{text}</span>
       </Link>
     </SidebarMenuButton>
   );
@@ -163,7 +172,7 @@ const SidebarUser = () => {
   return (
     <Button
       variant="ghost"
-      className="flex items-center justify-start px-2"
+      className={cn("flex items-center justify-start px-2", !open && "hidden")}
     >
       <Avatar className="h-8 w-8">
         <AvatarFallback className="bg-sidebar-foreground text-sidebar text-sm font-normal">

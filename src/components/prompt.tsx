@@ -30,7 +30,8 @@ export const Prompt = () => {
       ref={formRef}
       onSubmit={handleSubmit}
       onClick={() => textareaRef.current?.focus()}
-      className="has-[:focus]:border-primary h-fit space-y-4 rounded-md border p-4"
+      className="has-[:focus]:border-primary border-primary/30 h-fit space-y-4 rounded-md border p-4
+shadow-xl dark:shadow-neutral-800"
     >
       <TextareaAutosize
         ref={textareaRef}

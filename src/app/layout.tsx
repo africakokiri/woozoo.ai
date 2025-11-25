@@ -1,3 +1,4 @@
+import { Prompt } from "@/components/prompt";
 import { WooZooSidebar } from "@/components/woozoo-sidebar";
 import "@/styles/globals.css";
 import { SidebarProvider } from "@/ui/sidebar";
@@ -37,7 +38,10 @@ export default function RootLayout({
           >
             <WooZooSidebar />
 
-            <main className="mx-auto w-full max-w-3xl">{children}</main>
+            <main className="mx-auto w-full max-w-3xl">
+              <Prompt />
+              {children}
+            </main>
           </ThemeProvider>
         </SidebarProvider>
       </body>

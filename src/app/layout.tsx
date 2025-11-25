@@ -37,7 +37,7 @@ export default function RootLayout({
           >
             <WooZooSidebar />
 
-            {children}
+            <main className="mx-auto w-full max-w-3xl">{children}</main>
           </ThemeProvider>
         </SidebarProvider>
       </body>

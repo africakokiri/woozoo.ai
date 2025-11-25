@@ -1,22 +1,17 @@
 "use client";
 
 import { Button } from "@/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/ui/select";
 import { Textarea } from "@/ui/textarea";
 import { cn } from "@/utils/shadcn/cn";
+
 import {
   IconAlertTriangle,
   IconArrowUp,
   IconCloud,
   IconFileSpark,
   IconGauge,
-  IconPhotoScan,
+  IconPhotoScan
 } from "@tabler/icons-react";
 import { useRef, useState } from "react";
 
@@ -25,20 +20,20 @@ const PROMPTS = [
     icon: IconFileSpark,
     text: "Write documentation",
     prompt:
-      "Write comprehensive documentation for this codebase, including setup instructions, API references, and usage examples.",
+      "Write comprehensive documentation for this codebase, including setup instructions, API references, and usage examples."
   },
   {
     icon: IconGauge,
     text: "Optimize performance",
     prompt:
-      "Analyze the codebase for performance bottlenecks and suggest optimizations to improve loading times and runtime efficiency.",
+      "Analyze the codebase for performance bottlenecks and suggest optimizations to improve loading times and runtime efficiency."
   },
   {
     icon: IconAlertTriangle,
     text: "Find and fix 3 bugs",
     prompt:
-      "Scan through the codebase to identify and fix 3 critical bugs, providing detailed explanations for each fix.",
-  },
+      "Scan through the codebase to identify and fix 3 critical bugs, providing detailed explanations for each fix."
+  }
 ];
 
 const MODELS = [
@@ -46,26 +41,26 @@ const MODELS = [
     value: "gpt-5",
     name: "GPT-5",
     description: "Most advanced model",
-    max: true,
+    max: true
   },
   {
     value: "gpt-4o",
     name: "GPT-4o",
-    description: "Fast and capable",
+    description: "Fast and capable"
   },
   {
     value: "gpt-4",
     name: "GPT-4",
-    description: "Reliable and accurate",
+    description: "Reliable and accurate"
   },
   {
     value: "claude-3.5",
     name: "Claude 3.5 Sonnet",
-    description: "Great for coding tasks",
-  },
+    description: "Great for coding tasks"
+  }
 ];
 
-export default function Ai02() {
+export default function AiPrompt() {
   const [inputValue, setInputValue] = useState("");
   const [selectedModel, setSelectedModel] = useState(MODELS[0]);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -86,14 +81,13 @@ export default function Ai02() {
   };
 
   const renderMaxBadge = () => (
-    <div className="flex h-[14px] items-center gap-1.5 rounded border border-border px-1 py-0">
+    <div className="border-border flex h-[14px] items-center gap-1.5 rounded border px-1 py-0">
       <span
         className="text-[9px] font-bold uppercase"
         style={{
-          background:
-            "linear-gradient(to right, rgb(129, 161, 193), rgb(125, 124, 155))",
+          background: "linear-gradient(to right, rgb(129, 161, 193), rgb(125, 124, 155))",
           WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
+          WebkitTextFillColor: "transparent"
         }}
       >
         MAX
@@ -102,21 +96,26 @@ export default function Ai02() {
   );
 
   return (
-    <div className="flex flex-col gap-4 w-[calc(42rem-5rem)]">
-      <div className="flex min-h-[120px] flex-col rounded-2xl cursor-text bg-card border border-border shadow-lg">
-        <div className="flex-1 relative overflow-y-auto max-h-[258px]">
+    <div className="flex w-[calc(42rem-5rem)] flex-col gap-4">
+      <div
+        className="bg-card border-border flex min-h-[120px] cursor-text flex-col rounded-2xl border
+shadow-lg"
+      >
+        <div className="relative max-h-[258px] flex-1 overflow-y-auto">
           <Textarea
             ref={inputRef}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Ask anything"
-            className="w-full border-0 p-3 transition-[padding] duration-200 ease-in-out min-h-[48.4px] outline-none text-[16px] text-foreground resize-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent! whitespace-pre-wrap break-words"
+            className="text-foreground min-h-[48.4px] w-full resize-none border-0 bg-transparent! p-3
+text-[16px] break-words whitespace-pre-wrap shadow-none transition-[padding] duration-200 ease-in-out
+outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
           />
         </div>
 
         <div className="flex min-h-[40px] items-center gap-2 p-2 pb-1">
-          <div className="flex aspect-1 items-center gap-1 rounded-full bg-muted p-1.5 text-xs">
-            <IconCloud className="h-4 w-4 text-muted-foreground" />
+          <div className="aspect-1 bg-muted flex items-center gap-1 rounded-full p-1.5 text-xs">
+            <IconCloud className="text-muted-foreground h-4 w-4" />
           </div>
 
           <div className="relative flex items-center">
@@ -124,7 +123,10 @@ export default function Ai02() {
               value={selectedModel.value}
               onValueChange={handleModelChange}
             >
-              <SelectTrigger className="w-fit border-none bg-transparent! p-0 text-sm text-muted-foreground hover:text-foreground focus:ring-0 shadow-none">
+              <SelectTrigger
+                className="text-muted-foreground hover:text-foreground w-fit border-none bg-transparent!
+p-0 text-sm shadow-none focus:ring-0"
+              >
                 <SelectValue>
                   {selectedModel.max ? (
                     <div className="flex items-center gap-1">
@@ -138,7 +140,10 @@ export default function Ai02() {
               </SelectTrigger>
               <SelectContent>
                 {MODELS.map((model) => (
-                  <SelectItem key={model.value} value={model.value}>
+                  <SelectItem
+                    key={model.value}
+                    value={model.value}
+                  >
                     {model.max ? (
                       <div className="flex items-center gap-1">
                         <span>{model.name}</span>
@@ -147,9 +152,7 @@ export default function Ai02() {
                     ) : (
                       <span>{model.name}</span>
                     )}
-                    <span className="text-muted-foreground block text-xs">
-                      {model.description}
-                    </span>
+                    <span className="text-muted-foreground block text-xs">{model.description}</span>
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -160,7 +163,7 @@ export default function Ai02() {
             <Button
               variant="ghost"
               size="icon"
-              className="h-6 w-6 text-muted-foreground hover:text-foreground transition-all duration-100"
+              className="text-muted-foreground hover:text-foreground h-6 w-6 transition-all duration-100"
               title="Attach images"
             >
               <IconPhotoScan className="h-5 w-5" />
@@ -170,12 +173,12 @@ export default function Ai02() {
               variant="ghost"
               size="icon"
               className={cn(
-                "h-6 w-6 rounded-full transition-all duration-100 cursor-pointer bg-primary",
+                "bg-primary h-6 w-6 cursor-pointer rounded-full transition-all duration-100",
                 inputValue && "bg-primary hover:bg-primary/90!"
               )}
               disabled={!inputValue}
             >
-              <IconArrowUp className="h-4 w-4 text-primary-foreground" />
+              <IconArrowUp className="text-primary-foreground h-4 w-4" />
             </Button>
           </div>
         </div>
@@ -188,10 +191,13 @@ export default function Ai02() {
             <Button
               key={button.text}
               variant="ghost"
-              className="group flex items-center gap-2 rounded-full border px-3 py-2 text-sm text-foreground transition-all duration-200 hover:bg-muted/30 h-auto bg-transparent dark:bg-muted"
+              className="group text-foreground hover:bg-muted/30 dark:bg-muted flex h-auto items-center
+gap-2 rounded-full border bg-transparent px-3 py-2 text-sm transition-all duration-200"
               onClick={() => handlePromptClick(button.prompt)}
             >
-              <IconComponent className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+              <IconComponent
+                className="text-muted-foreground group-hover:text-foreground h-4 w-4 transition-colors"
+              />
               <span>{button.text}</span>
             </Button>
           );

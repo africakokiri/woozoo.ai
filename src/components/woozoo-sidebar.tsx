@@ -44,10 +44,7 @@ export const WooZooSidebar = () => {
     <Sidebar
       collapsible="icon"
       variant="sidebar"
-      className={cn(
-        "bg-sidebar flex h-screen w-72 flex-col border-r px-2 py-4 transition-none **:transition-none",
-        !open && "w-16!"
-      )}
+      className={cn("bg-sidebar flex h-screen flex-col overflow-hidden border-r px-2 py-4")}
     >
       <SidebarHeader className="flex items-center">
         <div className={cn(open ? "flex w-full items-center justify-between" : "hidden")}>
@@ -86,7 +83,7 @@ export const WooZooSidebar = () => {
 
       <SidebarContent className="gap-0">
         <SidebarGroup className="space-y-4 p-0">
-          <SidebarGroupContent className="group-data-[collapsible=icon]:hidden">
+          <SidebarGroupContent className={cn(!open && "hidden")}>
             <Card className="bg-sidebar-accent-foreground/10 border p-4 shadow-none">
               <div className="flex items-center justify-between">
                 <div className="">

@@ -11,7 +11,6 @@ import {
   ActionBarPrimitive,
   BranchPickerPrimitive,
   ComposerPrimitive,
-  ErrorPrimitive,
   MessagePrimitive,
   ThreadPrimitive
 } from "@assistant-ui/react";
@@ -75,19 +74,6 @@ z-10 self-center rounded-full p-4 disabled:invisible"
         <ArrowDownIcon />
       </TooltipIconButton>
     </ThreadPrimitive.ScrollToBottom>
-  );
-};
-
-const MessageError: FC = () => {
-  return (
-    <MessagePrimitive.Error>
-      <ErrorPrimitive.Root
-        className="aui-message-error-root border-destructive bg-destructive/10 text-destructive
-dark:bg-destructive/5 mt-2 rounded-md border p-3 text-sm dark:text-red-200"
-      >
-        <ErrorPrimitive.Message className="aui-message-error-message line-clamp-2" />
-      </ErrorPrimitive.Root>
-    </MessagePrimitive.Error>
   );
 };
 

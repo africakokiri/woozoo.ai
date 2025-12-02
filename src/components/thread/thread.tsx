@@ -1,12 +1,8 @@
-import {
-  ComposerAddAttachment,
-  ComposerAttachments,
-  UserMessageAttachments
-} from "@/components/assistant-ui/attachment";
-import { MarkdownText } from "@/components/assistant-ui/markdown-text";
-import { ToolFallback } from "@/components/assistant-ui/tool-fallback";
-import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
+import { ComposerAddAttachment, ComposerAttachments, UserMessageAttachments } from "@/ui/attachment";
 import { Button } from "@/ui/button";
+import { MarkdownText } from "@/ui/markdown-text";
+import { ToolFallback } from "@/ui/tool-fallback";
+import { TooltipIconButton } from "@/ui/tooltip-icon-button";
 import { cn } from "@/utils/shadcn/cn";
 
 import {

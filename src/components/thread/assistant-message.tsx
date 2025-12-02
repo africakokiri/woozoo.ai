@@ -1,3 +1,4 @@
+import { BranchPicker } from "@/components/thread/branch-picker";
 import { MessageError } from "@/components/thread/message-error";
 import { MarkdownText } from "@/ui/markdown-text";
 import { ToolFallback } from "@/ui/tool-fallback";

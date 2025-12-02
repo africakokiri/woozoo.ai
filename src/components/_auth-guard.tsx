@@ -26,8 +26,16 @@ const NotSignedIn = () => {
         <header className="fixed z-10 flex w-full justify-end gap-4 p-4">
           <Dialog>
             <DialogTrigger asChild>
-              <SignInButton mode="modal">
-                <Button>Sign In</Button>
+              <SignInButton
+                mode="modal"
+                appearance={{
+                  elements: {
+                    modalBackdrop: "flex items-center!",
+                    modalCloseButton: "ring-0!"
+                  }
+                }}
+              >
+                <Button>Sign in</Button>
               </SignInButton>
             </DialogTrigger>
 

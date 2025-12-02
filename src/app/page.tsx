@@ -1,7 +1,7 @@
 "use client";
 
-import { ThreadList } from "@/components/assistant-ui/thread-list";
-import { Thread } from "@/components/assistant-ui/thread/thread";
+import { ThreadList } from "@/components/thread-list/_thread-list";
+import { Thread } from "@/components/thread/_thread";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-sdk";

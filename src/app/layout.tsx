@@ -5,8 +5,11 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "",
-  description: ""
+  title: "WooZoo",
+  description: "",
+  icons: {
+    icon: "/icons/woozoo.svg"
+  }
 };
 
 export default function RootLayout({
@@ -24,6 +27,7 @@ export default function RootLayout({
           enableColorScheme={false}
           attribute="class"
           disableTransitionOnChange
+          defaultTheme="system"
         >
           {children}
         </ThemeProvider>

@@ -56,7 +56,7 @@ const NotSignedIn = () => {
 
             <DialogContent className="max-w-[402px]! border-none bg-transparent p-0 shadow-none">
               <DialogHeader className="sr-only">
-                <DialogTitle>Sign In</DialogTitle>
+                <DialogTitle>Sign in</DialogTitle>
               </DialogHeader>
             </DialogContent>
           </Dialog>

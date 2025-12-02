@@ -6,12 +6,22 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-sdk";
-import { SignInButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 
 export default function AuthGuard() {
   const { isSignedIn } = useUser();
 
-  return <>{isSignedIn ? <div></div> : <NotSignedIn />}</>;
+  return (
+    <>
+      {isSignedIn ? (
+        <div>
+          <SignOutButton />
+        </div>
+      ) : (
+        <NotSignedIn />
+      )}
+    </>
+  );
 }
 
 const NotSignedIn = () => {
@@ -34,6 +44,7 @@ const NotSignedIn = () => {
                     modalCloseButton: "ring-0!"
                   }
                 }}
+                forceRedirectUrl="/"
               >
                 <Button>Sign in</Button>
               </SignInButton>

@@ -1,21 +1,24 @@
 "use client";
 
+import { Chat } from "@/components/_chat";
 import { Thread } from "@/components/thread/_thread";
 import { Button } from "@/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/dialog";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-sdk";
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignInButton, useUser } from "@clerk/nextjs";
 
 export default function AuthGuard() {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
+
+  if (!isLoaded) return null;
 
   return (
     <>
       {isSignedIn ? (
         <div>
-          <SignOutButton />
+          <Chat />
         </div>
       ) : (
         <NotSignedIn />
@@ -30,6 +33,7 @@ const NotSignedIn = () => {
       api: "/api/chat"
     })
   });
+
   return (
     <AssistantRuntimeProvider runtime={runtime}>
       <div className="h-dvh">

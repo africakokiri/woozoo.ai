@@ -1,5 +1,6 @@
 "use client";
 
+import AppSidebar from "@/components/app-sidebar/_app-sidebar";
 import { Thread } from "@/components/thread/_thread";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 
@@ -17,6 +18,8 @@ export default function Chat() {
     <AssistantRuntimeProvider runtime={runtime}>
       <SidebarProvider>
         <div className="flex h-dvh w-full flex-col">
+          <AppSidebar />
+
           <SidebarInset>
             <Thread />
           </SidebarInset>

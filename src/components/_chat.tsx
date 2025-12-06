@@ -1,17 +1,9 @@
 "use client";
 
 import { AppSidebar } from "@/components/app-sidebar/_app-sidebar";
+import { NavTrigger } from "@/components/app-sidebar/nav-trigger";
 import { Thread } from "@/components/thread/_thread";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from "@/ui/breadcrumb";
-import { Separator } from "@/ui/separator";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-sdk";
@@ -27,28 +19,9 @@ export default function Chat() {
     <AssistantRuntimeProvider runtime={runtime}>
       <SidebarProvider>
         <AppSidebar />
-        <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2">
-            <div className="flex items-center gap-2 px-4">
-              <SidebarTrigger className="-ml-1" />
-              <Separator
-                orientation="vertical"
-                className="mr-2 data-[orientation=vertical]:h-4"
-              />
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="#">Building Your Application</BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator className="hidden md:block" />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
-            </div>
-          </header>
 
+        <SidebarInset>
+          <NavTrigger />
           <Thread />
         </SidebarInset>
       </SidebarProvider>

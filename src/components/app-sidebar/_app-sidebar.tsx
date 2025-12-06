@@ -5,7 +5,7 @@ import { NavMain } from "@/components/app-sidebar/nav-main";
 import { NavUser } from "@/components/app-sidebar/nav-user";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/ui/sidebar";
 
-import { Frame, PieChart } from "lucide-react";
+import { Search, SquarePen } from "lucide-react";
 import { type ComponentProps } from "react";
 
 const data = {
@@ -14,21 +14,16 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg"
   },
-  projects: [
+  tools: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame
+      name: "New chat",
+      url: "/",
+      icon: SquarePen
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map
+      name: "Search chats",
+      url: "/search",
+      icon: Search
     }
   ]
 };
@@ -45,7 +40,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        <NavMain projects={data.projects} />
+        <NavMain tools={data.tools} />
       </SidebarContent>
 
       <SidebarFooter>

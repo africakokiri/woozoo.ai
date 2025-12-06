@@ -20,9 +20,9 @@ import {
 import { Folder, Forward, type LucideIcon, MoreHorizontal, Trash2 } from "lucide-react";
 
 export const NavMain = ({
-  projects
+  tools
 }: {
-  projects: {
+  tools: {
     name: string;
     url: string;
     icon: LucideIcon;
@@ -31,14 +31,16 @@ export const NavMain = ({
   const { isMobile } = useSidebar();
 
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+    <SidebarGroup>
       <SidebarMenu>
-        {projects.map((item) => (
+        {tools.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton
+              asChild
+              tooltip={item.name}
+            >
               <a href={item.url}>
-                {/* <item.icon /> */}
+                <item.icon />
                 <span>{item.name}</span>
               </a>
             </SidebarMenuButton>
@@ -71,12 +73,6 @@ export const NavMain = ({
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   );

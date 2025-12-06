@@ -1,7 +1,6 @@
 "use client";
 
 import { NavMain } from "@/components/app-sidebar/nav-main";
-import { NavProjects } from "@/components/app-sidebar/nav-projects";
 import { NavUser } from "@/components/app-sidebar/nav-user";
 import {
   Sidebar,
@@ -13,7 +12,7 @@ import {
   SidebarMenuItem
 } from "@/ui/sidebar";
 
-import { BookOpen, Bot, Command, Frame, Map, PieChart, Settings2, SquareTerminal } from "lucide-react";
+import { BookOpen, Bot, Command, Settings2, SquareTerminal } from "lucide-react";
 import * as React from "react";
 
 const data = {
@@ -108,23 +107,6 @@ const data = {
         }
       ]
     }
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map
-    }
   ]
 };
 
@@ -161,7 +143,6 @@ items-center justify-center rounded-lg"
 
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
       </SidebarContent>
 
       <SidebarFooter>

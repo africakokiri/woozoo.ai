@@ -20,7 +20,7 @@ import {
 } from "@/ui/sidebar";
 import { cn } from "@/utils/shadcn/cn";
 
-import { EllipsisVertical, Eraser, Trash } from "lucide-react";
+import { EllipsisVertical, Eraser, Search, SquarePen, Trash } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -58,6 +58,23 @@ export const NavMain = () => {
                 </div>
               </div>
             </Card>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+
+      <SidebarGroup>
+        <SidebarMenu className="*:flex *:items-center *:gap-2">
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <SquarePen strokeWidth={1.5} />
+              New chats
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <Search strokeWidth={1.5} />
+              Search chats
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>

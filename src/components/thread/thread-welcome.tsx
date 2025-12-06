@@ -59,7 +59,8 @@ fill-mode-both duration-300 ease-out nth-[n+3]:hidden @md:nth-[n+3]:block"
             <Button
               variant="ghost"
               className="aui-thread-welcome-suggestion dark:hover:bg-accent/60 h-auto w-full flex-1
-flex-wrap items-start justify-start gap-1 rounded-3xl border px-5 py-4 text-left text-sm @md:flex-col"
+flex-wrap items-start justify-start gap-1 rounded-3xl border px-5 py-4 text-left text-sm shadow-lg
+@md:flex-col dark:shadow-neutral-800"
               aria-label={suggestedAction.action}
             >
               <span className="aui-thread-welcome-suggestion-text-1 font-medium">

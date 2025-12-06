@@ -18,14 +18,12 @@ export default function Chat() {
   return (
     <AssistantRuntimeProvider runtime={runtime}>
       <SidebarProvider>
-        <div className="flex h-dvh w-full flex-col">
-          <AppSidebar />
+        <AppSidebar />
 
-          <SidebarInset>
-            <TokenHeader />
-            <Thread />
-          </SidebarInset>
-        </div>
+        <SidebarInset>
+          <TokenHeader />
+          <Thread />
+        </SidebarInset>
       </SidebarProvider>
     </AssistantRuntimeProvider>
   );

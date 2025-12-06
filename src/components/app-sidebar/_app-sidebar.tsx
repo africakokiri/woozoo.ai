@@ -5,7 +5,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/ui/side
 
 export default function AppSidebar() {
   return (
-    <Sidebar className="z-20 transition-none *:transition-none">
+    <Sidebar className="z-20">
       <SidebarHeader>
         <AppSidebarHeader />
       </SidebarHeader>

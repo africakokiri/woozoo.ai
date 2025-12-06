@@ -1,6 +1,7 @@
 "use client";
 
 import { AppSidebarHeader } from "@/components/app-sidebar/app-sidebar-header";
+import { ThreadList } from "@/components/thread-list/_thread-list";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/ui/sidebar";
 
 export default function AppSidebar() {
@@ -10,7 +11,9 @@ export default function AppSidebar() {
         <AppSidebarHeader />
       </SidebarHeader>
 
-      <SidebarContent className="border-y"></SidebarContent>
+      <SidebarContent className="border-y">
+        <ThreadList />
+      </SidebarContent>
       <SidebarFooter></SidebarFooter>
     </Sidebar>
   );

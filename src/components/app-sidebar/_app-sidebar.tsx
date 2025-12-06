@@ -5,7 +5,7 @@ import { NavMain } from "@/components/app-sidebar/nav-main";
 import { NavUser } from "@/components/app-sidebar/nav-user";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/ui/sidebar";
 
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
+import { Frame, PieChart } from "lucide-react";
 import { type ComponentProps } from "react";
 
 const data = {
@@ -14,91 +14,21 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg"
   },
-  navMain: [
+  projects: [
     {
-      title: "Playground",
+      name: "Design Engineering",
       url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#"
-        },
-        {
-          title: "Starred",
-          url: "#"
-        },
-        {
-          title: "Settings",
-          url: "#"
-        }
-      ]
+      icon: Frame
     },
     {
-      title: "Models",
+      name: "Sales & Marketing",
       url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#"
-        },
-        {
-          title: "Explorer",
-          url: "#"
-        },
-        {
-          title: "Quantum",
-          url: "#"
-        }
-      ]
+      icon: PieChart
     },
     {
-      title: "Documentation",
+      name: "Travel",
       url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#"
-        },
-        {
-          title: "Get Started",
-          url: "#"
-        },
-        {
-          title: "Tutorials",
-          url: "#"
-        },
-        {
-          title: "Changelog",
-          url: "#"
-        }
-      ]
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#"
-        },
-        {
-          title: "Team",
-          url: "#"
-        },
-        {
-          title: "Billing",
-          url: "#"
-        },
-        {
-          title: "Limits",
-          url: "#"
-        }
-      ]
+      icon: Map
     }
   ]
 };
@@ -115,7 +45,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain projects={data.projects} />
       </SidebarContent>
 
       <SidebarFooter>

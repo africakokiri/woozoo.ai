@@ -13,8 +13,8 @@ export const Composer: FC = () => {
         className="aui-composer-attachment-dropzone border-input bg-background
 has-[textarea:focus-visible]:border-ring has-[textarea:focus-visible]:ring-ring/50
 data-[dragging=true]:border-ring data-[dragging=true]:bg-accent/50 dark:bg-background flex w-full
-flex-col rounded-3xl border px-1 pt-2 shadow-xs transition-[color,box-shadow] outline-none
-has-[textarea:focus-visible]:ring-[3px] data-[dragging=true]:border-dashed"
+flex-col rounded-3xl border px-1 pt-2 shadow-lg transition-[color,box-shadow] outline-none
+has-[textarea:focus-visible]:ring-[3px] data-[dragging=true]:border-dashed dark:shadow-neutral-800"
       >
         <ComposerAttachments />
         <ComposerPrimitive.Input

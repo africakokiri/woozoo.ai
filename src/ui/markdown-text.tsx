@@ -1,5 +1,6 @@
 "use client";
 
+import { SyntaxHighlighter } from "@/components/thread/shiki-highlighter";
 import { TooltipIconButton } from "@/ui/tooltip-icon-button";
 import { cn } from "@/utils/shadcn/cn";
 
@@ -70,6 +71,7 @@ const useCopyToClipboard = ({
 };
 
 const defaultComponents = memoizeMarkdownComponents({
+  SyntaxHighlighter: SyntaxHighlighter,
   h1: ({ className, ...props }) => (
     <h1
       className={cn(

@@ -65,13 +65,13 @@ export const NavMain = () => {
       <SidebarGroup>
         <SidebarMenu className="*:flex *:items-center *:gap-2">
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton tooltip="New chats">
               <SquarePen strokeWidth={1.5} />
               New chats
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton>
+            <SidebarMenuButton tooltip="Search chats">
               <Search strokeWidth={1.5} />
               Search chats
             </SidebarMenuButton>

@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownMenuTrigger } from "@/ui/dropdown-menu";
 import { Separator } from "@/ui/separator";
 import {
   SidebarGroup,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuAction,
   SidebarMenuButton,
@@ -36,7 +37,7 @@ export const NavMain = ({
             <Card className="rounded-3xl px-4 font-light shadow-none">
               <div className="flex flex-1 items-center justify-between">
                 <div className="flex flex-col">
-                  <span className="text-sidebar-foreground/80 text-xs tracking-wider">CREDITS</span>
+                  <span className="text-sidebar-foreground/70 text-xs tracking-wider">CREDITS</span>
                   <span className="text-sidebar-foreground mt-1 text-2xl">$24.80</span>
                 </div>
 
@@ -47,14 +48,14 @@ export const NavMain = ({
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sidebar-foreground/80 text-xs tracking-wider">
+                  <span className="text-sidebar-foreground/70 text-xs tracking-wider">
                     SESSION TOTAL
                   </span>
                   <span className="text-xl">1,322</span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-sidebar-foreground/80 text-xs tracking-wider">TOTAL COST</span>
+                  <span className="text-sidebar-foreground/70 text-xs tracking-wider">TOTAL COST</span>
                   <span className="text-lg">$0.14</span>
                 </div>
               </div>
@@ -64,6 +65,9 @@ export const NavMain = ({
       </SidebarGroup>
 
       <SidebarGroup>
+        <SidebarGroupLabel className="text-sidebar-foreground/50 text-xs font-medium">
+          Chat histories
+        </SidebarGroupLabel>
         <SidebarMenu>
           {tools.map((item) => (
             <SidebarMenuItem key={item.name}>

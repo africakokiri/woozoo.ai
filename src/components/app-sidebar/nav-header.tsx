@@ -1,5 +1,11 @@
 import { Button } from "@/ui/button";
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/ui/sidebar";
+import {
+  SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar
+} from "@/ui/sidebar";
 
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import Image from "next/image";
@@ -17,22 +23,24 @@ export const NavHeader = () => {
           size="lg"
           asChild
           className="hover:bg-sidebar"
+          tooltip="Open sidebar"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               {hover ? (
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  className="flex items-center justify-center"
+                <div
+                  className="flex h-8 w-8 items-center justify-center"
                   onMouseLeave={() => setHover(false)}
                   onClick={() => {
                     setOpen(!open);
                     setHover(false);
                   }}
                 >
-                  <ChevronsRight strokeWidth={1.5} />
-                </Button>
+                  <ChevronsRight
+                    className="h-4 w-4"
+                    strokeWidth={1.5}
+                  />
+                </div>
               ) : (
                 <Image
                   src="/icons/woozoo.svg"
@@ -47,13 +55,12 @@ export const NavHeader = () => {
             </div>
 
             {open && (
-              <Button
-                variant="ghost"
+              <SidebarMenuAction
                 className="h-10 w-10"
                 onClick={() => setOpen(!open)}
               >
                 {!open ? <ChevronsRight strokeWidth={1.5} /> : <ChevronsLeft strokeWidth={1.5} />}
-              </Button>
+              </SidebarMenuAction>
             )}
           </div>
         </SidebarMenuButton>

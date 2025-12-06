@@ -2,6 +2,7 @@
 
 import { NavMain } from "@/components/app-sidebar/nav-main";
 import { NavUser } from "@/components/app-sidebar/nav-user";
+import { Button } from "@/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -9,13 +10,13 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem
+  SidebarMenuItem,
+  useSidebar
 } from "@/ui/sidebar";
 
-import { BookOpen, Bot, Command, Settings2, SquareTerminal } from "lucide-react";
+import { BookOpen, Bot, ChevronsLeft, ChevronsRight, Settings2, SquareTerminal } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import * as React from "react";
+import { type ComponentProps, useState } from "react";
 
 const data = {
   user: {
@@ -112,7 +113,11 @@ const data = {
   ]
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
+  const [hover, setHover] = useState(false);
+
+  const { open, setOpen } = useSidebar();
+
   return (
     <Sidebar
       variant="inset"
@@ -125,18 +130,46 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton
               size="lg"
               asChild
+              className="hover:bg-sidebar"
             >
-              <Link
-                href="/"
-                className="flex gap-2"
-              >
-                <Image
-                  src="/icons/woozoo.svg"
-                  alt=""
-                  width={32}
-                  height={32}
-                />
-              </Link>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  {hover ? (
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      className="flex items-center justify-center"
+                      onMouseLeave={() => setHover(false)}
+                      onClick={() => {
+                        setOpen(!open);
+                        setHover(false);
+                      }}
+                    >
+                      <ChevronsRight strokeWidth={1.5} />
+                    </Button>
+                  ) : (
+                    <Image
+                      src="/icons/woozoo.svg"
+                      alt=""
+                      width={32}
+                      height={32}
+                      onMouseEnter={() => !open && setHover(true)}
+                    />
+                  )}
+
+                  <span className="text-lg font-light">WooZoo</span>
+                </div>
+
+                {open && (
+                  <Button
+                    variant="ghost"
+                    className="h-10 w-10"
+                    onClick={() => setOpen(!open)}
+                  >
+                    {!open ? <ChevronsRight strokeWidth={1.5} /> : <ChevronsLeft strokeWidth={1.5} />}
+                  </Button>
+                )}
+              </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

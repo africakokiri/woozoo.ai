@@ -1,7 +1,6 @@
 "use client";
 
 import { AppSidebar } from "@/components/app-sidebar/_app-sidebar";
-import { NavTrigger } from "@/components/app-sidebar/nav-trigger";
 import { Thread } from "@/components/thread/_thread";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 
@@ -21,7 +20,6 @@ export default function Chat() {
         <AppSidebar />
 
         <SidebarInset>
-          <NavTrigger />
           <Thread />
         </SidebarInset>
       </SidebarProvider>

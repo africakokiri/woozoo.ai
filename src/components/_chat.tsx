@@ -21,7 +21,7 @@ export default function Chat() {
         <AppSidebar />
 
         <SidebarInset>
-          <TokenHeader />
+          {/* <TokenHeader /> */}
           <Thread />
         </SidebarInset>
       </SidebarProvider>

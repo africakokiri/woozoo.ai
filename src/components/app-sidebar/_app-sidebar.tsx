@@ -40,7 +40,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent className="gap-0">
-        <NavMain tools={data.tools} />
+        <NavMain />
       </SidebarContent>
 
       <SidebarFooter>

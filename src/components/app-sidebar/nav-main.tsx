@@ -2,31 +2,29 @@
 
 import { Button } from "@/ui/button";
 import { Card } from "@/ui/card";
-import { DropdownMenu, DropdownMenuTrigger } from "@/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/ui/dropdown-menu";
 import { Separator } from "@/ui/separator";
 import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar
 } from "@/ui/sidebar";
 import { cn } from "@/utils/shadcn/cn";
 
-import { type LucideIcon, MoreHorizontal } from "lucide-react";
+import { EllipsisVertical, Eraser, Trash } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
-export const NavMain = ({
-  tools
-}: {
-  tools: {
-    name: string;
-    url: string;
-    icon: LucideIcon;
-  }[];
-}) => {
+export const NavMain = () => {
   const { open } = useSidebar();
 
   return (
@@ -69,29 +67,61 @@ export const NavMain = ({
           Chat histories
         </SidebarGroupLabel>
         <SidebarMenu>
-          {tools.map((item) => (
-            <SidebarMenuItem key={item.name}>
-              <SidebarMenuButton
-                asChild
-                tooltip={item.name}
-              >
-                <Link href={item.url}>
-                  <item.icon strokeWidth={1.5} />
-                  <span>{item.name}</span>
-                </Link>
-              </SidebarMenuButton>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <SidebarMenuAction showOnHover>
-                    <MoreHorizontal />
-                    <span className="sr-only">More</span>
-                  </SidebarMenuAction>
-                </DropdownMenuTrigger>
-              </DropdownMenu>
-            </SidebarMenuItem>
-          ))}
+          <SidebarMenuItem>
+            <SidebarItem />
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroup>
     </>
+  );
+};
+
+const SidebarItem = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div
+      className={cn(
+        "group/chat-item flex items-center justify-between rounded-lg py-0.5 hover:bg-neutral-200",
+        isOpen && "bg-neutral-200"
+      )}
+    >
+      <SidebarMenuButton
+        asChild
+        className="flex-1 hover:bg-transparent!"
+      >
+        <Link href="/">
+          <span>토스에 채용되는 방법</span>
+        </Link>
+      </SidebarMenuButton>
+
+      <DropdownMenu
+        open={isOpen}
+        onOpenChange={setIsOpen}
+      >
+        <DropdownMenuTrigger
+          className={cn("p-2 group-hover/chat-item:opacity-50", isOpen ? "opacity-50" : "opacity-0")}
+        >
+          <EllipsisVertical className="h-4 w-4" />
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent
+          side="bottom"
+          align="end"
+        >
+          <DropdownMenuItem>
+            <Eraser />
+            Rename
+          </DropdownMenuItem>
+
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItem className="**:text-destructive hover:bg-destructive/15! text-destructive!">
+            <Trash />
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 };

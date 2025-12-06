@@ -95,12 +95,14 @@ export const NavMain = () => {
 
 const SidebarItem = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { open } = useSidebar();
 
   return (
     <div
       className={cn(
         "group/chat-item flex items-center justify-between rounded-lg py-0.5 hover:bg-neutral-200",
-        isOpen && "bg-neutral-200"
+        isOpen && "bg-neutral-200",
+        !open && "hidden"
       )}
     >
       <SidebarMenuButton

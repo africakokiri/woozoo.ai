@@ -2,7 +2,6 @@
 
 import { NavMain } from "@/components/app-sidebar/nav-main";
 import { NavProjects } from "@/components/app-sidebar/nav-projects";
-import { NavSecondary } from "@/components/app-sidebar/nav-secondary";
 import { NavUser } from "@/components/app-sidebar/nav-user";
 import {
   Sidebar,
@@ -14,18 +13,7 @@ import {
   SidebarMenuItem
 } from "@/ui/sidebar";
 
-import {
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  LifeBuoy,
-  Map,
-  PieChart,
-  Send,
-  Settings2,
-  SquareTerminal
-} from "lucide-react";
+import { BookOpen, Bot, Command, Frame, Map, PieChart, Settings2, SquareTerminal } from "lucide-react";
 import * as React from "react";
 
 const data = {
@@ -121,18 +109,6 @@ const data = {
       ]
     }
   ],
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoy
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: Send
-    }
-  ],
   projects: [
     {
       name: "Design Engineering",
@@ -184,10 +160,6 @@ items-center justify-center rounded-lg"
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
-        <NavSecondary
-          items={data.navSecondary}
-          className="mt-auto"
-        />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

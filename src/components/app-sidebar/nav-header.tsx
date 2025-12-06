@@ -48,6 +48,7 @@ export const NavHeader = () => {
                   width={32}
                   height={32}
                   onMouseEnter={() => !open && setHover(true)}
+                  className="dark:invert"
                 />
               )}
 

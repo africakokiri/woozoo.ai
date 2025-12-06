@@ -1,4 +1,3 @@
-import { Button } from "@/ui/button";
 import {
   SidebarMenu,
   SidebarMenuAction,
@@ -6,6 +5,7 @@ import {
   SidebarMenuItem,
   useSidebar
 } from "@/ui/sidebar";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/ui/tooltip";
 
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import Image from "next/image";
@@ -54,14 +54,22 @@ export const NavHeader = () => {
               <span className="text-lg font-light">WooZoo</span>
             </div>
 
-            {open && (
-              <SidebarMenuAction
-                className="h-10 w-10"
-                onClick={() => setOpen(!open)}
-              >
-                {!open ? <ChevronsRight strokeWidth={1.5} /> : <ChevronsLeft strokeWidth={1.5} />}
-              </SidebarMenuAction>
-            )}
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  {open && (
+                    <SidebarMenuAction
+                      className="h-10 w-10"
+                      onClick={() => setOpen(!open)}
+                    >
+                      {!open ? <ChevronsRight strokeWidth={1.5} /> : <ChevronsLeft strokeWidth={1.5} />}
+                    </SidebarMenuAction>
+                  )}
+                </TooltipTrigger>
+
+                <TooltipContent side="bottom">Close sidebar</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>

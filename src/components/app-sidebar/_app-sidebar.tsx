@@ -1,7 +1,7 @@
 "use client";
 
-import { NavContent } from "@/components/app-sidebar/nav-content";
 import { NavHeader } from "@/components/app-sidebar/nav-header";
+import { NavMain } from "@/components/app-sidebar/nav-main";
 
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -25,11 +25,8 @@ export default function AppSidebar() {
         />
       </header>
 
-      <nav aria-label="chat menu">
-        <NavContent
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
-        />
+      <nav aria-label="Sidebar menu">
+        <NavMain isSidebarOpen={isSidebarOpen} />
       </nav>
 
       <footer></footer>

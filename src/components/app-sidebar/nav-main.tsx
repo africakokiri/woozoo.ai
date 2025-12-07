@@ -4,17 +4,10 @@ import { Button } from "@/ui/button";
 import { TooltipButton } from "@/ui/tooltip-button";
 
 import { Search, SquarePen } from "lucide-react";
-import { type Dispatch, type SetStateAction } from "react";
 
-export const NavContent = ({
-  isSidebarOpen,
-  setIsSidebarOpen
-}: {
-  isSidebarOpen: boolean;
-  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
+export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
-    <>
+    <div className="space-y-4">
       <ul className="space-y-1">
         {["New chats", "Search chats"].map((item, i) => (
           <li
@@ -28,7 +21,7 @@ export const NavContent = ({
                 className="flex w-full justify-start px-4!"
               >
                 {i === 0 ? <SquarePen /> : <Search />}
-                {item}
+                <span className="font-normal">{item}</span>
               </Button>
             ) : (
               <TooltipButton
@@ -42,7 +35,11 @@ export const NavContent = ({
         ))}
       </ul>
 
-      <ul></ul>
-    </>
+      <div className="px-4">
+        <h2 className="text-muted-foreground/70 px-4 text-sm font-normal">Chat histories</h2>
+
+        <ul></ul>
+      </div>
+    </div>
   );
 };

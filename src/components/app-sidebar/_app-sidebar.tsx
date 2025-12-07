@@ -29,17 +29,24 @@ export default function AppSidebar() {
       <header className="flex w-full items-center justify-between p-4">
         <div className="flex items-center gap-2">
           {isHover ? (
-            <Button
-              variant="ghost"
-              className="flex h-8 w-8 items-center justify-center"
-              onMouseLeave={() => setIsHover(false)}
-              onClick={() => {
-                setIsSidebarOpen(!isSidebarOpen);
-                setIsHover(false);
-              }}
-            >
-              <ChevronsRight />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="flex h-8 w-8 items-center justify-center"
+                  onMouseLeave={() => setIsHover(false)}
+                  onClick={() => {
+                    setIsSidebarOpen(!isSidebarOpen);
+                    setIsHover(false);
+                  }}
+                >
+                  <ChevronsRight />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                <p>Open sidebar</p>
+              </TooltipContent>
+            </Tooltip>
           ) : (
             <Image
               src="/icons/woozoo.svg"

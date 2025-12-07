@@ -25,24 +25,17 @@ export default function AppSidebar() {
       <header className="flex w-full items-center justify-between p-4">
         <div className="flex items-center gap-2">
           {isHover ? (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex h-8 w-8 items-center justify-center"
-                  onMouseLeave={() => setIsHover(false)}
-                  onClick={() => {
-                    setIsSidebarOpen(!isSidebarOpen);
-                    setIsHover(false);
-                  }}
-                >
-                  <ChevronsRight />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="right">
-                <p>Open sidebar</p>
-              </TooltipContent>
-            </Tooltip>
+            <TooltipButton
+              onClick={() => {
+                setIsSidebarOpen(!isSidebarOpen);
+                setIsHover(false);
+              }}
+              className="flex h-8 w-8 items-center justify-center"
+              onMouseLeave={() => setIsHover(false)}
+              tooltipMessage="Open sidebar"
+            >
+              <ChevronsRight />
+            </TooltipButton>
           ) : (
             <Image
               src="/icons/woozoo.svg"
@@ -58,20 +51,13 @@ export default function AppSidebar() {
         </div>
 
         {isSidebarOpen && (
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                className={cn("h-8 w-8", !isSidebarOpen && "hidden")}
-              >
-                {isSidebarOpen && <ChevronsLeft />}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Close sidebar</p>
-            </TooltipContent>
-          </Tooltip>
+          <TooltipButton
+            tooltipMessage="Close sidebar"
+            className="flex h-8 w-8 items-center justify-center"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            <ChevronsLeft />
+          </TooltipButton>
         )}
       </header>
 
@@ -92,20 +78,9 @@ export default function AppSidebar() {
                   {item}
                 </Button>
               ) : (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="flex w-full justify-start px-4!"
-                    >
-                      {i === 0 ? <SquarePen /> : <Search />}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">
-                    <p>{item}</p>
-                  </TooltipContent>
-                </Tooltip>
+                <TooltipButton tooltipMessage={item}>
+                  {i === 0 ? <SquarePen /> : <Search />}
+                </TooltipButton>
               )}
             </li>
           ))}
@@ -118,3 +93,29 @@ export default function AppSidebar() {
     </motion.aside>
   );
 }
+
+type TooltipButtonProps = {
+  children: string | React.ReactNode;
+  tooltipMessage: string;
+  className?: string;
+} & React.ComponentProps<typeof Button>;
+
+const TooltipButton = ({ children, tooltipMessage, className, ...props }: TooltipButtonProps) => {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className={cn("flex w-full justify-start px-4!", className)}
+          {...props}
+        >
+          {children}
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="right">
+        <p>{tooltipMessage}</p>
+      </TooltipContent>
+    </Tooltip>
+  );
+};

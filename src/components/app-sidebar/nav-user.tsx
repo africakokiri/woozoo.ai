@@ -9,6 +9,7 @@ import {
   AlertDialogTitle
 } from "@/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/ui/avatar";
+import { Button } from "@/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,8 +38,16 @@ export const NavUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="w-full">
-          <User isSidebarOpen={isSidebarOpen} />
+        <DropdownMenuTrigger
+          className="w-full"
+          asChild
+        >
+          <Button
+            variant="ghost"
+            className="p-0!"
+          >
+            <User isSidebarOpen={isSidebarOpen} />
+          </Button>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent
@@ -100,7 +109,7 @@ const User = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
       <Avatar className="h-9 w-9 rounded-lg">
         <AvatarImage
           src=""
-          alt=""
+          alt="Profile image"
         />
         <AvatarFallback className="rounded-lg">CN</AvatarFallback>
       </Avatar>
@@ -111,7 +120,10 @@ const User = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
           <span className="truncate text-xs">africakokiri@gmail.com</span>
         </div>
 
-        <ChevronsUpDown className="ml-auto" />
+        <ChevronsUpDown
+          className="ml-auto"
+          aria-hidden={true}
+        />
       </div>
     </div>
   );

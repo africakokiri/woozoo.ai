@@ -1,6 +1,6 @@
 "use client";
 
-import { AppSidebar } from "@/components/app-sidebar/_app-sidebar";
+import AppSidebar from "@/components/app-sidebar/_app-sidebar";
 import { Thread } from "@/components/thread/_thread";
 import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 

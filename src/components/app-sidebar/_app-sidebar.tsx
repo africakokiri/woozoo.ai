@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/ui/tooltip";
 import { cn } from "@/utils/shadcn/cn";
 
 import { ChevronsLeft, ChevronsRight, Search, SquarePen } from "lucide-react";
@@ -53,15 +54,22 @@ export default function AppSidebar() {
           <span className={cn("text-lg font-light", !isSidebarOpen && "hidden")}>WooZoo</span>
         </div>
 
-        <Button
-          variant="ghost"
-          onClick={() => {
-            setIsSidebarOpen(!isSidebarOpen);
-          }}
-          className={cn("h-8 w-8", !isSidebarOpen && "hidden")}
-        >
-          {isSidebarOpen && <ChevronsLeft />}
-        </Button>
+        {isSidebarOpen && (
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className={cn("h-8 w-8", !isSidebarOpen && "hidden")}
+              >
+                {isSidebarOpen && <ChevronsLeft />}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Add to library</p>
+            </TooltipContent>
+          </Tooltip>
+        )}
       </header>
 
       <nav aria-label="chat menu">

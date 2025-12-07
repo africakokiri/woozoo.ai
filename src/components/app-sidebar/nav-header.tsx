@@ -1,9 +1,9 @@
 "use client";
 
 import { TooltipButton } from "@/ui/tooltip-button";
-import { cn } from "@/utils/shadcn/cn";
 
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
@@ -43,7 +43,20 @@ export const NavHeader = ({
           />
         )}
 
-        <span className={cn("text-lg font-light", !isSidebarOpen && "hidden")}>WooZoo</span>
+        <AnimatePresence>
+          {isSidebarOpen && (
+            <motion.span
+              key="nav-header-logo-text"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-lg font-light"
+            >
+              WooZoo
+            </motion.span>
+          )}
+        </AnimatePresence>
       </div>
 
       {isSidebarOpen && (

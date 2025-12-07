@@ -79,14 +79,31 @@ export default function AppSidebar() {
               key={`${item}-${i}`}
               className="flex w-full items-center gap-2 px-2 text-sm"
             >
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex w-full justify-start px-4!"
-              >
-                {i === 0 ? <SquarePen /> : <Search />}
-                <span className={cn("font-normal", !isSidebarOpen && "sr-only")}>{item}</span>
-              </Button>
+              {isSidebarOpen ? (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex w-full justify-start px-4!"
+                >
+                  {i === 0 ? <SquarePen /> : <Search />}
+                  {item}
+                </Button>
+              ) : (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex w-full justify-start px-4!"
+                    >
+                      {i === 0 ? <SquarePen /> : <Search />}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="right">
+                    <span>{item}</span>
+                  </TooltipContent>
+                </Tooltip>
+              )}
             </li>
           ))}
         </ul>

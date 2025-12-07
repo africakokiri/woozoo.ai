@@ -116,7 +116,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 font-normal [&_svg]:h-5 [&_svg]:w-5 [&_svg]:stroke-[1.5];
   }
 
   body {

@@ -7,15 +7,11 @@ import { cn } from "@/utils/shadcn/cn";
 import { ChevronsLeft, ChevronsRight, Search, SquarePen } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function AppSidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isHover, setIsHover] = useState(false);
-
-  useEffect(() => {
-    console.log(isHover);
-  }, [isHover]);
 
   return (
     <motion.aside

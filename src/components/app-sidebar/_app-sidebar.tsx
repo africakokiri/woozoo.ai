@@ -18,10 +18,12 @@ export default function AppSidebar() {
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
       className="bg-sidebar border-r"
     >
-      <NavHeader
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
-      />
+      <header className="flex w-full items-center justify-between p-4">
+        <NavHeader
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
+      </header>
 
       <nav aria-label="chat menu">
         <NavContent

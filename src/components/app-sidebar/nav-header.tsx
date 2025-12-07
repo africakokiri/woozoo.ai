@@ -17,7 +17,7 @@ export const NavHeader = ({
   const [isHover, setIsHover] = useState(false);
 
   return (
-    <header className="flex w-full items-center justify-between p-4">
+    <>
       <div className="flex items-center gap-2">
         {isHover ? (
           <TooltipButton
@@ -56,6 +56,6 @@ export const NavHeader = ({
           <ChevronsLeft />
         </TooltipButton>
       )}
-    </header>
+    </>
   );
 };

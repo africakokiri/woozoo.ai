@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/ui/button";
 import { TooltipButton } from "@/ui/tooltip-button";
 import { cn } from "@/utils/shadcn/cn";
 
@@ -14,39 +13,31 @@ export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         {["New chats", "Search chats"].map((item, i) => (
           <li
             key={`${item}-${i}`}
-            className="flex w-full items-center gap-2 px-2 text-sm"
+            className="flex w-full items-center px-2 text-sm"
           >
-            {isSidebarOpen ? (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex w-full justify-start px-4!"
-              >
-                {i === 0 ? <SquarePen /> : <Search />}
+            <TooltipButton
+              tooltipMessage={item}
+              aria-label={item}
+              className="gap-2"
+              disableTooltip={isSidebarOpen}
+            >
+              {i === 0 ? <SquarePen aria-hidden={true} /> : <Search aria-hidden={true} />}
 
-                <AnimatePresence>
-                  {isSidebarOpen && (
-                    <motion.span
-                      key="nav-main-tools-text"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="font-normal"
-                    >
-                      {item}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </Button>
-            ) : (
-              <TooltipButton
-                tooltipMessage={item}
-                aria-label={item}
-              >
-                {i === 0 ? <SquarePen aria-hidden={true} /> : <Search aria-hidden={true} />}
-              </TooltipButton>
-            )}
+              <AnimatePresence>
+                {isSidebarOpen && (
+                  <motion.span
+                    key="nav-main-tools-text-out"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="font-normal"
+                  >
+                    {item}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </TooltipButton>
           </li>
         ))}
       </ul>

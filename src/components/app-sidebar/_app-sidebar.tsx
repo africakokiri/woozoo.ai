@@ -4,6 +4,7 @@ import { Button } from "@/ui/button";
 import { cn } from "@/utils/shadcn/cn";
 
 import { ChevronsLeft, ChevronsRight, Search, SquarePen } from "lucide-react";
+import { motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -11,7 +12,14 @@ export default function AppSidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <aside className={cn("bg-sidebar border-r", isSidebarOpen ? "w-72" : "w-16")}>
+    <motion.aside
+      initial={{ width: "288" }}
+      animate={{
+        width: isSidebarOpen ? 288 : 64
+      }}
+      transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
+      className={cn("bg-sidebar border-r", isSidebarOpen ? "w-72" : "w-16")}
+    >
       <header
         className={cn(
           "flex w-full items-center justify-between p-4",
@@ -62,6 +70,6 @@ export default function AppSidebar() {
       </nav>
 
       <footer></footer>
-    </aside>
+    </motion.aside>
   );
 }

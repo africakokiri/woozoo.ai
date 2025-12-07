@@ -8,9 +8,16 @@ type TooltipButtonProps = {
   children: string | React.ReactNode;
   tooltipMessage: string;
   className?: string;
+  disableTooltip?: boolean;
 } & React.ComponentProps<typeof Button>;
 
-export const TooltipButton = ({ children, tooltipMessage, className, ...props }: TooltipButtonProps) => {
+export const TooltipButton = ({
+  children,
+  tooltipMessage,
+  className,
+  disableTooltip,
+  ...props
+}: TooltipButtonProps) => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -23,7 +30,10 @@ export const TooltipButton = ({ children, tooltipMessage, className, ...props }:
           {children}
         </Button>
       </TooltipTrigger>
-      <TooltipContent side="right">
+      <TooltipContent
+        className={cn(disableTooltip && "hidden")}
+        side="right"
+      >
         <p>{tooltipMessage}</p>
       </TooltipContent>
     </Tooltip>

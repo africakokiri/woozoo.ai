@@ -12,7 +12,7 @@ export const NavHeader = ({
   setIsSidebarOpen
 }: {
   isSidebarOpen: boolean;
-  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean | null>>;
 }) => {
   const [isHover, setIsHover] = useState(false);
 

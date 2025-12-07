@@ -5,14 +5,28 @@ import { NavMain } from "@/components/app-sidebar/nav-main";
 import { NavUser } from "@/components/app-sidebar/nav-user";
 
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 export default function AppSidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean | null>(null);
+
+  useLayoutEffect(() => {
+    if (typeof window !== "undefined") {
+      const localStorageIsSidebarOpen = localStorage.getItem("open-sidebar") === "true";
+
+      if (isSidebarOpen !== localStorageIsSidebarOpen) setIsSidebarOpen(localStorageIsSidebarOpen);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isSidebarOpen !== null) localStorage.setItem("open-sidebar", String(isSidebarOpen));
+  }, [isSidebarOpen]);
+
+  if (isSidebarOpen === null) return null;
 
   return (
     <motion.aside
-      initial={{ width: "288" }}
+      initial={false}
       animate={{
         width: isSidebarOpen ? 288 : 64
       }}

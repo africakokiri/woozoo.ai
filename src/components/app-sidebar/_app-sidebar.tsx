@@ -32,14 +32,15 @@ export default function AppSidebar() {
               }}
               className="flex h-8 w-8 items-center justify-center"
               onMouseLeave={() => setIsHover(false)}
+              aria-label="Open sidebar"
               tooltipMessage="Open sidebar"
             >
-              <ChevronsRight />
+              <ChevronsRight aria-hidden={true} />
             </TooltipButton>
           ) : (
             <Image
               src="/icons/woozoo.svg"
-              alt=""
+              alt="WooZoo logo"
               width={32}
               height={32}
               onMouseEnter={() => !isSidebarOpen && setIsHover(true)}
@@ -52,6 +53,7 @@ export default function AppSidebar() {
 
         {isSidebarOpen && (
           <TooltipButton
+            aria-label="Close sidebar"
             tooltipMessage="Close sidebar"
             className="flex h-8 w-8 items-center justify-center"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -78,8 +80,11 @@ export default function AppSidebar() {
                   {item}
                 </Button>
               ) : (
-                <TooltipButton tooltipMessage={item}>
-                  {i === 0 ? <SquarePen /> : <Search />}
+                <TooltipButton
+                  tooltipMessage={item}
+                  aria-label={item}
+                >
+                  {i === 0 ? <SquarePen aria-hidden={true} /> : <Search aria-hidden={true} />}
                 </TooltipButton>
               )}
             </li>

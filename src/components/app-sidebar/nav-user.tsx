@@ -27,6 +27,7 @@ import { cn } from "@/utils/shadcn/cn";
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut, SunMoon } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
@@ -122,17 +123,27 @@ const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         </AvatarFallback>
       </Avatar>
 
-      <div className={cn("flex flex-1 items-center", !isSidebarOpen && "sr-only")}>
-        <div className="flex flex-col items-start justify-between">
-          <span className="truncate text-sm font-medium">{user?.firstName}</span>
-          <span className="truncate text-xs">{user?.emailAddresses[0].emailAddress}</span>
-        </div>
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className={cn("flex flex-1 items-center", !isSidebarOpen && "sr-only")}
+          >
+            <div className="flex flex-col items-start justify-between">
+              <span className="truncate text-sm font-medium">{user?.firstName}</span>
+              <span className="truncate text-xs">{user?.emailAddresses[0].emailAddress}</span>
+            </div>
 
-        <ChevronsUpDown
-          className="ml-auto"
-          aria-hidden={true}
-        />
-      </div>
+            <ChevronsUpDown
+              className="ml-auto"
+              aria-hidden={true}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -2,6 +2,7 @@
 
 import { NavHeader } from "@/components/app-sidebar/nav-header";
 import { NavMain } from "@/components/app-sidebar/nav-main";
+import { NavUser } from "@/components/app-sidebar/nav-user";
 
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -16,7 +17,7 @@ export default function AppSidebar() {
         width: isSidebarOpen ? 288 : 64
       }}
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
-      className="bg-sidebar border-r"
+      className="bg-sidebar flex h-screen flex-col border-r"
     >
       <header className="flex w-full items-center justify-between p-4">
         <NavHeader
@@ -29,7 +30,9 @@ export default function AppSidebar() {
         <NavMain isSidebarOpen={isSidebarOpen} />
       </nav>
 
-      <footer></footer>
+      <footer className="mt-auto p-4">
+        <NavUser isSidebarOpen={isSidebarOpen} />
+      </footer>
     </motion.aside>
   );
 }

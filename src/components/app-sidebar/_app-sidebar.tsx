@@ -44,7 +44,7 @@ export default function AppSidebar() {
         <NavMain isSidebarOpen={isSidebarOpen} />
       </nav>
 
-      <footer className="mt-auto p-4">
+      <footer className="mt-auto px-2 py-4">
         <NavUser isSidebarOpen={isSidebarOpen} />
       </footer>
     </motion.aside>

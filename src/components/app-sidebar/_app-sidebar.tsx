@@ -66,7 +66,7 @@ export default function AppSidebar() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Add to library</p>
+              <p>Close sidebar</p>
             </TooltipContent>
           </Tooltip>
         )}
@@ -100,7 +100,7 @@ export default function AppSidebar() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="right">
-                    <span>{item}</span>
+                    <p>{item}</p>
                   </TooltipContent>
                 </Tooltip>
               )}

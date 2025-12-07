@@ -25,7 +25,7 @@ import {
 import { DropdownMenuTrigger } from "@/ui/dropdown-menu";
 import { cn } from "@/utils/shadcn/cn";
 
-import { SignOutButton } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut, SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { type Dispatch, type SetStateAction, useState } from "react";
@@ -46,7 +46,7 @@ export const NavUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
             variant="ghost"
             className="p-0!"
           >
-            <User isSidebarOpen={isSidebarOpen} />
+            <UserProfile isSidebarOpen={isSidebarOpen} />
           </Button>
         </DropdownMenuTrigger>
 
@@ -103,21 +103,29 @@ export const NavUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   );
 };
 
-const User = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+  const { user } = useUser();
+
   return (
     <div className="flex w-full items-center gap-2">
-      <Avatar className="h-9 w-9 rounded-lg">
+      <Avatar className="h-9 w-9 rounded-full">
         <AvatarImage
-          src=""
+          src={user?.imageUrl}
           alt="Profile image"
         />
-        <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+        <AvatarFallback className="rounded-lg">
+          {user?.firstName &&
+            user.firstName
+              .split(" ")
+              .map((word) => word[0])
+              .join("")}
+        </AvatarFallback>
       </Avatar>
 
       <div className={cn("flex flex-1 items-center", !isSidebarOpen && "sr-only")}>
         <div className="flex flex-col items-start justify-between">
-          <span className="truncate text-sm font-medium">Africa Kokiri</span>
-          <span className="truncate text-xs">africakokiri@gmail.com</span>
+          <span className="truncate text-sm font-medium">{user?.firstName}</span>
+          <span className="truncate text-xs">{user?.emailAddresses[0].emailAddress}</span>
         </div>
 
         <ChevronsUpDown

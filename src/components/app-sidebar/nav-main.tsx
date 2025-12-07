@@ -5,6 +5,7 @@ import { TooltipButton } from "@/ui/tooltip-button";
 import { cn } from "@/utils/shadcn/cn";
 
 import { Search, SquarePen } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 
 export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
@@ -22,7 +23,21 @@ export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
                 className="flex w-full justify-start px-4!"
               >
                 {i === 0 ? <SquarePen /> : <Search />}
-                <span className="font-normal">{item}</span>
+
+                <AnimatePresence>
+                  {isSidebarOpen && (
+                    <motion.span
+                      key="nav-main-tools-text"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="font-normal"
+                    >
+                      {item}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </Button>
             ) : (
               <TooltipButton

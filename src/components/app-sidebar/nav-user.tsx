@@ -1,15 +1,151 @@
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from "@/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger
+} from "@/ui/dropdown-menu";
+import { DropdownMenuTrigger } from "@/ui/dropdown-menu";
+import { cn } from "@/utils/shadcn/cn";
 
-export const NavUser = () => {
+import { SignOutButton } from "@clerk/nextjs";
+import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut, SunMoon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { type Dispatch, type SetStateAction, useState } from "react";
+
+export const NavUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
+
+  const { theme, setTheme } = useTheme();
+
   return (
-    <div>
-      <Avatar className="h-8 w-8 rounded-lg">
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger className="w-full">
+          <User isSidebarOpen={isSidebarOpen} />
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent
+          className="w-(--radix-dropdown-menu-trigger-width) max-w-42 overflow-hidden rounded-lg"
+          align="end"
+          side="right"
+          sideOffset={4}
+        >
+          <DropdownMenuGroup>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>
+                <SunMoon />
+                Appearance
+              </DropdownMenuSubTrigger>
+
+              <DropdownMenuSubContent className="w-40">
+                <DropdownMenuRadioGroup
+                  value={theme}
+                  onValueChange={setTheme}
+                >
+                  <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+
+            <DropdownMenuItem>
+              <BadgeCheck />
+              Account
+            </DropdownMenuItem>
+
+            <DropdownMenuItem>
+              <CreditCard />
+              Billing
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem onClick={() => setIsLogoutDialogOpen(true)}>
+              <LogOut />
+              Sign out
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <AlertComponent
+        isLogoutDialogOpen={isLogoutDialogOpen}
+        setIsLogoutDialogOpen={setIsLogoutDialogOpen}
+      />
+    </>
+  );
+};
+
+const User = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+  return (
+    <div className="flex w-full items-center gap-2">
+      <Avatar className="h-9 w-9 rounded-lg">
         <AvatarImage
           src=""
           alt=""
         />
         <AvatarFallback className="rounded-lg">CN</AvatarFallback>
       </Avatar>
+
+      <div className={cn("flex flex-1 items-center", !isSidebarOpen && "sr-only")}>
+        <div className="flex flex-col items-start justify-between">
+          <span className="truncate text-sm font-medium">Africa Kokiri</span>
+          <span className="truncate text-xs">africakokiri@gmail.com</span>
+        </div>
+
+        <ChevronsUpDown className="ml-auto" />
+      </div>
     </div>
+  );
+};
+
+const AlertComponent = ({
+  isLogoutDialogOpen,
+  setIsLogoutDialogOpen
+}: {
+  isLogoutDialogOpen: boolean;
+  setIsLogoutDialogOpen: Dispatch<SetStateAction<boolean>>;
+}) => {
+  return (
+    <AlertDialog
+      open={isLogoutDialogOpen}
+      onOpenChange={setIsLogoutDialogOpen}
+    >
+      <AlertDialogContent className="space-y-4">
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure you want to sign out?</AlertDialogTitle>
+          <AlertDialogDescription>
+            You will need to sign in again to continue using WooZoo.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+          <SignOutButton>
+            <AlertDialogAction className="bg-destructive hover:bg-destructive/50">
+              Sign out
+            </AlertDialogAction>
+          </SignOutButton>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

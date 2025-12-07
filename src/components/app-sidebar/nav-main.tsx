@@ -2,6 +2,7 @@
 
 import { Button } from "@/ui/button";
 import { TooltipButton } from "@/ui/tooltip-button";
+import { cn } from "@/utils/shadcn/cn";
 
 import { Search, SquarePen } from "lucide-react";
 
@@ -35,10 +36,8 @@ export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         ))}
       </ul>
 
-      <div className="px-4">
+      <div className={cn("px-4", !isSidebarOpen && "hidden")}>
         <h2 className="text-muted-foreground/70 px-4 text-sm font-normal">Chat histories</h2>
-
-        <ul></ul>
       </div>
     </div>
   );

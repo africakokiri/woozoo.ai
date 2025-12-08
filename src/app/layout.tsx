@@ -1,3 +1,4 @@
+import ChatRuntimeProvider from "@/providers/chat-runtime-provider";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
@@ -36,7 +37,9 @@ export default function RootLayout({
             disableTransitionOnChange
             defaultTheme="system"
           >
-            <main>{children}</main>
+            <ChatRuntimeProvider>
+              <main>{children}</main>
+            </ChatRuntimeProvider>
           </ThemeProvider>
         </body>
       </html>

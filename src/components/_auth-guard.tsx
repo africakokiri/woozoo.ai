@@ -16,17 +16,7 @@ export default function AuthGuard() {
 
   if (!isLoaded) return null;
 
-  return (
-    <>
-      {isSignedIn ? (
-        <div>
-          <Chat />
-        </div>
-      ) : (
-        <NotSignedIn />
-      )}
-    </>
-  );
+  return <>{isSignedIn ? <Chat /> : <NotSignedIn />}</>;
 }
 
 const NotSignedIn = () => {

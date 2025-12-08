@@ -12,7 +12,7 @@ export const AssistantMessage: FC = () => {
   return (
     <MessagePrimitive.Root
       className="aui-assistant-message-root fade-in slide-in-from-bottom-1 animate-in relative mx-auto
-min-h-fit! w-full max-w-(--thread-max-width) py-4 duration-150 ease-out"
+w-full max-w-(--thread-max-width) py-4 duration-150 ease-out"
       data-role="assistant"
     >
       <div className="aui-assistant-message-content text-foreground mx-2 leading-7 wrap-break-word">

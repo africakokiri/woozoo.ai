@@ -48,3 +48,14 @@ export const createNewChatSession = async ({
     }
   });
 };
+
+export const getSessionByPublicId = async ({ params }: { params: { publicId: string } }) => {
+  return prisma.chatSession.findUnique({
+    where: { publicId: params.publicId },
+    include: {
+      messages: {
+        orderBy: { createdAt: "asc" }
+      }
+    }
+  });
+};

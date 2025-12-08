@@ -1,6 +1,7 @@
 "use client";
 
 import { TooltipButton } from "@/ui/tooltip-button";
+import { cn } from "@/utils/shadcn/cn";
 
 import { Search, SquarePen } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -8,16 +9,16 @@ import { AnimatePresence, motion } from "motion/react";
 export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
     <div className="space-y-4">
-      <ul className="space-y-1">
+      <ul className="flex w-full flex-col items-center space-y-1">
         {["New chats", "Search chats"].map((item, i) => (
           <li
             key={`${item}-${i}`}
-            className="flex items-center justify-center px-2 text-sm"
+            className="flex w-full items-center px-2 text-sm"
           >
             <TooltipButton
               tooltipMessage={item}
               aria-label={item}
-              className="flex h-8 w-8 items-center justify-center gap-2"
+              className="flex h-8 w-8 flex-1 items-center gap-2"
               disableTooltip={isSidebarOpen}
             >
               {i === 0 ? <SquarePen aria-hidden={true} /> : <Search aria-hidden={true} />}

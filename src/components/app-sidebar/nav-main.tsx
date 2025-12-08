@@ -42,9 +42,9 @@ export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         ))}
       </ul>
 
-      <div className={cn("px-4", !isSidebarOpen && "hidden")}>
+      {/* <div className={cn("px-4", !isSidebarOpen && "hidden")}>
         <h2 className="text-muted-foreground/70 px-4 text-sm font-normal">Chat histories</h2>
-      </div>
+      </div> */}
     </div>
   );
 };

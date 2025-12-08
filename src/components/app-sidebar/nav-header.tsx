@@ -41,7 +41,7 @@ export const NavHeader = ({
               width={32}
               height={32}
               onMouseEnter={() => !isSidebarOpen && setIsHover(true)}
-              className="h-8! w-8! dark:invert"
+              className="min-h-8! min-w-8! dark:invert"
             />
           </Link>
         )}

@@ -108,8 +108,8 @@ const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   const { user } = useUser();
 
   return (
-    <div className="flex w-full items-center gap-2 p-1.5">
-      <Avatar className="h-9 w-9 rounded-full">
+    <div className="flex w-full items-center gap-2 p-2.5">
+      <Avatar className="h-7 w-7 rounded-full">
         <AvatarImage
           src={user?.imageUrl}
           alt="Profile image"

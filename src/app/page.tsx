@@ -1,4 +1,4 @@
-import InitialSession from "@/app/_initial-session";
+import InitialSession from "@/app/(sessions)/_initial-session";
 
 export default function mainPage() {
   return (

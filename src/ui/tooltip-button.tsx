@@ -9,7 +9,7 @@ type TooltipButtonProps = {
   tooltipMessage: string;
   className?: string;
   disableTooltip?: boolean;
-  side: "right" | "top" | "bottom" | "left" | undefined;
+  side?: "right" | "top" | "bottom" | "left" | undefined;
 } & React.ComponentProps<typeof Button>;
 
 export const TooltipButton = ({

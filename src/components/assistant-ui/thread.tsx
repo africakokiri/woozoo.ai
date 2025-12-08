@@ -45,10 +45,6 @@ export const Thread: FC = () => {
         className="aui-thread-viewport relative flex flex-1 flex-col overflow-x-auto overflow-y-scroll
 scroll-smooth px-4 pt-4"
       >
-        <AssistantIf condition={({ thread }) => thread.isEmpty}>
-          <ThreadWelcome />
-        </AssistantIf>
-
         <ThreadPrimitive.Messages
           components={{
             UserMessage,
@@ -62,6 +58,10 @@ scroll-smooth px-4 pt-4"
 max-w-(--thread-max-width) flex-col gap-4 overflow-visible rounded-t-3xl pb-4 md:pb-6"
         >
           <ThreadScrollToBottom />
+          <AssistantIf condition={({ thread }) => thread.isEmpty}>
+            <ThreadWelcome />
+          </AssistantIf>
+
           <Composer />
         </ThreadPrimitive.ViewportFooter>
       </ThreadPrimitive.Viewport>

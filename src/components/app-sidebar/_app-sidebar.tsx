@@ -37,7 +37,7 @@ export default function AppSidebar() {
         isSidebarOpen && "w-[18rem]"
       )}
     >
-      <header className="flex w-full items-center justify-between px-3 py-4">
+      <header className="flex w-full items-center justify-between px-3.5 py-4">
         <NavHeader
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}

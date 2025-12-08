@@ -26,7 +26,7 @@ export const NavHeader = ({
               setIsSidebarOpen(!isSidebarOpen);
               setIsHover(false);
             }}
-            className="flex h-8 w-8 items-center justify-center"
+            className="flex h-12 w-12 items-center justify-center"
             onMouseLeave={() => setIsHover(false)}
             aria-label="Open sidebar"
             tooltipMessage="Open sidebar"
@@ -41,7 +41,7 @@ export const NavHeader = ({
               width={32}
               height={32}
               onMouseEnter={() => !isSidebarOpen && setIsHover(true)}
-              className="min-h-8! min-w-8! dark:invert"
+              className="min-h-12! min-w-12! dark:invert"
             />
           </Link>
         )}
@@ -70,7 +70,7 @@ export const NavHeader = ({
         <TooltipButton
           aria-label="Close sidebar"
           tooltipMessage="Close sidebar"
-          className="flex h-8 w-8 items-center justify-center"
+          className="flex h-12 w-12 items-center justify-center"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           <ChevronsLeft />

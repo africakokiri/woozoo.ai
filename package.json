@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/google-vertex": "^3.0.86",
+    "@ai-sdk/google": "^2.0.45",
     "@assistant-ui/react": "^0.11.48",
     "@assistant-ui/react-ai-sdk": "^1.1.16",
     "@assistant-ui/react-markdown": "^0.11.6",

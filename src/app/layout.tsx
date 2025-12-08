@@ -1,3 +1,4 @@
+import AppSidebar from "@/components/app-sidebar/_app-sidebar";
 import { prisma } from "@/libs/prisma/prisma";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
@@ -53,7 +54,11 @@ export default async function RootLayout({
             disableTransitionOnChange
             defaultTheme="system"
           >
-            {children}
+            <div className="flex">
+              <AppSidebar />
+
+              <div className="h-dvh w-dvw">{children}</div>
+            </div>
           </ThemeProvider>
         </body>
       </html>

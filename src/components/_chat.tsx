@@ -1,6 +1,5 @@
 "use client";
 
-import AppSidebar from "@/components/app-sidebar/_app-sidebar";
 import { Thread } from "@/components/thread/_thread";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
@@ -18,13 +17,7 @@ export default function Chat() {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
-      <div className="flex">
-        <AppSidebar />
-
-        <div className="h-dvh w-dvw">
-          <Thread />
-        </div>
-      </div>
+      <Thread />
     </AssistantRuntimeProvider>
   );
 }

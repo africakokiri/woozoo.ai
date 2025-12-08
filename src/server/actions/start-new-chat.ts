@@ -11,6 +11,8 @@ export const startNewChat = async (formData: FormData) => {
   const publicId = uuidv4();
   const model = "gemini-2.5-flash";
 
+  console.log(publicId);
+
   await createNewChatSession({
     publicId,
     prompt,

@@ -9,16 +9,28 @@ import { TooltipIconButton } from "@/ui/tooltip-icon-button";
 
 import { ComposerPrimitive, ThreadPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, Square } from "lucide-react";
-import { type FC, useState } from "react";
+import { type FC, type FormEvent, useState } from "react";
 
 export const Composer: FC = () => {
   const [prompt, setPrompt] = useState("");
 
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    formData.set("prompt", prompt);
+
+    setPrompt("");
+
+    console.log(formData);
+
+    await startNewChat(formData);
+  };
+
   return (
     // form 요소
     <ComposerPrimitive.Root
-      action={startNewChat}
-      onSubmit={() => setPrompt("")}
+      onSubmit={onSubmit}
       className="aui-composer-root relative flex w-full flex-col"
     >
       <ComposerPrimitive.AttachmentDropzone

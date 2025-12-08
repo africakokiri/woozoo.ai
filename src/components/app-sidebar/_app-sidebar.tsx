@@ -6,13 +6,13 @@ import { NavUser } from "@/components/app-sidebar/nav-user";
 import { useSidebarStore } from "@/libs/zustand/store";
 
 import { motion } from "motion/react";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AppSidebar() {
   const { isSidebarOpen, setIsSidebarOpen } = useSidebarStore();
   const [hydrated, setHydrated] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setHydrated(true);
   }, []);
 
@@ -21,11 +21,9 @@ export default function AppSidebar() {
   return (
     <motion.aside
       initial={false}
-      animate={{
-        width: isSidebarOpen ? 288 : 80
-      }}
+      animate={{ width: isSidebarOpen ? 288 : 80 }}
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
-      className="bg-sidebar sticky top-0 left-0 flex h-screen flex-col border-r"
+      className="bg-sidebar sticky top-0 left-0 flex h-screen shrink-0 flex-col border-r"
     >
       <header className="flex w-full items-center justify-between px-3.5 py-4">
         <NavHeader
@@ -39,7 +37,7 @@ export default function AppSidebar() {
       </nav>
 
       <footer className="mt-auto px-3.5 py-4">
-        <NavUser isSidebarOpen={isSidebarOpen} />
+        <NavUser isSidebarOpen={isSidebarOpen} />{" "}
       </footer>
     </motion.aside>
   );

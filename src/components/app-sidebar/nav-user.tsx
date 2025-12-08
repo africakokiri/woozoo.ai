@@ -45,7 +45,7 @@ export const NavUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         >
           <Button
             variant="ghost"
-            className="p-0!"
+            className="px-0! py-6!"
           >
             <UserProfile isSidebarOpen={isSidebarOpen} />
           </Button>

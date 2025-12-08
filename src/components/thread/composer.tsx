@@ -1,3 +1,4 @@
+import { ModelSelectorComponent } from "@/components/thread/model-selector-component";
 import { ComposerAddAttachment, ComposerAttachments } from "@/ui/attachment";
 import { Button } from "@/ui/button";
 import { TooltipButton } from "@/ui/tooltip-button";
@@ -51,6 +52,8 @@ p-1 text-xs"
             <Mic className="size-5 stroke-[1.5px]" />
           </TooltipButton>
         </div>
+
+        <ModelSelectorComponent />
       </div>
 
       <ThreadPrimitive.If running={false}>

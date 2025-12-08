@@ -31,7 +31,7 @@ export default function AppSidebar() {
         width: isSidebarOpen ? 288 : 64
       }}
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
-      className="bg-sidebar flex h-screen flex-col border-r"
+      className="bg-sidebar sticky top-0 left-0 flex h-screen flex-col border-r"
     >
       <header className="flex w-full items-center justify-between p-4">
         <NavHeader

@@ -13,7 +13,7 @@ export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         {["New chats", "Search chats"].map((item, i) => (
           <li
             key={`${item}-${i}`}
-            className="flex w-full items-center px-2 text-sm"
+            className="flex w-full items-center px-3 text-sm"
           >
             <TooltipButton
               tooltipMessage={item}

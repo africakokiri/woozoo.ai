@@ -29,7 +29,7 @@ export default function AppSidebar() {
     <motion.aside
       initial={false}
       animate={{
-        width: isSidebarOpen ? 288 : 64
+        width: isSidebarOpen ? 288 : 80
       }}
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
       className={cn(
@@ -37,7 +37,7 @@ export default function AppSidebar() {
         isSidebarOpen && "w-[18rem]"
       )}
     >
-      <header className="flex w-full items-center justify-between px-2 py-4">
+      <header className="flex w-full items-center justify-between px-3 py-4">
         <NavHeader
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}

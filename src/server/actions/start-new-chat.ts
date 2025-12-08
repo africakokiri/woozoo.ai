@@ -19,5 +19,5 @@ export const startNewChat = async (formData: FormData) => {
     model
   });
 
-  redirect(`/chat/${publicId}?p=${encodeURIComponent(prompt)}`);
+  redirect(`/chat/${publicId}?p=${prompt}`);
 };

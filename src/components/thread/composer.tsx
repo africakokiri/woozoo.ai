@@ -9,15 +9,20 @@ import { TooltipIconButton } from "@/ui/tooltip-icon-button";
 
 import { ComposerPrimitive, ThreadPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, Square } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { type FC, type FormEvent, startTransition } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { type FC, type FormEvent, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export const Composer: FC = () => {
+  const [isPending, startTransition] = useTransition();
+
   const router = useRouter();
+  const params = useParams();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (params.publicId) return; // 이미 채팅 세션 안이라면 리턴
 
     const uuid = uuidv4();
 

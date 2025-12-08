@@ -6,6 +6,8 @@ export const maxDuration = 30;
 export async function POST(req: Request) {
   const { messages, model } = await req.json();
 
+  console.log(model);
+
   const modelInstance = google(model ?? "gemini-2.5-flash-lite");
 
   const result = streamText({

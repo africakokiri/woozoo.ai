@@ -10,7 +10,12 @@ import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-s
 export default function Chat() {
   const runtime = useChatRuntime({
     transport: new AssistantChatTransport({
-      api: "/api/chat"
+      api: "/api/chat",
+      body: () => ({
+        model: "modelRef.current,  // 동적으로 모델 전달",
+        temperature: 0.7,
+        max_tokens: 100
+      })
     })
   });
 

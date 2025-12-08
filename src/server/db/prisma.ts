@@ -50,6 +50,10 @@ export const createNewChatSession = async ({
 };
 
 export const getSessionByPublicId = async ({ publicId }: { publicId: string }) => {
+  console.log("============================================================");
+  console.log(publicId);
+  console.log("============================================================");
+
   return prisma.chatSession.findUnique({
     where: { publicId },
     include: {

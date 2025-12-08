@@ -2,6 +2,10 @@ import ClientChatPage from "@/components/_client-chat-page";
 import { getSessionByPublicId } from "@/server/db/prisma";
 
 export default async function sessionPage({ params }: { params: { publicId: string } }) {
+  console.log("============================================================");
+  console.log(params);
+  console.log("============================================================");
+
   const session = await getSessionByPublicId({
     publicId: params.publicId
   });

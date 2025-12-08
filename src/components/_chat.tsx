@@ -2,7 +2,6 @@
 
 import AppSidebar from "@/components/app-sidebar/_app-sidebar";
 import { Thread } from "@/components/thread/_thread";
-import { SidebarInset, SidebarProvider } from "@/ui/sidebar";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-sdk";
@@ -19,13 +18,13 @@ export default function Chat() {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
-      <SidebarProvider>
+      <div className="flex">
         <AppSidebar />
 
-        <SidebarInset>
+        <div className="h-dvh w-dvw">
           <Thread />
-        </SidebarInset>
-      </SidebarProvider>
+        </div>
+      </div>
     </AssistantRuntimeProvider>
   );
 }

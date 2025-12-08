@@ -22,7 +22,7 @@ export const Composer: FC = () => {
   const params = useParams();
 
   const onSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+    setInput("");
 
     if (params.publicId) return; // 이미 채팅 세션 안이라면 리턴
 

@@ -13,12 +13,12 @@ export const NavMain = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         {["New chats", "Search chats"].map((item, i) => (
           <li
             key={`${item}-${i}`}
-            className="flex w-full items-center px-3 text-sm"
+            className="flex w-full items-center px-3.5 text-sm"
           >
             <TooltipButton
               tooltipMessage={item}
               aria-label={item}
-              className="flex h-8 w-8 flex-1 items-center gap-2"
+              className={cn("flex h-12 w-12 flex-1 justify-start gap-2", isSidebarOpen && "h-8")}
               disableTooltip={isSidebarOpen}
             >
               {i === 0 ? <SquarePen aria-hidden={true} /> : <Search aria-hidden={true} />}

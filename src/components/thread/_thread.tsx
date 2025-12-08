@@ -9,7 +9,7 @@ import { ThreadPrimitive } from "@assistant-ui/react";
 import { ArrowDownIcon } from "lucide-react";
 import { type FC } from "react";
 
-export const Thread: FC = () => {
+export default function Thread() {
   return (
     <ThreadPrimitive.Root
       className="aui-root aui-thread-root bg-background @container flex h-full flex-col"
@@ -44,7 +44,7 @@ max-w-(--thread-max-width) flex-col gap-4 overflow-visible rounded-t-3xl pb-4 md
       </ThreadPrimitive.Viewport>
     </ThreadPrimitive.Root>
   );
-};
+}
 
 const ThreadScrollToBottom: FC = () => {
   return (

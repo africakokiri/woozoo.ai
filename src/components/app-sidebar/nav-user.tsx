@@ -64,7 +64,10 @@ export const NavUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
                 Appearance
               </DropdownMenuSubTrigger>
 
-              <DropdownMenuSubContent className="w-40">
+              <DropdownMenuSubContent
+                sideOffset={4}
+                className="w-40"
+              >
                 <DropdownMenuRadioGroup
                   value={theme}
                   onValueChange={setTheme}

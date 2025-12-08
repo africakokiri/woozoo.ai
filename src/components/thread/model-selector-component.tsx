@@ -13,6 +13,7 @@ import {
   ModelSelectorName,
   ModelSelectorTrigger
 } from "@/components/thread/model-selector";
+import { useModelStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 
 import { CheckIcon } from "lucide-react";
@@ -72,7 +73,7 @@ const models = [
 
 export const ModelSelectorComponent = () => {
   const [open, setOpen] = useState(false);
-  const [selectedModel, setSelectedModel] = useState<string>("gemini-2.5-flash");
+  const { model: selectedModel, setModel: setSelectedModel } = useModelStore();
 
   const selectedModelData = models.find((model) => model.id === selectedModel);
 

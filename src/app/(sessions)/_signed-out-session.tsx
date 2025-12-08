@@ -6,12 +6,14 @@
  */
 import { Thread } from "@/components/assistant-ui/thread";
 import { Button } from "@/ui/button";
+import { Skeleton } from "@/ui/skeleton";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { SignInButton } from "@clerk/nextjs";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function SignedOutSession() {
   const runtime = useChatRuntime({
@@ -46,7 +48,20 @@ export default function SignedOutSession() {
 }
 
 const DarkmodeSwitch = () => {
+  const [isMount, setIsMount] = useState(false);
+
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setIsMount(true);
+  }, []);
+
+  if (!isMount)
+    return (
+      <Button size="icon">
+        <Skeleton />
+      </Button>
+    );
 
   return (
     <Button

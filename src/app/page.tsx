@@ -2,8 +2,8 @@
  * Route: /
  * Description: 로그인 여부에 따라 세션 이동
  */
-import InitialSession from "@/app/(sessions)/_initial-session";
-import SignedOutSession from "@/app/(sessions)/_signed-out-session";
+import InitialSession from "@/app/(sessions)/initial-session";
+import SignedOutSession from "@/app/(sessions)/signed-out-session";
 
 import { auth } from "@clerk/nextjs/server";
 

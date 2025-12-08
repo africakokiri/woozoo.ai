@@ -22,26 +22,19 @@ export const useModelStore = create<ModelStore>()(
 
 type SidebarStore = {
   isSidebarOpen: boolean;
-  _hasHydrated: boolean;
 
   setIsSidebarOpen: () => void;
-  setHasHydrated: (state: boolean) => void;
 };
 
 export const useSidebarStore = create<SidebarStore>()(
   persist(
     (set, get) => ({
       isSidebarOpen: true,
-      _hasHydrated: false,
 
-      setIsSidebarOpen: () => set({ isSidebarOpen: !get().isSidebarOpen }),
-      setHasHydrated: (state) => set({ _hasHydrated: state })
+      setIsSidebarOpen: () => set({ isSidebarOpen: !get().isSidebarOpen })
     }),
     {
-      name: "open-sidebar",
-      onRehydrateStorage: () => (state) => {
-        if (state) state.setHasHydrated(true);
-      }
+      name: "open-sidebar"
     }
   )
 );

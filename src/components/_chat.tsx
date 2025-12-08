@@ -12,9 +12,7 @@ export default function Chat() {
     transport: new AssistantChatTransport({
       api: "/api/chat",
       body: () => ({
-        model: "modelRef.current,  // 동적으로 모델 전달",
-        temperature: 0.7,
-        max_tokens: 100
+        model: "gemini-2.5-pro"
       })
     })
   });

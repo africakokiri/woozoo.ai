@@ -8,12 +8,12 @@ export async function POST(req: Request) {
 
   console.log(model);
 
-  const modelInstance = google(model ?? "gemini-2.5-flash-lite");
+  // const modelInstance = google("gemini-2.5-flash-live");
 
-  const result = streamText({
-    model: modelInstance,
-    messages: convertToModelMessages(messages)
-  });
+  // const result = streamText({
+  //   model: modelInstance,
+  //   messages: convertToModelMessages(messages)
+  // });
 
-  return result.toUIMessageStreamResponse();
+  // return result.toUIMessageStreamResponse();
 }

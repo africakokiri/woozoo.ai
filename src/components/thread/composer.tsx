@@ -31,7 +31,7 @@ export const Composer: FC = () => {
     router.push(`/chat/${publicId}?p=${encodeURIComponent(prompt)}`);
 
     startTransition(() => {
-      createNewChatSession({ publicId, prompt, model });
+      createNewChatSession({ publicId, prompt, model: "" });
     });
   };
 

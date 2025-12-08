@@ -1,9 +1,10 @@
 import { ComposerAddAttachment, ComposerAttachments } from "@/ui/attachment";
 import { Button } from "@/ui/button";
+import { TooltipButton } from "@/ui/tooltip-button";
 import { TooltipIconButton } from "@/ui/tooltip-icon-button";
 
 import { ComposerPrimitive, ThreadPrimitive } from "@assistant-ui/react";
-import { ArrowUpIcon, Square } from "lucide-react";
+import { ArrowUpIcon, Mic, Square } from "lucide-react";
 import { type FC } from "react";
 
 export const Composer: FC = () => {
@@ -36,7 +37,21 @@ const ComposerAction: FC = () => {
     <div
       className="aui-composer-action-wrapper relative mx-1 mt-2 mb-2 flex items-center justify-between"
     >
-      <ComposerAddAttachment />
+      <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <ComposerAddAttachment />
+          <TooltipButton
+            className="hover:bg-muted-foreground/15 dark:border-muted-foreground/15
+dark:hover:bg-muted-foreground/30 font-semibol flex size-[34px] items-center justify-center rounded-full
+p-1 text-xs"
+            tooltipMessage="Voice input"
+            side="top"
+            aria-label="Voice input"
+          >
+            <Mic className="size-5 stroke-[1.5px]" />
+          </TooltipButton>
+        </div>
+      </div>
 
       <ThreadPrimitive.If running={false}>
         <ComposerPrimitive.Send asChild>

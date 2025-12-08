@@ -13,63 +13,14 @@ import {
   ModelSelectorName,
   ModelSelectorTrigger
 } from "@/components/thread/model-selector";
+import { googleModels } from "@/constants/models/google";
 import { useModelStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 
 import { CheckIcon } from "lucide-react";
 import { useState } from "react";
 
-const models = [
-  {
-    id: "gpt-4o",
-    name: "GPT-4o",
-    chef: "OpenAI",
-    chefSlug: "openai",
-    providers: ["openai", "azure"]
-  },
-  {
-    id: "gpt-4o-mini",
-    name: "GPT-4o Mini",
-    chef: "OpenAI",
-    chefSlug: "openai",
-    providers: ["openai", "azure"]
-  },
-  {
-    id: "o1",
-    name: "o1",
-    chef: "OpenAI",
-    chefSlug: "openai",
-    providers: ["openai", "azure"]
-  },
-  {
-    id: "o1-mini",
-    name: "o1 Mini",
-    chef: "OpenAI",
-    chefSlug: "openai",
-    providers: ["openai", "azure"]
-  },
-  {
-    id: "gemini-2.5-flash",
-    name: "Gemini 2.5 Flash",
-    chef: "Google",
-    chefSlug: "google",
-    providers: ["google", "google-vertex"]
-  },
-  {
-    id: "gemini-1.5-pro",
-    name: "Gemini 1.5 Pro",
-    chef: "Google",
-    chefSlug: "google",
-    providers: ["google", "google-vertex"]
-  },
-  {
-    id: "gemini-1.5-flash",
-    name: "Gemini 1.5 Flash",
-    chef: "Google",
-    chefSlug: "google",
-    providers: ["google", "google-vertex"]
-  }
-];
+const models = [...googleModels];
 
 export const ModelSelectorComponent = () => {
   const [open, setOpen] = useState(false);

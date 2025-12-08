@@ -1,6 +1,7 @@
 "use client";
 
 import { ModelSelectorComponent } from "@/components/thread/model-selector-component";
+import { useModelStore } from "@/libs/zustand/store";
 import { createNewChatSession } from "@/server/db/prisma";
 import { ComposerAddAttachment, ComposerAttachments } from "@/ui/attachment";
 import { Button } from "@/ui/button";
@@ -15,6 +16,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const Composer: FC = () => {
   const [prompt, setPrompt] = useState("");
+  const { model } = useModelStore();
 
   const [isPending, startTransition] = useTransition();
 
@@ -31,7 +33,7 @@ export const Composer: FC = () => {
     router.push(`/chat/${publicId}?p=${encodeURIComponent(prompt)}`);
 
     startTransition(() => {
-      createNewChatSession({ publicId, prompt, model: "" });
+      createNewChatSession({ publicId, prompt, model });
     });
   };
 

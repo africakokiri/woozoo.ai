@@ -18,7 +18,7 @@ export const createUser = async ({ clerkUserId, email }: { clerkUserId: string; 
 export const createNewChatSession = async ({
   publicId,
   prompt,
-  model = "gemini-2.5-flash"
+  model
 }: {
   publicId: string;
   prompt: string;

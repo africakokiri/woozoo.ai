@@ -1,7 +1,7 @@
 "use client";
 
 import Chat from "@/components/_chat";
-import { Thread } from "@/components/thread/_thread";
+import Thread from "@/components/thread/_thread";
 import { Button } from "@/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/dialog";
 

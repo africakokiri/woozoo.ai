@@ -9,6 +9,7 @@ type TooltipButtonProps = {
   tooltipMessage: string;
   className?: string;
   disableTooltip?: boolean;
+  side: "right" | "top" | "bottom" | "left" | undefined;
 } & React.ComponentProps<typeof Button>;
 
 export const TooltipButton = ({
@@ -16,6 +17,7 @@ export const TooltipButton = ({
   tooltipMessage,
   className,
   disableTooltip,
+  side,
   ...props
 }: TooltipButtonProps) => {
   return (
@@ -32,7 +34,7 @@ export const TooltipButton = ({
       </TooltipTrigger>
       <TooltipContent
         className={cn(disableTooltip && "hidden")}
-        side="right"
+        side={side ?? "right"}
       >
         <p>{tooltipMessage}</p>
       </TooltipContent>

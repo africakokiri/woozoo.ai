@@ -10,6 +10,8 @@ import { Button } from "@/ui/button";
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { SignInButton } from "@clerk/nextjs";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function SignedOutSession() {
   const runtime = useChatRuntime({
@@ -22,6 +24,8 @@ export default function SignedOutSession() {
     <AssistantRuntimeProvider runtime={runtime}>
       <div className="h-dvh">
         <header className="fixed z-10 flex w-full justify-end gap-4 p-4">
+          <DarkmodeSwitch />
+
           <SignInButton
             mode="modal"
             appearance={{
@@ -40,3 +44,16 @@ export default function SignedOutSession() {
     </AssistantRuntimeProvider>
   );
 }
+
+const DarkmodeSwitch = () => {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Button
+      size="icon"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+    >
+      {theme === "dark" ? <Sun /> : <Moon />}
+    </Button>
+  );
+};

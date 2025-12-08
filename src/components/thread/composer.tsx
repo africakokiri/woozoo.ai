@@ -22,8 +22,6 @@ export const Composer: FC = () => {
 
     setPrompt("");
 
-    console.log(formData);
-
     await startNewChat(formData);
   };
 

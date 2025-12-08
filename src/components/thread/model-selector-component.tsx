@@ -48,8 +48,8 @@ const models = [
     providers: ["openai", "azure"]
   },
   {
-    id: "gemini-2.0-flash-exp",
-    name: "Gemini 2.0 Flash",
+    id: "gemini-2.5-flash",
+    name: "Gemini 2.5 Flash",
     chef: "Google",
     chefSlug: "google",
     providers: ["google", "google-vertex"]
@@ -72,7 +72,7 @@ const models = [
 
 export const ModelSelectorComponent = () => {
   const [open, setOpen] = useState(false);
-  const [selectedModel, setSelectedModel] = useState<string>("gpt-4o");
+  const [selectedModel, setSelectedModel] = useState<string>("gemini-2.5-flash");
 
   const selectedModelData = models.find((model) => model.id === selectedModel);
 

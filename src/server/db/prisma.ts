@@ -15,7 +15,7 @@ export const createUser = async ({ clerkUserId, email }: { clerkUserId: string; 
   });
 };
 
-export const createNewChatSession = async ({}) => {
+export const createNewChatSession = async () => {
   const userId = await auth();
 
   if (!userId) throw new Error("Unauthorized");
@@ -25,7 +25,7 @@ export const createNewChatSession = async ({}) => {
       userId: userId.userId ?? "",
       publicId: randomUUID(),
       title: "New Chat",
-      model: "gemini-flash-2.5-lite"
+      model: "gemini-flash-2.5"
     }
   });
 

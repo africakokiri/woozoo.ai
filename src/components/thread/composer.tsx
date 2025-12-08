@@ -1,4 +1,7 @@
+"use client";
+
 import { ModelSelectorComponent } from "@/components/thread/model-selector-component";
+import { createNewChatSession } from "@/server/db/prisma";
 import { ComposerAddAttachment, ComposerAttachments } from "@/ui/attachment";
 import { Button } from "@/ui/button";
 import { TooltipButton } from "@/ui/tooltip-button";
@@ -6,11 +9,31 @@ import { TooltipIconButton } from "@/ui/tooltip-icon-button";
 
 import { ComposerPrimitive, ThreadPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, Square } from "lucide-react";
-import { type FC } from "react";
+import { useRouter } from "next/navigation";
+import { type FC, type FormEvent, startTransition } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const Composer: FC = () => {
+  const router = useRouter();
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const uuid = uuidv4();
+
+    router.push(`/chat/${uuid}`);
+
+    startTransition(() => {
+      createNewChatSession(uuid);
+    });
+  };
+
   return (
-    <ComposerPrimitive.Root className="aui-composer-root relative flex w-full flex-col">
+    // form 요소
+    <ComposerPrimitive.Root
+      onSubmit={onSubmit}
+      className="aui-composer-root relative flex w-full flex-col"
+    >
       <ComposerPrimitive.AttachmentDropzone
         className="aui-composer-attachment-dropzone border-input bg-background
 has-[textarea:focus-visible]:border-ring has-[textarea:focus-visible]:ring-ring/50

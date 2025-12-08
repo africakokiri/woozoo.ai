@@ -1,4 +1,5 @@
 import AppSidebar from "@/components/app-sidebar/_app-sidebar";
+import MotionConfigProvider from "@/libs/motion/motion-config-provider";
 import { prisma } from "@/libs/prisma/prisma";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
@@ -54,11 +55,13 @@ export default async function RootLayout({
             disableTransitionOnChange
             defaultTheme="system"
           >
-            <div className="flex">
-              <AppSidebar />
+            <MotionConfigProvider>
+              <div className="flex">
+                <AppSidebar />
 
-              <div className="h-dvh w-dvw">{children}</div>
-            </div>
+                <div className="h-dvh w-dvw">{children}</div>
+              </div>
+            </MotionConfigProvider>
           </ThemeProvider>
         </body>
       </html>

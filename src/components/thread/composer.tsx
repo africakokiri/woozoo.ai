@@ -38,7 +38,7 @@ const ComposerAction: FC = () => {
     <div
       className="aui-composer-action-wrapper relative mx-1 mt-2 mb-2 flex items-center justify-between"
     >
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
         <div className="flex items-center gap-2">
           <ComposerAddAttachment />
           <TooltipButton

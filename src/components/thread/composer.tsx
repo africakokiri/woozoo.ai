@@ -10,10 +10,12 @@ import { TooltipIconButton } from "@/ui/tooltip-icon-button";
 import { ComposerPrimitive, ThreadPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, Square } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { type FC, type FormEvent, useTransition } from "react";
+import { type FC, type FormEvent, useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export const Composer: FC = () => {
+  const [input, setInput] = useState("");
+
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
@@ -26,7 +28,7 @@ export const Composer: FC = () => {
 
     const uuid = uuidv4();
 
-    router.push(`/chat/${uuid}`);
+    router.push(`/chat/${uuid}?p=${encodeURIComponent(input)}`);
 
     startTransition(() => {
       createNewChatSession(uuid);
@@ -52,6 +54,8 @@ has-[textarea:focus-visible]:ring-[3px] data-[dragging=true]:border-dashed dark:
           className="aui-composer-input placeholder:text-muted-foreground mb-1 max-h-32 min-h-16 w-full
 resize-none bg-transparent px-3.5 pt-1.5 pb-3 text-base outline-none focus-visible:ring-0"
           rows={1}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
           autoFocus
           aria-label="Message input"
         />

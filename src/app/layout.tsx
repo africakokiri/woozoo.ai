@@ -2,6 +2,7 @@ import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { shadcn } from "@clerk/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
@@ -19,7 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        theme: shadcn
+      }}
+    >
       <html
         lang="en"
         suppressHydrationWarning

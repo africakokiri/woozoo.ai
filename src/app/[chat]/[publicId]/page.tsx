@@ -1,3 +1,4 @@
+import ClientChatPage from "@/components/_client-chat-page";
 import SessionPage from "@/components/_session-page";
 import { getSessionByPublicId } from "@/server/db/prisma";
 
@@ -10,5 +11,11 @@ export default async function sessionPage({ params }: { params: { publicId: stri
     return <div className="h-screen w-screen text-5xl">세션을 찾을 수 없습니다.</div>;
   }
 
-  // return <SessionPage />;
+  return (
+    <ClientChatPage
+      publicId={session.publicId}
+      model={session.model ?? ""}
+      initialMessages={session.messages}
+    />
+  );
 }

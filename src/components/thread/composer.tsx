@@ -14,7 +14,7 @@ import { type FC, type FormEvent, useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export const Composer: FC = () => {
-  const [input, setInput] = useState("");
+  const [prompt, setPrompt] = useState("");
 
   const [isPending, startTransition] = useTransition();
 
@@ -22,16 +22,16 @@ export const Composer: FC = () => {
   const params = useParams();
 
   const onSubmit = async (e: FormEvent) => {
-    setInput("");
+    setPrompt("");
 
     if (params.publicId) return; // 이미 채팅 세션 안이라면 리턴
 
-    const uuid = uuidv4();
+    const publicId = uuidv4();
 
-    router.push(`/chat/${uuid}?p=${encodeURIComponent(input)}`);
+    router.push(`/chat/${publicId}?p=${encodeURIComponent(prompt)}`);
 
     startTransition(() => {
-      createNewChatSession(uuid);
+      createNewChatSession({ publicId, prompt });
     });
   };
 
@@ -54,8 +54,8 @@ has-[textarea:focus-visible]:ring-[3px] data-[dragging=true]:border-dashed dark:
           className="aui-composer-input placeholder:text-muted-foreground mb-1 max-h-32 min-h-16 w-full
 resize-none bg-transparent px-3.5 pt-1.5 pb-3 text-base outline-none focus-visible:ring-0"
           rows={1}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
           autoFocus
           aria-label="Message input"
         />

@@ -1,8 +1,7 @@
 "use client";
 
 import { ModelSelectorComponent } from "@/components/thread/model-selector-component";
-import { useModelStore } from "@/libs/zustand/store";
-import { createNewChatSession } from "@/server/db/prisma";
+import { startNewChat } from "@/server/actions/start-new-chat";
 import { ComposerAddAttachment, ComposerAttachments } from "@/ui/attachment";
 import { Button } from "@/ui/button";
 import { TooltipButton } from "@/ui/tooltip-button";
@@ -10,37 +9,16 @@ import { TooltipIconButton } from "@/ui/tooltip-icon-button";
 
 import { ComposerPrimitive, ThreadPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, Square } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import { type FC, type FormEvent, useState, useTransition } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { type FC, useState } from "react";
 
 export const Composer: FC = () => {
   const [prompt, setPrompt] = useState("");
-  const { model } = useModelStore();
-
-  const [isPending, startTransition] = useTransition();
-
-  const router = useRouter();
-  const params = useParams();
-
-  const onSubmit = async (e: FormEvent) => {
-    setPrompt("");
-
-    if (params.publicId) return; // 이미 채팅 세션 안이라면 리턴
-
-    const publicId = uuidv4();
-
-    router.push(`/chat/${publicId}?p=${encodeURIComponent(prompt)}`);
-
-    startTransition(() => {
-      createNewChatSession({ publicId, prompt, model });
-    });
-  };
 
   return (
     // form 요소
     <ComposerPrimitive.Root
-      onSubmit={onSubmit}
+      action={startNewChat}
+      onSubmit={() => setPrompt("")}
       className="aui-composer-root relative flex w-full flex-col"
     >
       <ComposerPrimitive.AttachmentDropzone

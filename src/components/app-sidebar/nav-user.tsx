@@ -127,7 +127,7 @@ const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         {isSidebarOpen && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, width: 200 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className={cn("flex flex-1 items-center", !isSidebarOpen && "sr-only")}

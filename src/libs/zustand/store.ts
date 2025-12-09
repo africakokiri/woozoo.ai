@@ -10,6 +10,9 @@ type GlobalConfigStore = {
 
   isSidebarOpen: boolean;
   setIsSidebarOpen: (isSidebarOpen: boolean) => void;
+
+  isSidebarRendered: boolean;
+  setIsSidebarRendered: () => void;
 };
 
 export const useGlobalConfigStore = create<GlobalConfigStore>()(
@@ -22,7 +25,10 @@ export const useGlobalConfigStore = create<GlobalConfigStore>()(
       setIsHydrated: () => set({ isHydrated: !get().isHydrated }),
 
       isSidebarOpen: true,
-      setIsSidebarOpen: () => set({ isSidebarOpen: !get().isSidebarOpen })
+      setIsSidebarOpen: () => set({ isSidebarOpen: !get().isSidebarOpen }),
+
+      isSidebarRendered: false,
+      setIsSidebarRendered: () => set({ isSidebarRendered: true })
     }),
     {
       name: "open-sidebar",

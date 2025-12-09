@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 export const SidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   return (
-    <ul className="flex w-full flex-col items-center space-y-1">
+    <ul className="flex w-full flex-col items-center space-y-2">
       {["New chats", "Search chats"].map((item, i) => (
         <li
           key={`${item}-${i}`}

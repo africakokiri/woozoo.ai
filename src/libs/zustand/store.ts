@@ -24,7 +24,7 @@ export const useGlobalConfigStore = create<GlobalConfigStore>()(
     (set, get) => ({
       isSidebarOpen: false,
 
-      setIsSidebarOpen: () => ({ isSidebarOpen: !get().isSidebarOpen })
+      setIsSidebarOpen: () => set({ isSidebarOpen: !get().isSidebarOpen })
     }),
     {
       name: "open-sidebar",

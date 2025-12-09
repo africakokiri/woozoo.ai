@@ -1,6 +1,7 @@
 "use client";
 
 import { SidebarHeader } from "@/components/sidebar/sidebar-header";
+import { SidebarNav } from "@/components/sidebar/sidebar-nav";
 
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -21,7 +22,10 @@ export default function Sidebar() {
           setIsSidebarOpen={setIsSidebarOpen}
         />
       </header>
-      <nav></nav>
+
+      <nav className="px-4">
+        <SidebarNav isSidebarOpen={isSidebarOpen} />
+      </nav>
       <footer></footer>
     </motion.aside>
   );

@@ -3,10 +3,11 @@
 import { SidebarHeader } from "@/components/sidebar/sidebar-header";
 import { SidebarNav } from "@/components/sidebar/sidebar-nav";
 import { SidebarUser } from "@/components/sidebar/sidebar-user";
+import { useFirstRenderStore } from "@/libs/zustand/store";
 import { cn } from "@/utils/tailwind/cn";
 
 import { type Variants, motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const titleVariants: Variants = {
   hidden: { opacity: 0, transition: { duration: 0.1 } },
@@ -18,6 +19,12 @@ export const titleVariants: Variants = {
 
 export default function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const { finishFirstRender } = useFirstRenderStore();
+
+  useEffect(() => {
+    requestAnimationFrame(() => finishFirstRender());
+  }, []);
 
   return (
     <motion.aside

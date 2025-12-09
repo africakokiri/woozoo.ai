@@ -1,8 +1,5 @@
-import {
-  ComposerAddAttachment,
-  ComposerAttachments,
-  UserMessageAttachments
-} from "@/components/assistant-ui/attachment";
+import { UserMessageAttachments } from "@/components/assistant-ui/attachment";
+import { Composer } from "@/components/assistant-ui/composer";
 import { MarkdownText } from "@/components/assistant-ui/markdown-text";
 import { ToolFallback } from "@/components/assistant-ui/tool-fallback";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
@@ -20,15 +17,13 @@ import {
 } from "@assistant-ui/react";
 import {
   ArrowDownIcon,
-  ArrowUpIcon,
   CheckIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   CopyIcon,
   DownloadIcon,
   PencilIcon,
-  RefreshCwIcon,
-  SquareIcon
+  RefreshCwIcon
 } from "lucide-react";
 import type { FC } from "react";
 
@@ -136,69 +131,6 @@ justify-start gap-1 rounded-2xl border px-4 py-3 text-left text-sm transition-co
           </ThreadPrimitive.Suggestion>
         </div>
       ))}
-    </div>
-  );
-};
-
-const Composer: FC = () => {
-  return (
-    <ComposerPrimitive.Root className="aui-composer-root relative flex w-full flex-col">
-      <ComposerPrimitive.AttachmentDropzone
-        className="aui-composer-attachment-dropzone border-input bg-background
-has-[textarea:focus-visible]:border-ring has-[textarea:focus-visible]:ring-ring/20
-data-[dragging=true]:border-ring data-[dragging=true]:bg-accent/50 flex w-full flex-col rounded-2xl
-border px-1 pt-2 transition-shadow outline-none has-[textarea:focus-visible]:ring-2
-data-[dragging=true]:border-dashed"
-      >
-        <ComposerAttachments />
-        <ComposerPrimitive.Input
-          placeholder="Send a message..."
-          className="aui-composer-input placeholder:text-muted-foreground mb-1 max-h-32 min-h-14 w-full
-resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:ring-0"
-          rows={1}
-          autoFocus
-          aria-label="Message input"
-        />
-        <ComposerAction />
-      </ComposerPrimitive.AttachmentDropzone>
-    </ComposerPrimitive.Root>
-  );
-};
-
-const ComposerAction: FC = () => {
-  return (
-    <div className="aui-composer-action-wrapper relative mx-2 mb-2 flex items-center justify-between">
-      <ComposerAddAttachment />
-
-      <AssistantIf condition={({ thread }) => !thread.isRunning}>
-        <ComposerPrimitive.Send asChild>
-          <TooltipIconButton
-            tooltip="Send message"
-            side="bottom"
-            type="submit"
-            variant="default"
-            size="icon"
-            className="aui-composer-send size-8 rounded-full"
-            aria-label="Send message"
-          >
-            <ArrowUpIcon className="aui-composer-send-icon size-4" />
-          </TooltipIconButton>
-        </ComposerPrimitive.Send>
-      </AssistantIf>
-
-      <AssistantIf condition={({ thread }) => thread.isRunning}>
-        <ComposerPrimitive.Cancel asChild>
-          <Button
-            type="button"
-            variant="default"
-            size="icon"
-            className="aui-composer-cancel size-8 rounded-full"
-            aria-label="Stop generating"
-          >
-            <SquareIcon className="aui-composer-cancel-icon size-3 fill-current" />
-          </Button>
-        </ComposerPrimitive.Cancel>
-      </AssistantIf>
     </div>
   );
 };

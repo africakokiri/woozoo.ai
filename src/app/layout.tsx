@@ -1,3 +1,4 @@
+import Sidebar from "@/components/sidebar/sidebar";
 import ChatRuntimeProvider from "@/providers/chat-runtime-provider";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
@@ -30,15 +31,17 @@ export default function RootLayout({
         lang="en"
         suppressHydrationWarning
       >
-        <body className={`${inter.className} antialiased`}>
+        <body className={`${inter.className} flex antialiased`}>
           <ThemeProvider
             enableColorScheme={false}
             attribute="class"
             disableTransitionOnChange
             defaultTheme="system"
           >
+            <Sidebar />
+
             <ChatRuntimeProvider>
-              <main>{children}</main>
+              <main className="h-dvh w-dvw">{children}</main>
             </ChatRuntimeProvider>
           </ThemeProvider>
         </body>

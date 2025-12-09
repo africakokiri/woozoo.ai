@@ -3,7 +3,7 @@
 import { SidebarHeader } from "@/components/sidebar/sidebar-header";
 import { SidebarNav } from "@/components/sidebar/sidebar-nav";
 import { SidebarUser } from "@/components/sidebar/sidebar-user";
-import { useFirstRenderStore, useGlobalConfigStore } from "@/libs/zustand/store";
+import { useGlobalConfigStore } from "@/libs/zustand/store";
 import { cn } from "@/utils/tailwind/cn";
 
 import { type Variants, motion } from "motion/react";
@@ -18,8 +18,7 @@ export const titleVariants: Variants = {
 };
 
 export default function Sidebar() {
-  const { isSidebarOpen } = useGlobalConfigStore();
-  const { finishFirstRender } = useFirstRenderStore();
+  const { isSidebarOpen, finishFirstRender } = useGlobalConfigStore();
 
   useEffect(() => {
     requestAnimationFrame(() => finishFirstRender());

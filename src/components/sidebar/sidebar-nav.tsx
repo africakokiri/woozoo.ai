@@ -1,7 +1,7 @@
 "use client";
 
 import { titleVariants } from "@/components/sidebar/sidebar";
-import { useFirstRenderStore, useGlobalConfigStore } from "@/libs/zustand/store";
+import { useGlobalConfigStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 import { cn } from "@/utils/tailwind/cn";
 
@@ -9,8 +9,7 @@ import { Search, SquarePen } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 export const SidebarNav = () => {
-  const { isFirstRender } = useFirstRenderStore();
-  const { isSidebarOpen } = useGlobalConfigStore();
+  const { isFirstRender, isSidebarOpen } = useGlobalConfigStore();
 
   return (
     <ul className="flex w-full flex-col items-center space-y-2">

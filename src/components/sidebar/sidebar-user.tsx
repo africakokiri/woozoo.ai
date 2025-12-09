@@ -1,5 +1,5 @@
 import { titleVariants } from "@/components/sidebar/sidebar";
-import { useFirstRenderStore, useGlobalConfigStore } from "@/libs/zustand/store";
+import { useGlobalConfigStore } from "@/libs/zustand/store";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -113,7 +113,7 @@ export const SidebarUser = () => {
 const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   const { user } = useUser();
 
-  const { isFirstRender } = useFirstRenderStore();
+  const { isFirstRender } = useGlobalConfigStore();
 
   return (
     <div className="flex w-full items-center gap-2 p-2.5">

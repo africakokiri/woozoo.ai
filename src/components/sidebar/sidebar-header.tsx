@@ -1,5 +1,5 @@
 import { titleVariants } from "@/components/sidebar/sidebar";
-import { useFirstRenderStore, useGlobalConfigStore } from "@/libs/zustand/store";
+import { useGlobalConfigStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 import { cn } from "@/utils/tailwind/cn";
 
@@ -9,9 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const SidebarHeader = () => {
-  const { isFirstRender } = useFirstRenderStore();
-
-  const { isSidebarOpen, setIsSidebarOpen } = useGlobalConfigStore();
+  const { isFirstRender, isSidebarOpen, setIsSidebarOpen } = useGlobalConfigStore();
 
   return (
     <div className="space-y-4">

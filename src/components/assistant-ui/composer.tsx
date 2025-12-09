@@ -1,14 +1,30 @@
+"use client";
+
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, SquareIcon } from "lucide-react";
-import { type FC } from "react";
+import { type FC, type FormEvent, useState } from "react";
 
 export const Composer: FC = () => {
+  const [prompt, setPrompt] = useState("");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+    formData.set("prompt", prompt);
+
+    for (const x of formData.entries()) {
+      console.log(x);
+    }
+  };
+
   return (
-    <ComposerPrimitive.Root className="aui-composer-root relative flex w-full flex-col">
+    <ComposerPrimitive.Root
+      onSubmit={handleSubmit}
+      className="aui-composer-root relative flex w-full flex-col"
+    >
       <ComposerPrimitive.AttachmentDropzone
         className="aui-composer-attachment-dropzone border-input bg-background
 has-[textarea:focus-visible]:border-ring has-[textarea:focus-visible]:ring-ring/20
@@ -24,6 +40,8 @@ resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:rin
           rows={1}
           autoFocus
           aria-label="Message input"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
         />
         <ComposerAction />
       </ComposerPrimitive.AttachmentDropzone>

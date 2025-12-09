@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import { useState } from "react";
 
 export default function Sidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
     <motion.aside

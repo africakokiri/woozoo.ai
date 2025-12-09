@@ -7,7 +7,7 @@ import { useGlobalConfigStore } from "@/libs/zustand/store";
 import { cn } from "@/utils/tailwind/cn";
 
 import { type Variants, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export const titleVariants: Variants = {
   hidden: { opacity: 0, transition: { duration: 0.1 } },
@@ -18,10 +18,12 @@ export const titleVariants: Variants = {
 };
 
 export default function Sidebar() {
-  const { isSidebarOpen, isHydrated, finishFirstRender } = useGlobalConfigStore();
+  const { isSidebarOpen, isHydrated, setIsSidebarRendered, finishFirstRender } = useGlobalConfigStore();
 
   useEffect(() => {
     requestAnimationFrame(() => finishFirstRender());
+
+    setIsSidebarRendered();
   }, []);
 
   if (!isHydrated) return null;

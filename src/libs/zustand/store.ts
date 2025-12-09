@@ -21,7 +21,7 @@ export const useGlobalConfigStore = create<GlobalConfigStore>()(
       isHydrated: false,
       setIsHydrated: () => set({ isHydrated: !get().isHydrated }),
 
-      isSidebarOpen: false,
+      isSidebarOpen: true,
       setIsSidebarOpen: () => set({ isSidebarOpen: !get().isSidebarOpen })
     }),
     {

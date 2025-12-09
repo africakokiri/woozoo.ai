@@ -1,4 +1,5 @@
 import ChatRuntimeProvider from "@/providers/chat-runtime-provider";
+import { upsertUser } from "@/server/prisma";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
@@ -15,11 +16,13 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await upsertUser();
+
   return (
     <ClerkProvider
       appearance={{

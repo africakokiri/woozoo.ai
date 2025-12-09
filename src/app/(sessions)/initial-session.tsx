@@ -14,7 +14,7 @@ export default function InitialSession() {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
-      <div className="h-dvh">
+      <div className="h-dvh w-dvw">
         <Thread />
       </div>
     </AssistantRuntimeProvider>

@@ -1,5 +1,6 @@
 import { titleVariants } from "@/components/sidebar/sidebar";
 import { Button } from "@/ui/button";
+import { cn } from "@/utils/tailwind/cn";
 
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -16,57 +17,66 @@ export const SidebarHeader = ({
 }) => {
   return (
     <div className="space-y-4">
-      <div className="flex h-12 flex-1 items-center justify-between">
+      <div className="flex items-center justify-between">
         <Link
           href="/"
           className="fvis flex items-center gap-2"
         >
-          <Image
-            src="/icons/main.svg"
-            alt="WooZoo logo"
-            width={48}
-            height={48}
-            className="size-12 dark:invert"
-          />
-          <AnimatePresence>
-            {isSidebarOpen && (
-              <motion.h1
-                key="sidebar-header"
-                variants={titleVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                aria-hidden={!isSidebarOpen}
-                className="text-sidebar-foreground text-2xl font-light tracking-tight"
-              >
-                WooZoo
-              </motion.h1>
+          <motion.div
+            animate={{
+              height: isSidebarOpen ? "auto" : "100px",
+              marginTop: isSidebarOpen ? 0 : 64,
+              borderTopWidth: isSidebarOpen ? 0 : 1,
+              borderBottomWidth: isSidebarOpen ? 0 : 1
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className={cn(
+              "flex h-12 items-center gap-2",
+              isSidebarOpen ? "mt-0" : "my-4 mt-16 h-full border-y"
             )}
-          </AnimatePresence>
+          >
+            <Image
+              src="/icons/main.svg"
+              alt="WooZoo logo"
+              width={48}
+              height={48}
+              className="min-w-12! shrink-0 dark:invert"
+            />
+            <AnimatePresence>
+              {isSidebarOpen && (
+                <motion.h1
+                  key="sidebar-header"
+                  variants={titleVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  aria-hidden={!isSidebarOpen}
+                  className="text-sidebar-foreground top-6 left-[72px] text-2xl font-light
+tracking-tight"
+                >
+                  WooZoo
+                </motion.h1>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </Link>
 
-        {isSidebarOpen && (
+        <motion.div
+          initial={{ x: 0 }}
+          animate={{ x: isSidebarOpen ? 208 : 0 }}
+          transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
+          className="absolute top-4 left-4"
+        >
           <Button
             aria-label="Close sidebar"
             variant="ghost"
             className="flex h-12 w-12 items-center justify-center"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           >
-            <ChevronsLeft />
+            {isSidebarOpen ? <ChevronsLeft /> : <ChevronsRight />}
           </Button>
-        )}
+        </motion.div>
       </div>
-
-      {!isSidebarOpen && (
-        <Button
-          aria-label="Close sidebar"
-          variant="ghost"
-          className="flex h-12 w-12 items-center justify-center"
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        >
-          <ChevronsRight />
-        </Button>
-      )}
     </div>
   );
 };

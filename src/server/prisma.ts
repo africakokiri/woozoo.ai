@@ -4,7 +4,7 @@ import { prisma } from "@/libs/prisma/prisma";
 
 import { currentUser } from "@clerk/nextjs/server";
 
-export const upsertUser = async () => {
+export const createUserIfNotExist = async () => {
   const user = await currentUser();
 
   if (!user) return null;

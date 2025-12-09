@@ -1,4 +1,7 @@
+"use client";
+
 import { titleVariants } from "@/components/sidebar/sidebar";
+import { useFirstRenderStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 import { cn } from "@/utils/tailwind/cn";
 
@@ -6,6 +9,8 @@ import { Search, SquarePen } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 export const SidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+  const { isFirstRender } = useFirstRenderStore();
+
   return (
     <ul className="flex w-full flex-col items-center space-y-2">
       {["New chats", "Search chats"].map((item, i) => (
@@ -28,7 +33,7 @@ export const SidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
                 <motion.span
                   key="sidebar-nav"
                   variants={titleVariants}
-                  initial="hidden"
+                  initial={isFirstRender ? false : "hidden"}
                   animate="visible"
                   exit="hidden"
                   className="font-normal"

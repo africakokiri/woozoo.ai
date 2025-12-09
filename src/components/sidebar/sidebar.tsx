@@ -9,7 +9,7 @@ import { type Variants, motion } from "motion/react";
 import { useState } from "react";
 
 export const titleVariants: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0, transition: { duration: 0.1 } },
   visible: {
     opacity: 1,
     transition: { duration: 0.2, delay: 0.1 }

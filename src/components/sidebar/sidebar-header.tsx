@@ -1,18 +1,11 @@
+import { titleVariants } from "@/components/sidebar/sidebar";
 import { Button } from "@/ui/button";
 
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
-import { AnimatePresence, type Variants, motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { type Dispatch, type SetStateAction } from "react";
-
-const titleVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { duration: 0.2, delay: 0.1 }
-  }
-};
 
 export const SidebarHeader = ({
   isSidebarOpen,
@@ -38,7 +31,7 @@ export const SidebarHeader = ({
           <AnimatePresence>
             {isSidebarOpen && (
               <motion.h1
-                key="sidebar-title"
+                key="sidebar-header"
                 variants={titleVariants}
                 initial="hidden"
                 animate="visible"

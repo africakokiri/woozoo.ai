@@ -1,3 +1,4 @@
+import { titleVariants } from "@/components/sidebar/sidebar";
 import { Button } from "@/ui/button";
 import { cn } from "@/utils/tailwind/cn";
 
@@ -25,11 +26,11 @@ export const SidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
             <AnimatePresence>
               {isSidebarOpen && (
                 <motion.span
-                  key="nav-main-tools-text-out"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  key="sidebar-nav"
+                  variants={titleVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
                   className="font-normal"
                 >
                   {item}

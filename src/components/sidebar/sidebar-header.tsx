@@ -25,14 +25,13 @@ export const SidebarHeader = ({
           <motion.div
             animate={{
               height: isSidebarOpen ? "auto" : "100px",
-              marginTop: isSidebarOpen ? 0 : 64,
-              borderTopWidth: isSidebarOpen ? 0 : 1,
-              borderBottomWidth: isSidebarOpen ? 0 : 1
+              marginTop: isSidebarOpen ? 0 : 64
             }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            data-open={isSidebarOpen}
             className={cn(
               "flex h-12 items-center gap-2",
-              isSidebarOpen ? "mt-0" : "my-4 mt-16 h-full border-y"
+              isSidebarOpen ? "mt-0" : "my-4 mt-16 h-full border-y!"
             )}
           >
             <Image

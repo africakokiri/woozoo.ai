@@ -1,4 +1,5 @@
 import { titleVariants } from "@/components/sidebar/sidebar";
+import { useFirstRenderStore } from "@/libs/zustand/store";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,7 +25,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from "@/ui/dropdown-menu";
-import { cn } from "@/utils/tailwind/cn";
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut, SunMoon } from "lucide-react";
@@ -47,6 +47,7 @@ export const SidebarUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
           <Button
             variant="ghost"
             className="h-12 px-0! py-6!"
+            aria-label="Open user account menu"
           >
             <UserProfile isSidebarOpen={isSidebarOpen} />
           </Button>
@@ -111,6 +112,8 @@ export const SidebarUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
 const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
   const { user } = useUser();
 
+  const { isFirstRender } = useFirstRenderStore();
+
   return (
     <div className="flex w-full items-center gap-2 p-2.5">
       <Avatar className="h-7 w-7 rounded-full">
@@ -132,19 +135,20 @@ const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
           <motion.div
             key="sidebar-user"
             variants={titleVariants}
-            initial="hidden"
+            initial={isFirstRender ? false : "hidden"}
             animate="visible"
             exit="hidden"
-            className={cn("flex flex-1 items-center", !isSidebarOpen && "sr-only")}
+            className="flex flex-1 items-center"
           >
             <div className="flex flex-col items-start justify-between">
-              <span className="truncate text-sm font-medium">{user?.firstName}</span>
-              <span className="truncate text-xs">{user?.emailAddresses[0].emailAddress}</span>
+              <span className="text-sm font-medium">{user?.firstName}</span>
+              <span className="text-xs">{user?.emailAddresses[0].emailAddress}</span>
             </div>
 
             <ChevronsUpDown
+              aria-hidden="true"
+              focusable="false"
               className="ml-auto"
-              aria-hidden={true}
             />
           </motion.div>
         )}

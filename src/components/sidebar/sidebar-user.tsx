@@ -1,5 +1,5 @@
 import { titleVariants } from "@/components/sidebar/sidebar";
-import { useFirstRenderStore } from "@/libs/zustand/store";
+import { useFirstRenderStore, useGlobalConfigStore } from "@/libs/zustand/store";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,8 +32,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
 import { type Dispatch, type SetStateAction, useState } from "react";
 
-export const SidebarUser = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+export const SidebarUser = () => {
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
+  const { isSidebarOpen } = useGlobalConfigStore();
 
   const { theme, setTheme } = useTheme();
 

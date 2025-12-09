@@ -3,11 +3,11 @@
 import { SidebarHeader } from "@/components/sidebar/sidebar-header";
 import { SidebarNav } from "@/components/sidebar/sidebar-nav";
 import { SidebarUser } from "@/components/sidebar/sidebar-user";
-import { useFirstRenderStore } from "@/libs/zustand/store";
+import { useFirstRenderStore, useGlobalConfigStore } from "@/libs/zustand/store";
 import { cn } from "@/utils/tailwind/cn";
 
 import { type Variants, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export const titleVariants: Variants = {
   hidden: { opacity: 0, transition: { duration: 0.1 } },
@@ -18,8 +18,7 @@ export const titleVariants: Variants = {
 };
 
 export default function Sidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
+  const { isSidebarOpen } = useGlobalConfigStore();
   const { finishFirstRender } = useFirstRenderStore();
 
   useEffect(() => {
@@ -34,18 +33,15 @@ export default function Sidebar() {
       className="bg-sidebar sticky top-0 left-0 flex h-screen shrink-0 flex-col border-r"
     >
       <header className={cn("px-4 pt-4 pb-1", isSidebarOpen && "pb-4")}>
-        <SidebarHeader
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
-        />
+        <SidebarHeader />
       </header>
 
       <nav className="px-4">
-        <SidebarNav isSidebarOpen={isSidebarOpen} />
+        <SidebarNav />
       </nav>
 
       <footer className="mt-auto p-4">
-        <SidebarUser isSidebarOpen={isSidebarOpen} />
+        <SidebarUser />
       </footer>
     </motion.aside>
   );

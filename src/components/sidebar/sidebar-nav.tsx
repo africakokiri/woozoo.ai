@@ -1,15 +1,16 @@
 "use client";
 
 import { titleVariants } from "@/components/sidebar/sidebar";
-import { useFirstRenderStore } from "@/libs/zustand/store";
+import { useFirstRenderStore, useGlobalConfigStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 import { cn } from "@/utils/tailwind/cn";
 
 import { Search, SquarePen } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
-export const SidebarNav = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
+export const SidebarNav = () => {
   const { isFirstRender } = useFirstRenderStore();
+  const { isSidebarOpen } = useGlobalConfigStore();
 
   return (
     <ul className="flex w-full flex-col items-center space-y-2">

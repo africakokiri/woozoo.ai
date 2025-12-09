@@ -1,5 +1,5 @@
 import { titleVariants } from "@/components/sidebar/sidebar";
-import { useFirstRenderStore } from "@/libs/zustand/store";
+import { useFirstRenderStore, useGlobalConfigStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 import { cn } from "@/utils/tailwind/cn";
 
@@ -7,16 +7,11 @@ import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { type Dispatch, type SetStateAction } from "react";
 
-export const SidebarHeader = ({
-  isSidebarOpen,
-  setIsSidebarOpen
-}: {
-  isSidebarOpen: boolean;
-  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
+export const SidebarHeader = () => {
   const { isFirstRender } = useFirstRenderStore();
+
+  const { isSidebarOpen, setIsSidebarOpen } = useGlobalConfigStore();
 
   return (
     <div className="space-y-4">

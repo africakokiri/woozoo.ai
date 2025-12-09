@@ -1,11 +1,12 @@
 "use client";
 
+import { ModelSelector } from "@/components/ai-elements/model-selector";
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
-import { ArrowUpIcon, SquareIcon } from "lucide-react";
+import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
 import { type FC, type FormEvent, useState } from "react";
 
 export const Composer: FC = () => {
@@ -51,8 +52,30 @@ resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:rin
 
 const ComposerAction: FC = () => {
   return (
-    <div className="aui-composer-action-wrapper relative mx-2 mb-2 flex items-center justify-between">
-      <ComposerAddAttachment />
+    <div
+      className="aui-composer-action-wrapper relative mx-1 mt-2 mb-2 flex items-center justify-between"
+    >
+      <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
+          <ComposerAddAttachment />
+          <TooltipIconButton
+            className="focus-visible:border-ring focus-visible:ring-ring/50
+aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive
+hover:text-accent-foreground aui-button-icon aui-composer-add-attachment hover:bg-muted-foreground/15
+dark:border-muted-foreground/15 dark:hover:bg-muted-foreground/30 inline-flex size-[34px] shrink-0
+items-center justify-center gap-2 rounded-full p-1 text-xs font-semibold whitespace-nowrap transition-all
+outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50
+[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+            tooltip="Voice input"
+            side="top"
+            aria-label="Voice input"
+          >
+            <Mic className="size-5 stroke-[1.5px]" />
+          </TooltipIconButton>
+        </div>
+
+        <ModelSelector />
+      </div>
 
       <AssistantIf condition={({ thread }) => !thread.isRunning}>
         <ComposerPrimitive.Send asChild>

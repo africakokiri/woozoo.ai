@@ -1,4 +1,5 @@
 import { titleVariants } from "@/components/sidebar/sidebar";
+import { useFirstRenderStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 import { cn } from "@/utils/tailwind/cn";
 
@@ -15,6 +16,8 @@ export const SidebarHeader = ({
   isSidebarOpen: boolean;
   setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const { isFirstRender } = useFirstRenderStore();
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -23,6 +26,7 @@ export const SidebarHeader = ({
           className="fvis flex items-center gap-2"
         >
           <motion.div
+            initial={isFirstRender ? false : true}
             animate={{
               height: isSidebarOpen ? "auto" : "100px",
               marginTop: isSidebarOpen ? 0 : 64
@@ -46,7 +50,7 @@ export const SidebarHeader = ({
                 <motion.h1
                   key="sidebar-header"
                   variants={titleVariants}
-                  initial="hidden"
+                  initial={isFirstRender ? false : "hidden"}
                   animate="visible"
                   exit="hidden"
                   aria-hidden={!isSidebarOpen}
@@ -61,7 +65,7 @@ tracking-tight"
         </Link>
 
         <motion.div
-          initial={{ x: 0 }}
+          initial={isFirstRender ? false : { x: 0 }}
           animate={{ x: isSidebarOpen ? 208 : 0 }}
           transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
           className="absolute top-4 left-4"

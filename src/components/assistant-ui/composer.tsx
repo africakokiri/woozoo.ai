@@ -19,7 +19,7 @@ export const Composer: FC = () => {
     setPrompt("");
 
     await startNewChat({
-      prompt,
+      prompt: prompt.trim(),
       model
     });
   };

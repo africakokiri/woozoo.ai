@@ -45,14 +45,14 @@ export const useGlobalConfigStore = create<GlobalConfigStore>()(
 
 type ModelStore = {
   model: string;
-  setModel: (model: string) => void;
+  setModel: (selectedModel: string) => void;
 };
 
 export const useModelStore = create<ModelStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       model: "gemini-2.5-flash-lite",
-      setModel: () => set({ model: get().model })
+      setModel: (selectedModel) => set({ model: selectedModel })
     }),
     {
       name: "selected-model"

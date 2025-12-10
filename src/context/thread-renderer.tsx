@@ -4,7 +4,8 @@ import { Thread } from "@/components/assistant-ui/thread";
 import { useChatRuntimeInstance } from "@/context/chat-runtime-provider";
 import { useGlobalConfigStore } from "@/context/store";
 
-import { AssistantRuntimeProvider } from "@assistant-ui/react";
+import { AssistantRuntimeProvider, useAssistantState } from "@assistant-ui/react";
+import { useEffect } from "react";
 
 export default function ThreadRenderer() {
   const { isSidebarRendered } = useGlobalConfigStore();
@@ -19,3 +20,11 @@ export default function ThreadRenderer() {
     </AssistantRuntimeProvider>
   );
 }
+
+const ThreadDetector = () => {
+  const isRunning = useAssistantState(({ thread }) => thread.isRunning);
+
+  useEffect(() => {
+    if (isRunning) console.log("!");
+  }, [isRunning]);
+};

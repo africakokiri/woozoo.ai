@@ -1,24 +1,27 @@
 "use client";
 
-import { ModelSelector } from "@/components/ai-elements/model-selector";
+import ModelSelectorComponent from "@/components/ai-elements/model-selector-component";
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
+import { useModelStore } from "@/libs/zustand/store";
+import { startNewChat } from "@/server/chat";
 import { Button } from "@/ui/button";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
-import { type FC, type FormEvent, useState } from "react";
+import { type FC, useState } from "react";
 
 export const Composer: FC = () => {
   const [prompt, setPrompt] = useState("");
+  const { model } = useModelStore();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(e.currentTarget);
-    formData.set("prompt", prompt);
+  const handleSubmit = async () => {
+    setPrompt("");
 
-    for (const x of formData.entries()) {
-      console.log(x);
-    }
+    await startNewChat({
+      prompt,
+      model
+    });
   };
 
   return (
@@ -74,7 +77,7 @@ outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opac
           </TooltipIconButton>
         </div>
 
-        <ModelSelector />
+        <ModelSelectorComponent />
       </div>
 
       <AssistantIf condition={({ thread }) => !thread.isRunning}>

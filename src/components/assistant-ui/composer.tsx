@@ -1,6 +1,6 @@
 "use client";
 
-import ModelSelectorComponent from "@/components/ai-elements/model-selector-component";
+import ModelSelectorComponent from "@/components/ai-elements/model-selector-renderer";
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { useModelStore, usePromptStore } from "@/libs/zustand/store";

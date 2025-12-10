@@ -29,7 +29,7 @@ export const Composer: FC = () => {
   return (
     <ComposerPrimitive.Root
       onSubmit={handleSubmit}
-      className="aui-composer-root relative flex w-full flex-col"
+      className="aui-composer-root relative mx-auto flex w-full max-w-[704px] flex-col"
     >
       <ComposerPrimitive.AttachmentDropzone
         className="aui-composer-attachment-dropzone border-input bg-background

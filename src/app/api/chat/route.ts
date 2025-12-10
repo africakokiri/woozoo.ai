@@ -16,9 +16,6 @@ export async function POST(req: Request) {
   logger({
     message: "!"
   });
-  logger({
-    message: messages
-  });
 
   return result.toUIMessageStreamResponse();
 }

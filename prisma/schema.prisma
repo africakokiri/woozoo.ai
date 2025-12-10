@@ -8,61 +8,9 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-/// WooZoo 유저 (Clerk 유저랑 1:1 매핑)
-model User {
-  /// Clerk userId (예: "user_2abc123...")
-  id              String          @id
-  email           String?         @unique
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  /// 현재 사용 가능한 크레딧 (토큰/원화/포인트 단위는 일단 number)
-  currentCredits  Int             @default(0)
-  creditLedger    CreditLedger[]
-  chatSessions    ChatSession[]
-}
-
-/// 크레딧 충전/차감 내역
-model CreditLedger {
-  id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
-  /// "charge" | "spend" 등으로 쓸 수 있게 enum
-  type        CreditLedgerType
-  /// +면 충전, -면 사용
-  amount      Int
-  description String?
-  createdAt   DateTime @default(now())
-}
-
 enum CreditLedgerType {
   CHARGE
   SPEND
-}
-
-/// 한 번의 채팅 세션 (/chat/:uuid)
-model ChatSession {
-  id            String      @id @default(cuid())
-  userId        String
-  user          User        @relation(fields: [userId], references: [id])
-  /// URL에 쓸 publicId (uuid 따로 관리하고 싶으면 이 필드 사용)
-  publicId      String      @unique
-  title         String?
-  model         String?     // gpt-4o-mini, gemini-2.0-flash 등
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  archived      Boolean     @default(false)
-  messages      Message[]
-  tokenUsages   TokenUsage[]
-}
-
-/// 세션 안의 메시지
-model Message {
-  id            String      @id @default(cuid())
-  chatSessionId String
-  chatSession   ChatSession @relation(fields: [chatSessionId], references: [publicId])
-  role          MessageRole
-  content       String
-  createdAt     DateTime    @default(now())
 }
 
 enum MessageRole {
@@ -71,16 +19,56 @@ enum MessageRole {
   SYSTEM
 }
 
-/// 토큰 사용량 기록
-model TokenUsage {
+model User {
+  id              String          @id
+  email           String?         @unique
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  currentCredits  Int             @default(0)
+  creditLedger    CreditLedger[]
+  chatSessions    ChatSession[]
+}
+model CreditLedger {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  type        CreditLedgerType
+  amount      Int
+  createdAt   DateTime @default(now())
+}
+
+model ChatSession {
+  id          String       @id @default(cuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+  publicId    String       @unique
+  title       String
+  model       String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  archived    Boolean      @default(false)
+  messages    Message[]
+  tokenUsages TokenUsage[]
+}
+
+model Message {
   id            String      @id @default(cuid())
   chatSessionId String
-  chatSession   ChatSession @relation(fields: [chatSessionId], references: [publicId])
-  requestId     String?
-  model         String
-  promptTokens  Int
+  chatSession   ChatSession @relation(fields: [chatSessionId], references: [id])
+  role          MessageRole
+  content       String
+  createdAt     DateTime    @default(now())
+}
+
+model TokenUsage {
+  id               String      @id @default(cuid())
+  chatSessionId    String
+  chatSession      ChatSession @relation(fields: [chatSessionId], references: [id])
+  requestId        String?
+  model            String
+  promptTokens     Int
   completionTokens Int
-  totalTokens   Int
-  spentCredits  Int
-  createdAt     DateTime @default(now())
+  totalTokens      Int
+  spentCredits     Int
+  createdAt        DateTime @default(now())
 }

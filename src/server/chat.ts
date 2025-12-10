@@ -8,30 +8,30 @@ import { generateText } from "ai";
 import { redirect } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 
-export const startNewChat = async (formData: FormData) => {
+export const startNewChat = async ({ prompt, model }: { prompt: string; model: string }) => {
   const { userId } = await auth();
 
   if (!userId) return;
 
-  const prompt = formData.get("prompt") as string;
-  if (!prompt.trim()) throw new Error("Invalid prompt");
-
   const { text: title } = await generateText({
-    model: google("gemini-2.5.-flash"),
+    model: google(model),
     prompt: `
-      아래 유저의 입력을 보고, 채팅 세션 제목을 10자 내로 간단하게 만들어줘.
-      핵심만 요약할 것.
-      
-      사용자 입력:
+      Based on the user's input below, create a simple chat session title within 10 characters.
+      Summarize only the core meaning.
+
+      User input:
       """${prompt}"""
     `
   });
 
+  const publicId = uuidv4();
+
   const session = await prisma.chatSession.create({
     data: {
       userId,
-      publicId: uuidv4(),
-      title: title ?? "New Chat"
+      publicId: publicId,
+      title: title ?? "New Chat",
+      model
     }
   });
 
@@ -43,5 +43,5 @@ export const startNewChat = async (formData: FormData) => {
     }
   });
 
-  redirect(`/chat/${session.id}?p=${encodeURIComponent(prompt)}`);
+  redirect(`/chat/${publicId}`);
 };

@@ -46,7 +46,7 @@ export const Vars: Variants = {
   }
 };
 
-const Sidebar = () => {
+const Sidebar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const { isSidebarOpen, isHydrated, setIsSidebarRendered, finishFirstRender } = useGlobalConfigStore();
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Sidebar = () => {
     setIsSidebarRendered();
   }, []);
 
-  if (!isHydrated) return null;
+  if (!isHydrated || !isAuthenticated) return null;
 
   return (
     <motion.aside

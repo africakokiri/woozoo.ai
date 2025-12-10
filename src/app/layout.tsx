@@ -5,6 +5,7 @@ import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { shadcn } from "@clerk/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -22,6 +23,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isAuthenticated } = await auth();
+
   return (
     <ClerkProvider
       appearance={{
@@ -39,7 +42,7 @@ export default async function RootLayout({
             disableTransitionOnChange
             defaultTheme="system"
           >
-            <Sidebar />
+            <Sidebar isAuthenticated={isAuthenticated} />
 
             <ChatRuntimeProvider>
               <main className="h-dvh w-dvw">

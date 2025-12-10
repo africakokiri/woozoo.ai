@@ -14,8 +14,8 @@ import {
   ModelSelectorTrigger
 } from "@/components/ai-elements/model-selector";
 import { MODELS_GOOGLE } from "@/constants/models";
-import { useModelStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
+import { useModelStore } from "@/utils/zustand/store";
 
 import { CheckIcon } from "lucide-react";
 import { useState } from "react";

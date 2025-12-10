@@ -1,5 +1,4 @@
 import { titleVariants } from "@/components/sidebar/sidebar";
-import { useGlobalConfigStore } from "@/libs/zustand/store";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,6 +24,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger
 } from "@/ui/dropdown-menu";
+import { useGlobalConfigStore } from "@/utils/zustand/store";
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut, SunMoon } from "lucide-react";

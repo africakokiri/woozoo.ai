@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "@/libs/prisma/prisma";
+import { prisma } from "@/utils/prisma/prisma";
 
 import { google } from "@ai-sdk/google";
 import { auth } from "@clerk/nextjs/server";

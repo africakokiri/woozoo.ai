@@ -3,8 +3,8 @@
 import { SidebarHeader } from "@/components/sidebar/sidebar-header";
 import { SidebarNav } from "@/components/sidebar/sidebar-nav";
 import { SidebarUser } from "@/components/sidebar/sidebar-user";
-import { useGlobalConfigStore } from "@/libs/zustand/store";
 import { cn } from "@/utils/tailwind/cn";
+import { useGlobalConfigStore } from "@/utils/zustand/store";
 
 import { type Variants, motion } from "motion/react";
 import { useEffect } from "react";

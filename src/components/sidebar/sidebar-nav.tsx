@@ -1,9 +1,9 @@
 "use client";
 
 import { titleVariants } from "@/components/sidebar/sidebar";
-import { useGlobalConfigStore } from "@/libs/zustand/store";
 import { Button } from "@/ui/button";
 import { cn } from "@/utils/tailwind/cn";
+import { useGlobalConfigStore } from "@/utils/zustand/store";
 
 import { Search, SquarePen } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";

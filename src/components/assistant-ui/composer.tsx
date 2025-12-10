@@ -3,16 +3,16 @@
 import ModelSelectorComponent from "@/components/ai-elements/model-selector-component";
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
-import { useModelStore } from "@/libs/zustand/store";
+import { useModelStore, usePromptStore } from "@/libs/zustand/store";
 import { startNewChat } from "@/server/chat";
 import { Button } from "@/ui/button";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
-import { type FC, useState } from "react";
+import { type FC } from "react";
 
 export const Composer: FC = () => {
-  const [prompt, setPrompt] = useState("");
+  const { prompt, setPrompt } = usePromptStore();
   const { model } = useModelStore();
 
   const handleSubmit = async () => {

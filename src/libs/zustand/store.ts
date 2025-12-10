@@ -42,3 +42,20 @@ export const useGlobalConfigStore = create<GlobalConfigStore>()(
     }
   )
 );
+
+type ModelStore = {
+  model: string;
+  setModel: (model: string) => void;
+};
+
+export const useModelStore = create<ModelStore>()(
+  persist(
+    (set, get) => ({
+      model: "gemini-2.5-flash",
+      setModel: () => set({ model: get().model })
+    }),
+    {
+      name: "selected-model"
+    }
+  )
+);

@@ -59,8 +59,7 @@ model ChatSession {
 model Message {
   id            String      @id @default(cuid())
   chatSessionId String
-  chatSession   ChatSession @relation(fields: [chatSessionId], references: [id])
-  /// "user" | "assistant" | "system" 정도
+  chatSession   ChatSession @relation(fields: [chatSessionId], references: [publicId])
   role          MessageRole
   content       String
   createdAt     DateTime    @default(now())
@@ -76,15 +75,12 @@ enum MessageRole {
 model TokenUsage {
   id            String      @id @default(cuid())
   chatSessionId String
-  chatSession   ChatSession @relation(fields: [chatSessionId], references: [id])
-  /// 어떤 요청/응답 기준인지 식별용
+  chatSession   ChatSession @relation(fields: [chatSessionId], references: [publicId])
   requestId     String?
   model         String
   promptTokens  Int
   completionTokens Int
   totalTokens   Int
-
-  /// 해당 사용으로 차감된 크레딧 (토큰 → 크레딧 변환 후)
   spentCredits  Int
   createdAt     DateTime @default(now())
 }

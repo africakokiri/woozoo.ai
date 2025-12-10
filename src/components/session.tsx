@@ -2,7 +2,6 @@
 
 import { Composer } from "@/components/assistant-ui/composer";
 import { Thread } from "@/components/assistant-ui/thread";
-import Sidebar from "@/components/sidebar/sidebar";
 import { useGlobalConfigStore } from "@/libs/zustand/store";
 import { useChatRuntimeInstance } from "@/providers/chat-runtime-provider";
 import { Button } from "@/ui/button";
@@ -27,13 +26,7 @@ const Session = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
 const SignedIn = () => {
   const { isSidebarRendered } = useGlobalConfigStore();
 
-  return (
-    <>
-      <Sidebar />
-
-      <div className="flex h-dvh w-dvw items-end">{isSidebarRendered && <Composer />}</div>
-    </>
-  );
+  return <div className="flex h-dvh w-dvw items-end">{isSidebarRendered && <Composer />}</div>;
 };
 
 const SignedOut = () => {

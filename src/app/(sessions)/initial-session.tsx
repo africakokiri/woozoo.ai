@@ -1,17 +1,10 @@
 "use client";
 
 import { Composer } from "@/components/assistant-ui/composer";
-/**
- * Route: /
- * Description: 로그인 한 사용자가 보는 세션
- */
-import { Thread } from "@/components/assistant-ui/thread";
-import Sidebar from "@/components/sidebar/sidebar";
 import { useGlobalConfigStore } from "@/libs/zustand/store";
 import { useChatRuntimeInstance } from "@/providers/chat-runtime-provider";
 
-import { AssistantRuntimeProvider, useAssistantApi } from "@assistant-ui/react";
-import { useEffect } from "react";
+import { AssistantRuntimeProvider } from "@assistant-ui/react";
 
 export default function InitialSession() {
   const { isSidebarRendered } = useGlobalConfigStore();
@@ -20,8 +13,6 @@ export default function InitialSession() {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
-      <Sidebar />
-
       <div className="flex h-dvh w-dvw items-end">{isSidebarRendered && <Composer />}</div>
     </AssistantRuntimeProvider>
   );

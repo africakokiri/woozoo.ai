@@ -51,7 +51,7 @@ type ModelStore = {
 export const useModelStore = create<ModelStore>()(
   persist(
     (set, get) => ({
-      model: "gemini-2.5-flash",
+      model: "gemini-2.5-flash-lite",
       setModel: () => set({ model: get().model })
     }),
     {

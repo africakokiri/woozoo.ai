@@ -9,18 +9,14 @@ import { Button } from "@/ui/button";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
-import { useParams } from "next/navigation";
 import { type FC } from "react";
-import { validate as uuidValidate } from "uuid";
 
 export const Composer: FC = () => {
   const { prompt, setPrompt } = usePromptStore();
   const { model } = useModelStore();
 
-  const params = useParams();
-
   const handleSubmit = async () => {
-    if (!prompt.trim() || uuidValidate(params.publicId)) return;
+    if (!prompt.trim()) return;
 
     setPrompt("");
 

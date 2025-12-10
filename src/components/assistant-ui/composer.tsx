@@ -11,6 +11,7 @@ import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { type FC } from "react";
+import { validate as uuidValidate } from "uuid";
 
 export const Composer: FC = () => {
   const { prompt, setPrompt } = usePromptStore();
@@ -19,7 +20,7 @@ export const Composer: FC = () => {
   const params = useParams();
 
   const handleSubmit = async () => {
-    if (!prompt.trim() || (params?.publicId as string).includes("/chat")) return;
+    if (!prompt.trim() || uuidValidate(params.publicId)) return;
 
     setPrompt("");
 

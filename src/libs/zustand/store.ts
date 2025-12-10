@@ -59,3 +59,16 @@ export const useModelStore = create<ModelStore>()(
     }
   )
 );
+
+type PromptStore = {
+  prompt: string;
+  setPrompt: (word: string) => void;
+};
+
+export const usePromptStore = create<PromptStore>((set, get) => ({
+  prompt: "",
+  setPrompt: (word) =>
+    set(() => ({
+      prompt: word
+    }))
+}));

@@ -1,4 +1,4 @@
-import Sidebar from "@/components/sidebar/sidebar";
+import Sidebar from "@/components/sidebar";
 import ThreadRenderer from "@/components/thread-renderer";
 import ChatRuntimeProvider from "@/context/chat-runtime-provider";
 import { inter } from "@/styles/fonts";

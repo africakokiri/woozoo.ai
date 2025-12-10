@@ -1,5 +1,5 @@
 import Session from "@/components/session";
-import { createUserIfNotExist } from "@/server/prisma";
+import { createUserIfNotExist } from "@/utils/server/prisma";
 
 import { auth } from "@clerk/nextjs/server";
 

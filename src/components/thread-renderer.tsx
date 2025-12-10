@@ -1,7 +1,7 @@
 "use client";
 
 import { Thread } from "@/components/assistant-ui/thread";
-import { useChatRuntimeInstance } from "@/providers/chat-runtime-provider";
+import { useChatRuntimeInstance } from "@/context/chat-runtime-provider";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 

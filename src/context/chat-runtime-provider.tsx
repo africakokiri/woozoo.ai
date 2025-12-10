@@ -18,8 +18,10 @@ export default function ChatRuntimeProvider({ children }: { children: React.Reac
 
 export function useChatRuntimeInstance() {
   const ctx = useContext(ChatRuntimeContext);
+
   if (!ctx) {
     throw new Error("Undefined: ChatRuntimeProvider");
   }
+
   return ctx;
 }

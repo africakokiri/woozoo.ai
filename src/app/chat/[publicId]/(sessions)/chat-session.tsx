@@ -2,7 +2,7 @@
 
 import { Thread } from "@/components/assistant-ui/thread";
 import Sidebar from "@/components/sidebar/sidebar";
-import { useChatRuntimeInstance } from "@/providers/chat-runtime-provider";
+import { useChatRuntimeInstance } from "@/context/chat-runtime-provider";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 

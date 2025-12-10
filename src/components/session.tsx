@@ -2,7 +2,7 @@
 
 import { Composer } from "@/components/assistant-ui/composer";
 import { Thread } from "@/components/assistant-ui/thread";
-import { useChatRuntimeInstance } from "@/providers/chat-runtime-provider";
+import { useChatRuntimeInstance } from "@/context/chat-runtime-provider";
 import { Button } from "@/ui/button";
 import { Skeleton } from "@/ui/skeleton";
 import { useGlobalConfigStore } from "@/utils/zustand/store";

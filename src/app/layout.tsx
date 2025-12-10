@@ -1,6 +1,6 @@
 import Sidebar from "@/components/sidebar";
-import ThreadRenderer from "@/components/thread-renderer";
 import ChatRuntimeProvider from "@/context/chat-runtime-provider";
+import ThreadRenderer from "@/context/thread-renderer";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 

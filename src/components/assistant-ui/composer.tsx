@@ -3,9 +3,9 @@
 import ModelSelectorComponent from "@/components/ai-elements/model-selector-renderer";
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
+import { useModelStore, usePromptStore } from "@/context/store";
 import { Button } from "@/ui/button";
 import { startNewChat } from "@/utils/server/chat";
-import { useModelStore, usePromptStore } from "@/utils/zustand/store";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";

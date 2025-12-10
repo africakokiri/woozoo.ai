@@ -3,9 +3,9 @@
 import { Composer } from "@/components/assistant-ui/composer";
 import { Thread } from "@/components/assistant-ui/thread";
 import { useChatRuntimeInstance } from "@/context/chat-runtime-provider";
+import { useGlobalConfigStore } from "@/context/store";
 import { Button } from "@/ui/button";
 import { Skeleton } from "@/ui/skeleton";
-import { useGlobalConfigStore } from "@/utils/zustand/store";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { SignInButton } from "@clerk/nextjs";

@@ -16,6 +16,8 @@ export const Composer: FC = () => {
   const { model } = useModelStore();
 
   const handleSubmit = async () => {
+    if (!prompt.trim()) return;
+
     setPrompt("");
 
     await startNewChat({

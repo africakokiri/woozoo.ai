@@ -31,7 +31,7 @@ export const ModelSelectorRenderer = () => {
   const chefs = Array.from(new Set(models.map((model) => model.chef)));
 
   return (
-    <div className="flex size-full items-center justify-center p-8">
+    <div className="flex items-center justify-center p-2">
       <ModelSelector
         onOpenChange={setOpen}
         open={open}

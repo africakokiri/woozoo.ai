@@ -1,54 +1,35 @@
-import Sidebar from "@/components/sidebar";
-import ChatRuntimeProvider from "@/context/chat-runtime-provider";
-import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
-import { ClerkProvider } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { shadcn } from "@clerk/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "WooZoo",
-  description: "",
-  icons: {
-    icon: "/icons/main.svg"
-  }
+  title: "",
+  description: ""
 };
 
-export default async function RootLayout({
+const inter = Inter({ subsets: ["latin"] });
+
+export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isAuthenticated } = await auth();
-
   return (
-    <ClerkProvider
-      appearance={{
-        theme: shadcn
-      }}
+    <html
+      lang="en"
+      suppressHydrationWarning
     >
-      <html
-        lang="en"
-        suppressHydrationWarning
-      >
-        <body className={`${inter.className} flex antialiased`}>
-          <ThemeProvider
-            enableColorScheme={false}
-            attribute="class"
-            disableTransitionOnChange
-            defaultTheme="system"
-          >
-            <Sidebar isAuthenticated={isAuthenticated} />
-
-            <ChatRuntimeProvider>
-              <main className="h-dvh w-dvw">{children}</main>
-            </ChatRuntimeProvider>
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+      <body className={`${inter.className} antialiased`}>
+        <ThemeProvider
+          enableColorScheme={false}
+          attribute="class"
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

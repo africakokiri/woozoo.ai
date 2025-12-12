@@ -3,17 +3,35 @@
 import ModelSelectorComponent from "@/components/ai-elements/model-selector-renderer";
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
-import { usePromptStore } from "@/context/store";
+import { useModelStore, usePromptStore } from "@/context/store";
 import { Button } from "@/ui/button";
+import { createChatSessionAction } from "@/utils/server/create-session";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { type FormEvent } from "react";
 
 export const Composer = () => {
   const { prompt, setPrompt } = usePromptStore();
+  const { model } = useModelStore();
+  const router = useRouter();
+
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    if (!prompt.trim()) return;
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("prompt", prompt);
+    formData.append("model", model);
+
+    const sessionId = await createChatSessionAction(formData);
+
+    router.replace(`/chat/${sessionId}`);
+  };
 
   return (
     <ComposerPrimitive.Root
+      onSubmit={handleOnSubmit}
       className="aui-composer-root relative mx-auto flex w-full max-w-[704px] flex-col"
     >
       <ComposerPrimitive.AttachmentDropzone

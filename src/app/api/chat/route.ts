@@ -1,22 +1,21 @@
+import logger from "@/utils/debug/logger";
+
 import { google } from "@ai-sdk/google";
 import { convertToModelMessages, streamText } from "ai";
 
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { messages, model } = await req.json();
-
-  const modelInstance = google("gemini-1.5-pro");
+  const { messages } = await req.json();
 
   const result = streamText({
-    model: modelInstance,
+    model: google("gemini-2.5-flash-lite"),
     messages: convertToModelMessages(messages)
   });
 
-  console.log("================================================================");
-  console.log(result);
-  console.log(messages);
-  console.log("================================================================");
+  logger({
+    message: "!"
+  });
 
   return result.toUIMessageStreamResponse();
 }

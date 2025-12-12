@@ -116,10 +116,16 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50 font-normal [&_svg]:h-5 [&_svg]:w-5 [&_svg]:stroke-[1.5];
+    @apply border-border outline-ring/50;
   }
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .fvis {
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive rounded-md outline-none focus-visible:ring-[3px];
   }
 }

@@ -37,7 +37,7 @@ export default async function RootLayout({
         lang="en"
         suppressHydrationWarning
       >
-        <body className={`${inter.className} antialiased`}>
+        <body className={`${inter.className} flex antialiased`}>
           <ThemeProvider
             enableColorScheme={false}
             attribute="class"
@@ -46,7 +46,7 @@ export default async function RootLayout({
             <ChatRuntimeProvider>
               <Sidebar isAuthenticated={isAuthenticated} />
 
-              <main className="h-dvh">
+              <main className="h-dvh w-dvw">
                 <ThreadClientSideRenderer />
                 {children}
               </main>

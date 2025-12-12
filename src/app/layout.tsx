@@ -5,8 +5,11 @@ import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "",
-  description: ""
+  title: "WooZoo",
+  description: "",
+  icons: {
+    icon: "/icons/main.svg"
+  }
 };
 
 const inter = Inter({ subsets: ["latin"] });

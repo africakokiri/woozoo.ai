@@ -1,6 +1,5 @@
 import Sidebar from "@/components/sidebar";
 import ChatRuntimeProvider from "@/context/chat-runtime-provider";
-import ThreadRenderer from "@/context/thread-renderer";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
@@ -45,10 +44,7 @@ export default async function RootLayout({
             <Sidebar isAuthenticated={isAuthenticated} />
 
             <ChatRuntimeProvider>
-              <main className="h-dvh w-dvw">
-                <ThreadRenderer />
-                {children}
-              </main>
+              <main className="h-dvh w-dvw">{children}</main>
             </ChatRuntimeProvider>
           </ThemeProvider>
         </body>

@@ -8,13 +8,26 @@ import { Button } from "@/ui/button";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
-import { type FC } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { type FC, type FormEvent } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const Composer: FC = () => {
   const { prompt, setPrompt } = usePromptStore();
+  const router = useRouter();
+  const { publicId } = useParams<{ publicId: string }>();
+
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setPrompt("");
+
+    if (!prompt.trim() || publicId) return;
+
+    router.replace(`/chat/${uuidv4()}`);
+  };
 
   return (
     <ComposerPrimitive.Root
+      onSubmit={handleOnSubmit}
       className="aui-composer-root relative mx-auto flex w-full max-w-[704px] flex-col"
     >
       <ComposerPrimitive.AttachmentDropzone

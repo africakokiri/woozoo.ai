@@ -5,6 +5,7 @@ import { ComposerAddAttachment, ComposerAttachments } from "@/components/assista
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { usePromptStore } from "@/context/store";
 import { Button } from "@/ui/button";
+import logger from "@/utils/debug/logger";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
@@ -20,9 +21,12 @@ export const Composer: FC = () => {
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setPrompt("");
 
-    if (!prompt.trim() || publicId) return;
+    logger({
+      message: "INIT: handleOnSubmit"
+    });
 
-    router.replace(`/chat/${uuidv4()}`);
+    if (!prompt.trim()) return;
+    if (!publicId) router.replace(`/chat/${uuidv4()}`);
   };
 
   return (

@@ -1,27 +1,25 @@
 "use server";
 
+import logger from "@/utils/debug/logger";
 import { prisma } from "@/utils/prisma/prisma";
 
 import { google } from "@ai-sdk/google";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { generateText } from "ai";
 
-export const createUserIfNotExist = async () => {
-  const user = await currentUser();
+export const createChatSessionAction = async (formData: FormData) => {
+  const prompt = formData.get("prompt");
+  const model = formData.get("model");
 
-  if (!user) return null;
+  const { userId } = await auth();
 
-  await prisma.user.upsert({
-    where: { id: user.id },
-    create: {
-      id: user.id,
-      email: user.emailAddresses[0].emailAddress
-    },
-    update: {}
+  console.log(userId);
+  logger({
+    message: prompt + " " + model
   });
 };
 
-export const createNewChatSession = async ({
+const createNewChatSession = async ({
   publicId,
   prompt,
   model

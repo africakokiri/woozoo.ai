@@ -5,33 +5,15 @@ import { ComposerAddAttachment, ComposerAttachments } from "@/components/assista
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { usePromptStore } from "@/context/store";
 import { Button } from "@/ui/button";
-import logger from "@/utils/debug/logger";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import { type FC, type FormEvent } from "react";
-import { v4 as uuidv4 } from "uuid";
 
-export const Composer: FC = () => {
+export const Composer = () => {
   const { prompt, setPrompt } = usePromptStore();
-  const router = useRouter();
-  const { publicId } = useParams<{ publicId: string }>();
-
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    setPrompt("");
-
-    logger({
-      message: "INIT: handleOnSubmit"
-    });
-
-    if (!prompt.trim()) return;
-    if (!publicId) router.replace(`/chat/${uuidv4()}`);
-  };
 
   return (
     <ComposerPrimitive.Root
-      onSubmit={handleOnSubmit}
       className="aui-composer-root relative mx-auto flex w-full max-w-[704px] flex-col"
     >
       <ComposerPrimitive.AttachmentDropzone
@@ -58,7 +40,7 @@ resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:rin
   );
 };
 
-const ComposerAction: FC = () => {
+const ComposerAction = () => {
   return (
     <div
       className="aui-composer-action-wrapper relative mx-1 mt-2 mb-2 flex items-center justify-between"

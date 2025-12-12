@@ -15,6 +15,7 @@ import {
 } from "@/components/ai-elements/model-selector";
 import { MODELS_GOOGLE } from "@/constants/models";
 import { Button } from "@/ui/button";
+import { useModelStore } from "@/utils/zustand/use-model";
 
 import { CheckIcon } from "lucide-react";
 import { useState } from "react";
@@ -23,7 +24,7 @@ const models = [...MODELS_GOOGLE];
 
 export const ModelSelectorRenderer = () => {
   const [open, setOpen] = useState(false);
-  const [selectedModel, setSelectedModel] = useState<string>("gemini-2.5-flash-lite");
+  const { model: selectedModel, setModel: setSelectedModel } = useModelStore();
 
   const selectedModelData = models.find((model) => model.id === selectedModel);
 

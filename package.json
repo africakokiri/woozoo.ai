@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^2.0.46",
     "@assistant-ui/react": "^0.11.50",
     "@assistant-ui/react-markdown": "^0.11.8",
     "@radix-ui/react-avatar": "^1.1.11",
@@ -16,6 +17,7 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@xeonlink/prettier-plugin-organize-attributes": "^1.1.0",
+    "ai": "^5.0.112",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.560.0",

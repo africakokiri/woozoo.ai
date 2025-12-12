@@ -1,26 +1,11 @@
 "use client";
 
-import { Thread } from "@/components/assistant-ui/thread";
-import { ThreadList } from "@/components/assistant-ui/thread-list";
+import ThreadClientSideRenderer from "@/contexts/thread-client-side-renderer";
 
-import { AssistantRuntimeProvider } from "@assistant-ui/react";
-import { AssistantChatTransport, useChatRuntime } from "@assistant-ui/react-ai-sdk";
-
-const MyApp = () => {
-  const runtime = useChatRuntime({
-    transport: new AssistantChatTransport({
-      api: "/api/chat"
-    })
-  });
-
+export default function page() {
   return (
-    <AssistantRuntimeProvider runtime={runtime}>
-      <div>
-        <ThreadList />
-        <Thread />
-      </div>
-    </AssistantRuntimeProvider>
+    <div className="h-dvh">
+      <ThreadClientSideRenderer />
+    </div>
   );
-};
-
-export default MyApp;
+}

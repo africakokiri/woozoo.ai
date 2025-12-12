@@ -11,6 +11,7 @@ import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { type FormEvent } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const Composer = () => {
   const { prompt, setPrompt } = usePromptStore();
@@ -20,19 +21,23 @@ export const Composer = () => {
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     if (!prompt.trim()) return;
 
+    setPrompt("");
+
     const formData = new FormData(e.currentTarget);
     formData.append("prompt", prompt);
     formData.append("model", model);
 
-    const sessionId = await createChatSessionAction(formData);
+    const publicId = uuidv4();
 
-    router.replace(`/chat/${sessionId}`);
+    await createChatSessionAction(formData, publicId);
+
+    router.replace(`/chat/${publicId}`);
   };
 
   return (
     <ComposerPrimitive.Root
       onSubmit={handleOnSubmit}
-      className="aui-composer-root relative mx-auto flex w-full max-w-[704px] flex-col"
+      className="aui-composer-root relative mx-auto flex w-full flex-col"
     >
       <ComposerPrimitive.AttachmentDropzone
         className="aui-composer-attachment-dropzone border-input bg-background

@@ -5,19 +5,16 @@ import { prisma } from "@/utils/prisma/prisma";
 import { google } from "@ai-sdk/google";
 import { auth } from "@clerk/nextjs/server";
 import { generateText } from "ai";
-import { v4 as uuidv4 } from "uuid";
 
-export const createChatSessionAction = async (formData: FormData) => {
+export const createChatSessionAction = async (formData: FormData, publicId: string) => {
   const prompt = formData.get("prompt") as string;
   const model = formData.get("model") as string;
 
-  const session = await createNewChatSession({
-    publicId: uuidv4(),
+  await createNewChatSession({
+    publicId,
     prompt,
     model
   });
-
-  return session.id;
 };
 
 const createNewChatSession = async ({
@@ -36,7 +33,7 @@ const createNewChatSession = async ({
   const { text: title } = await generateText({
     model: google(model),
     prompt: `
-      아래 유저의 입력을 보고, 채팅 세션 제목을 10자 내로 간단하게 만들어줘.
+      아래 유저의 입력을 보고, 채팅 세션 제목을 10자 내로 간단하게 생성.
       핵심만 요약할 것.
       
       사용자 입력:

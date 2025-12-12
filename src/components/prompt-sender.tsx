@@ -2,7 +2,6 @@
 
 import { useChatRuntimeInstance } from "@/context/chat-runtime-provider";
 import { usePromptStore } from "@/context/store";
-import logger from "@/utils/debug/logger";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { useAssistantApi } from "@assistant-ui/react";
@@ -26,10 +25,6 @@ const PromptSenderCore = () => {
 
   useEffect(() => {
     if (sent.current) return;
-
-    logger({
-      message: "heo"
-    });
 
     sent.current = true;
 

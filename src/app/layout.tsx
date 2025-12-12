@@ -1,3 +1,4 @@
+import ChatRuntimeProvider from "@/contexts/chat-runtime-context";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
@@ -30,7 +31,7 @@ export default function RootLayout({
           attribute="class"
           disableTransitionOnChange
         >
-          {children}
+          <ChatRuntimeProvider>{children}</ChatRuntimeProvider>
         </ThemeProvider>
       </body>
     </html>

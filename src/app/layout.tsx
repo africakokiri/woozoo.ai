@@ -32,7 +32,12 @@ export default function RootLayout({
           attribute="class"
           disableTransitionOnChange
         >
-          <ChatRuntimeProvider>{children}</ChatRuntimeProvider>
+          <ChatRuntimeProvider>
+            <main className="h-dvh">
+              <ThreadClientSideRenderer />
+              {children}
+            </main>
+          </ChatRuntimeProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -25,7 +25,7 @@ const Session = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
 const SignedIn = () => {
   const { isSidebarRendered } = useGlobalConfigStore();
 
-  return <div className="h-dvh *:w-dvw">{isSidebarRendered && <Thread />}</div>;
+  return <div className="h-dvh">{isSidebarRendered && <Thread />}</div>;
 };
 
 const SignedOut = () => {

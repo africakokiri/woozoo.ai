@@ -4,9 +4,11 @@ import { Button } from "@/ui/button";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, SquareIcon } from "lucide-react";
-import { type FC } from "react";
+import { type FC, useState } from "react";
 
 export const Composer: FC = () => {
+  const [prompt, setPrompt] = useState("");
+
   return (
     <ComposerPrimitive.Root className="aui-composer-root relative flex w-full flex-col">
       <ComposerPrimitive.AttachmentDropzone
@@ -24,6 +26,8 @@ resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:rin
           placeholder="Send a message..."
           rows={1}
           autoFocus
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
         />
         <ComposerAction />
       </ComposerPrimitive.AttachmentDropzone>

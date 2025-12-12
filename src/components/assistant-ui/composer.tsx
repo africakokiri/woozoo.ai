@@ -29,7 +29,7 @@ export const Composer = () => {
 
     const publicId = uuidv4();
 
-    router.push(`/chat/${publicId}/?p=${encodeURIComponent(prompt)}`);
+    router.push(`/chat/${publicId}`);
   };
 
   return (

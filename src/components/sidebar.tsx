@@ -1,6 +1,5 @@
 "use client";
 
-import { useGlobalConfigStore } from "@/context/store";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,6 +26,7 @@ import {
   DropdownMenuTrigger
 } from "@/ui/dropdown-menu";
 import { cn } from "@/utils/tailwind/cn";
+import { useGlobalConfigStore } from "@/utils/zustand/use-global-config";
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut, SunMoon } from "lucide-react";

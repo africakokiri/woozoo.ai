@@ -1,4 +1,5 @@
 import ChatRuntimeProvider from "@/contexts/chat-runtime-context";
+import ThreadClientSideRenderer from "@/contexts/thread-client-side-renderer";
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";

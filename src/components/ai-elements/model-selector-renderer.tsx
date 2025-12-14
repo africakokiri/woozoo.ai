@@ -40,7 +40,7 @@ export const ModelSelectorRenderer = () => {
         <ModelSelectorTrigger asChild>
           <Button
             className="w-fit justify-between"
-            variant="outline"
+            variant="ghost"
           >
             {selectedModelData?.chefSlug && <ModelSelectorLogo provider={selectedModelData.chefSlug} />}
             {selectedModelData?.name && <ModelSelectorName>{selectedModelData.name}</ModelSelectorName>}

@@ -9,6 +9,16 @@ type GlobalConfigStore = {
   setIsHydrated: (state: boolean) => void;
 };
 
+const TITLE_SYSTEM_PROMPT = `
+You are a title generator for chat sessions.
+Summarize the user's input into a concise title.
+Rules:
+- Maximum 10 characters (Korean) or 6 words (English)
+- Do not include punctuation
+- Do not include quotation marks
+- Only output the title text
+`;
+
 export const useGlobalConfigStore = create<GlobalConfigStore>()(
   persist(
     (set, get) => ({

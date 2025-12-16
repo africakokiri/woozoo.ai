@@ -3,12 +3,14 @@ import { streamText } from "ai";
 
 const TITLE_SYSTEM_PROMPT = `
 You are a title generator for chat sessions.
-Summarize the user's input into a concise title.
+
 Rules:
-- Maximum 10 characters (Korean) or 6 words (English)
-- Do not include punctuation
-- Do not include quotation marks
-- Only output the title text
+- The title must describe an action, not just a topic
+- Do not output a single noun
+- Use a short verb phrase
+- Maximum 10 Korean characters or 6 English words
+- Do not include punctuation or quotation marks
+- Output only the title text
 `;
 
 export async function generateChatTitle({

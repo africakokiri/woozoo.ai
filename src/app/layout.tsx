@@ -30,6 +30,7 @@ export default function RootLayout({
           enableColorScheme={false}
           attribute="class"
           disableTransitionOnChange
+          defaultTheme="system"
         >
           <Sidebar />
 

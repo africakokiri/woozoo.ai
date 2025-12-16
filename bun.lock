@@ -6,33 +6,34 @@
       "dependencies": {
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
-        "motion": "^12.18.1",
-        "next": "^15",
+        "motion": "^12.23.26",
+        "next": "^15.5.9",
         "next-themes": "^0.4.6",
-        "react": "^19",
-        "react-dom": "^19",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
         "react-textarea-autosize": "^8.5.9",
       },
       "devDependencies": {
-        "@eslint/eslintrc": "^3.3.1",
+        "@eslint/eslintrc": "^3.3.3",
         "@tailwindcss/container-queries": "^0.1.1",
-        "@tailwindcss/postcss": "^4.1.10",
+        "@tailwindcss/postcss": "^4.1.18",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-        "@types/node": "^20.19.1",
-        "@types/react": "^19.1.8",
-        "@types/react-dom": "^19.1.6",
-        "eslint": "^9.29.0",
+        "@types/node": "^20.19.27",
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.3",
+        "@xeonlink/prettier-plugin-organize-attributes": "^1.1.0",
+        "eslint": "^9.39.2",
         "eslint-config-next": "15.1.6",
         "eslint-plugin-only-warn": "^1.1.0",
-        "eslint-plugin-unused-imports": "^4.1.4",
+        "eslint-plugin-unused-imports": "^4.3.0",
         "postcss": "^8.5.6",
         "prettier-plugin-classnames": "^0.7.9",
         "prettier-plugin-merge": "^0.7.4",
-        "prettier-plugin-tailwindcss": "^0.6.12",
-        "tailwind-merge": "^3.3.1",
-        "tailwindcss": "^4.1.10",
-        "typescript": "^5.8.3",
-        "typescript-eslint": "^8.34.1",
+        "prettier-plugin-tailwindcss": "^0.6.14",
+        "tailwind-merge": "^3.4.0",
+        "tailwindcss": "^4.1.18",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.50.0",
       },
     },
   },
@@ -288,6 +289,8 @@
     "@unrs/resolver-binding-win32-ia32-msvc": ["@unrs/resolver-binding-win32-ia32-msvc@1.7.2", "", { "os": "win32", "cpu": "ia32" }, "sha512-Ywv20XHvHTDRQs12jd3MY8X5C8KLjDbg/jyaal/QLKx3fAShhJyD4blEANInsjxW3P7isHx1Blt56iUDDJO3jg=="],
 
     "@unrs/resolver-binding-win32-x64-msvc": ["@unrs/resolver-binding-win32-x64-msvc@1.7.2", "", { "os": "win32", "cpu": "x64" }, "sha512-friS8NEQfHaDbkThxopGk+LuE5v3iY0StruifjQEt7SLbA46OnfgMO15sOTkbpJkol6RB+1l1TYPXh0sCddpvA=="],
+
+    "@xeonlink/prettier-plugin-organize-attributes": ["@xeonlink/prettier-plugin-organize-attributes@1.1.0", "", { "dependencies": { "prettier": "^3.6.2" } }, "sha512-1Vmv+7zkQvPSgiBX0HsrZL4Xf6MYFinS3VE+dXeJCbF2i3BOM+nYQk1iRbcnnSTsJ+IB1IP5X5o3O4zp2ccTgg=="],
 
     "acorn": ["acorn@8.15.0", "", { "bin": { "acorn": "bin/acorn" } }, "sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg=="],
 
@@ -904,6 +907,8 @@
     "@typescript-eslint/utils/@typescript-eslint/types": ["@typescript-eslint/types@8.50.0", "", {}, "sha512-iX1mgmGrXdANhhITbpp2QQM2fGehBse9LbTf0sidWK6yg/NE+uhV5dfU1g6EYPlcReYmkE9QLPq/2irKAmtS9w=="],
 
     "@typescript-eslint/visitor-keys/eslint-visitor-keys": ["eslint-visitor-keys@4.2.0", "", {}, "sha512-UyLnSehNt62FFhSwjZlHmeokpRK59rcz29j+F1/aDgbkbRTk7wIc9XzdoasMUbRNKDM0qQt/+BJ4BrpFeABemw=="],
+
+    "@xeonlink/prettier-plugin-organize-attributes/prettier": ["prettier@3.7.4", "", { "bin": { "prettier": "bin/prettier.cjs" } }, "sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA=="],
 
     "eslint-import-resolver-node/debug": ["debug@3.2.7", "", { "dependencies": { "ms": "^2.1.1" } }, "sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ=="],
 

@@ -78,7 +78,7 @@ const Sidebar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
       initial={false}
       animate={{ width: isOpen ? 288 : 80 }}
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
-      className="bg-sidebar border-r-sidebar-border sticky top-0 left-0 flex h-screen shrink-0 flex-col"
+      className="bg-sidebar sticky top-0 left-0 flex h-screen shrink-0 flex-col border-r"
     >
       <header className="p-4">
         <Sidebar.Header />

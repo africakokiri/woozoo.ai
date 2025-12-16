@@ -37,6 +37,7 @@ const prettierConfig = {
     "^transition$",
     "^exit$",
     "^key$",
+    "^variant$",
     "^className$",
     "^aria-",
     "$DEFAULT"

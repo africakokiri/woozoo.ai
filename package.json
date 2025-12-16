@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^2.0.47",
     "@assistant-ui/react": "^0.11.51",
     "@assistant-ui/react-ai-sdk": "^1.1.19",
     "@assistant-ui/react-markdown": "^0.11.8",

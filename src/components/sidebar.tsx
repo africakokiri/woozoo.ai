@@ -59,7 +59,7 @@ const Header = () => {
           height: isOpen ? "auto" : "100px",
           marginTop: isOpen ? 0 : 64
         }}
-        transition={{ type: "spring", stiffness: 300, damping: 30, bounce: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={cn("flex h-12 items-center gap-2", !isOpen && "border-y")}
       >
         <Link

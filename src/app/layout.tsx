@@ -1,4 +1,6 @@
 import Sidebar from "@/components/sidebar";
+import ThreadClientSideRenderer from "@/components/thread-client-side-renderer";
+import ClientSideRenderer from "@/components/thread-client-side-renderer";
 import ChatRuntimeProvider from "@/contexts/chat-runtime-context";
 import "@/styles/globals.css";
 
@@ -46,7 +48,10 @@ export default async function RootLayout({
             <ChatRuntimeProvider>
               <Sidebar isAuthenticated={isAuthenticated} />
 
-              <main>{children}</main>
+              <main>
+                <ThreadClientSideRenderer isAuthenticated={isAuthenticated} />
+                {children}
+              </main>
             </ChatRuntimeProvider>
           </ThemeProvider>
         </body>

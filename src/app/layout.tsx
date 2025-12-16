@@ -2,6 +2,7 @@ import Sidebar from "@/components/sidebar";
 import "@/styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { shadcn } from "@clerk/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -17,11 +18,13 @@ export const metadata: Metadata = {
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isAuthenticated } = await auth();
+
   return (
     <ClerkProvider
       appearance={{
@@ -39,7 +42,7 @@ export default function RootLayout({
             disableTransitionOnChange
             defaultTheme="system"
           >
-            <Sidebar />
+            <Sidebar isAuthenticated={isAuthenticated} />
 
             <main>{children}</main>
           </ThemeProvider>

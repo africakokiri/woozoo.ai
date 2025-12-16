@@ -55,7 +55,7 @@ const motionVars: Variants = {
   }
 };
 
-const Sidebar = () => {
+const Sidebar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const { isOpen } = useSidebarStore();
   const { isHydrated, finishFirstRender } = useGlobalConfigStore();
 
@@ -67,7 +67,7 @@ const Sidebar = () => {
     return () => cancelAnimationFrame(raf);
   }, [isHydrated, finishFirstRender]);
 
-  if (!isHydrated) return null;
+  if (!isHydrated || !isAuthenticated) return null;
 
   return (
     <motion.aside

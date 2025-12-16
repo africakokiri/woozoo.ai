@@ -1,3 +1,4 @@
+import { ModelSelectorRenderer } from "@/components/ai-elements/model-selector-renderer";
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
@@ -48,6 +49,8 @@ font-semibold"
             <Mic className="size-5 stroke-[1.5px]" />
           </TooltipIconButton>
         </div>
+
+        <ModelSelectorRenderer />
       </div>
 
       <AssistantIf condition={({ thread }) => !thread.isRunning}>

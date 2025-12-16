@@ -5,7 +5,7 @@ import { cn } from "@/utils/tailwind/cn";
 import { useGlobalConfigStore } from "@/utils/zustand/use-global-config-store";
 import { useSidebarStore } from "@/utils/zustand/use-sidebar-store";
 
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { ChevronsLeft, ChevronsRight, Search, SquarePen } from "lucide-react";
 import { AnimatePresence, type Variants, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,9 +36,13 @@ const Sidebar = () => {
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
       className="bg-sidebar sticky top-0 left-0 h-screen border-r"
     >
-      <header className={cn("px-4 pt-4 pb-1", isOpen && "pb-4")}>
+      <header className="p-4">
         <Sidebar.Header />
       </header>
+
+      <nav className="px-4">
+        <Sidebar.Nav />
+      </nav>
     </motion.aside>
   );
 };
@@ -105,7 +109,45 @@ const Header = () => {
   );
 };
 
-const Nav = () => {};
+const Nav = () => {
+  const { isOpen } = useSidebarStore();
+  const { isFirstRender } = useGlobalConfigStore();
+
+  return (
+    <ul className="flex w-full flex-col items-center space-y-2">
+      {["New chats", "Search chats"].map((item, i) => (
+        <li
+          key={`${item}-${i}`}
+          className="flex w-full items-center text-sm"
+        >
+          <Button
+            variant="ghost"
+            className={cn("flex h-12 w-12 flex-1 items-center justify-start gap-2", isOpen && "h-8")}
+            aria-label={!isOpen ? item : undefined}
+          >
+            <div>{i === 0 ? <SquarePen aria-hidden={true} /> : <Search aria-hidden={true} />}</div>
+
+            <AnimatePresence>
+              {isOpen && (
+                <motion.span
+                  key="sidebar-nav"
+                  variants={motionVars}
+                  initial={isFirstRender ? false : "hidden"}
+                  animate="visible"
+                  transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
+                  exit="hidden"
+                  className="font-normal"
+                >
+                  {item}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Button>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 const User = () => {};
 

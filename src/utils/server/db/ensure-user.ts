@@ -2,9 +2,9 @@
 
 import { prisma } from "@/utils/prisma/prisma";
 
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { type User, auth } from "@clerk/nextjs/server";
 
-export const ensureUser = async () => {
+export const ensureUser = async (clerkUser: User | null) => {
   const { userId } = await auth();
 
   if (!userId) return null;
@@ -14,8 +14,6 @@ export const ensureUser = async () => {
   });
 
   if (existing) return existing;
-
-  const clerkUser = await currentUser();
 
   return prisma.user.create({
     data: {

@@ -5,6 +5,7 @@ import { useChatRuntimeInstance } from "@/contexts/chat-runtime-context";
 import { Button } from "@/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/ui/dialog";
 import { cn } from "@/utils/tailwind/cn";
+import { useSidebarStore } from "@/utils/zustand/use-sidebar-store";
 
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { SignInButton } from "@clerk/nextjs";
@@ -12,9 +13,12 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export default function ThreadClientSideRenderer({ isAuthenticated }: { isAuthenticated: boolean }) {
+  const { isSidebarRendered } = useSidebarStore();
   const runtime = useChatRuntimeInstance();
 
   const { theme, setTheme } = useTheme();
+
+  if (!isSidebarRendered) return null;
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>

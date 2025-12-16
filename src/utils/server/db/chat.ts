@@ -29,7 +29,7 @@ export const createChatSession = async (input: unknown) => {
   const session = await prisma.chatSession.create({
     data: {
       userId,
-      title: data.title,
+      title,
       model: data.model
     }
   });

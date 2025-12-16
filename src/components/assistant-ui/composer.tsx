@@ -8,7 +8,7 @@ import { useModelStore } from "@/utils/zustand/use-model";
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { type FC, type FormEvent, useState } from "react";
+import { type FC, useState } from "react";
 
 export const Composer: FC = () => {
   const [prompt, setPrompt] = useState("");
@@ -16,14 +16,17 @@ export const Composer: FC = () => {
   const params = useParams<{ id: string }>();
   const router = useRouter();
 
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    setPrompt("");
+  const handleOnSubmit = async () => {
     if (params.id) return;
+
+    console.log(prompt);
 
     const session = await createChatSession({
       title: prompt,
       model
     });
+
+    setPrompt("");
 
     router.push(`/chat/${session.id}`);
   };
@@ -48,6 +51,8 @@ resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:rin
           placeholder="Send a message..."
           rows={1}
           autoFocus
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
         />
         <ComposerAction />
       </ComposerPrimitive.AttachmentDropzone>

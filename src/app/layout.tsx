@@ -1,4 +1,5 @@
 import Sidebar from "@/components/sidebar";
+import ChatRuntimeProvider from "@/contexts/chat-runtime-context";
 import "@/styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
@@ -42,9 +43,11 @@ export default async function RootLayout({
             disableTransitionOnChange
             defaultTheme="system"
           >
-            <Sidebar isAuthenticated={isAuthenticated} />
+            <ChatRuntimeProvider>
+              <Sidebar isAuthenticated={isAuthenticated} />
 
-            <main>{children}</main>
+              <main>{children}</main>
+            </ChatRuntimeProvider>
           </ThemeProvider>
         </body>
       </html>

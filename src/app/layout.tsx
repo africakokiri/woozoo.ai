@@ -1,6 +1,8 @@
 import Sidebar from "@/components/sidebar";
 import "@/styles/globals.css";
 
+import { ClerkProvider } from "@clerk/nextjs";
+import { shadcn } from "@clerk/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
@@ -21,22 +23,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
+    <ClerkProvider
+      appearance={{
+        theme: shadcn
+      }}
     >
-      <body className={`${inter.className} antialiased`}>
-        <ThemeProvider
-          enableColorScheme={false}
-          attribute="class"
-          disableTransitionOnChange
-          defaultTheme="system"
-        >
-          <Sidebar />
+      <html
+        lang="en"
+        suppressHydrationWarning
+      >
+        <body className={`${inter.className} antialiased`}>
+          <ThemeProvider
+            enableColorScheme={false}
+            attribute="class"
+            disableTransitionOnChange
+            defaultTheme="system"
+          >
+            <Sidebar />
 
-          <main>{children}</main>
-        </ThemeProvider>
-      </body>
-    </html>
+            <main>{children}</main>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

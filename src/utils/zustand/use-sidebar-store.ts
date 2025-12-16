@@ -3,7 +3,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 type SidebarStore = {
   isOpen: boolean;
-  toggle: (isOpen: boolean) => void;
+  toggle: () => void;
 };
 
 export const useSidebarStore = create<SidebarStore>()(

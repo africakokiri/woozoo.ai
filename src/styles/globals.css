@@ -121,3 +121,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .min-size-icon {
+    @apply max-h-12! min-h-12! max-w-12! min-w-12!;
+  }
+}

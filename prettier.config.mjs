@@ -6,7 +6,6 @@ import "prettier-plugin-tailwindcss";
 const prettierConfig = {
   plugins: [
     "@trivago/prettier-plugin-sort-imports",
-    "@xeonlink/prettier-plugin-organize-attributes",
     "prettier-plugin-tailwindcss",
     "prettier-plugin-classnames",
     "prettier-plugin-merge"
@@ -27,8 +26,6 @@ const prettierConfig = {
   insertPragma: false,
   requirePragma: false,
   useTabs: false,
-
-  attributeGroups: ["^(id|name)$", "^key$", "^className$", "^aria-", "$DEFAULT"],
 
   importOrder: ["^@/(.*)$", "^[./]", "<THIRD_PARTY_MODULES>"],
   importOrderSeparation: true,

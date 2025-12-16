@@ -2,7 +2,7 @@ import { ModelSelectorRenderer } from "@/components/ai-elements/model-selector-r
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
-import { createChatSession } from "@/utils/server/chat";
+import { createChatSession } from "@/utils/server/db/chat";
 import { useModelStore } from "@/utils/zustand/use-model";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";

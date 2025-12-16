@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/utils/prisma/prisma";
-import { recordTokenUsageSchema } from "@/utils/server/credit.schema";
+import { recordTokenUsageSchema } from "@/utils/server/db/credit.schema";
 
 import { auth } from "@clerk/nextjs/server";
 

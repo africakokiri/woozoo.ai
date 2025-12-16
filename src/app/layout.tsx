@@ -1,9 +1,9 @@
+import Sidebar from "@/components/sidebar";
 import "@/styles/globals.css";
-import { Inter } from "next/font/google";
-
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "WooZoo",
@@ -31,7 +31,9 @@ export default function RootLayout({
           attribute="class"
           disableTransitionOnChange
         >
-          {children}
+          <Sidebar />
+
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>

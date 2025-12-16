@@ -2,32 +2,30 @@ import { ModelSelectorRenderer } from "@/components/ai-elements/model-selector-r
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
+import { createChatSession } from "@/utils/server/chat";
 import { useModelStore } from "@/utils/zustand/use-model";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { type FC, type FormEvent, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 export const Composer: FC = () => {
   const [prompt, setPrompt] = useState("");
   const { model } = useModelStore();
-  const params = useParams<{ publicId: string }>();
+  const params = useParams<{ id: string }>();
   const router = useRouter();
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(e.currentTarget);
-
-    formData.append("prompt", prompt);
-    formData.append("model", model);
-
     setPrompt("");
-    if (params.publicId) return;
+    if (params.id) return;
 
-    const publicId = uuidv4();
+    const session = await createChatSession({
+      title: prompt,
+      model
+    });
 
-    router.push(`/chat/${publicId}`);
+    router.push(`/chat/${session.id}`);
   };
 
   return (

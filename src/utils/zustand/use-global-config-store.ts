@@ -16,7 +16,7 @@ export const useGlobalConfigStore = create<GlobalConfigStore>()(
       finishFirstRender: () => set(() => ({ isFirstRender: false })),
 
       isHydrated: false,
-      setIsHydrated: () => set({ isHydrated: !get().isHydrated })
+      setIsHydrated: (state: boolean) => set({ isHydrated: state })
     }),
     {
       name: "global-config",

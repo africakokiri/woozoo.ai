@@ -17,10 +17,13 @@ export const Composer: FC = () => {
   const router = useRouter();
 
   const handleOnSubmit = async () => {
+    const tempPrompt = prompt;
+    setPrompt("");
+
     if (params.id) return;
 
     const session = await createChatSession({
-      title: prompt,
+      title: tempPrompt,
       model
     });
 

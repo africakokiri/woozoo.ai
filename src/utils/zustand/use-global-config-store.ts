@@ -20,6 +20,7 @@ export const useGlobalConfigStore = create<GlobalConfigStore>()(
     }),
     {
       name: "global-config",
+      partialize: () => ({}),
       onRehydrateStorage: (state) => () => state.setIsHydrated(true)
     }
   )

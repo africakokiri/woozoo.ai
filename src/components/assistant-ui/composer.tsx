@@ -19,8 +19,6 @@ export const Composer: FC = () => {
   const handleOnSubmit = async () => {
     if (params.id) return;
 
-    console.log(prompt);
-
     const session = await createChatSession({
       title: prompt,
       model

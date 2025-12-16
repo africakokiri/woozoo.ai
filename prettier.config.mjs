@@ -30,6 +30,7 @@ const prettierConfig = {
 
   attributeGroups: [
     "^(id|name)$",
+    "^href$",
     "^key$",
     "^layout$",
     "^variants$",

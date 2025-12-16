@@ -24,8 +24,12 @@ const Sidebar = () => {
   const { isHydrated, finishFirstRender } = useGlobalConfigStore();
 
   useEffect(() => {
-    requestAnimationFrame(() => finishFirstRender());
-  }, []);
+    if (!isHydrated) return;
+
+    const raf = requestAnimationFrame(() => finishFirstRender());
+
+    return () => cancelAnimationFrame(raf);
+  }, [isHydrated, finishFirstRender]);
 
   if (!isHydrated) return null;
 
@@ -56,7 +60,7 @@ const Header = () => {
       <motion.div
         initial={isFirstRender ? false : true}
         animate={{
-          height: isOpen ? "auto" : "100px",
+          height: isOpen ? "auto" : 100,
           marginTop: isOpen ? 0 : 64
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}

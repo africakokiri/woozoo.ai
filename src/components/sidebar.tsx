@@ -1,6 +1,5 @@
 "use client";
 
-import { useGlobalConfigStore } from "@/context/store";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,6 +26,7 @@ import {
   DropdownMenuTrigger
 } from "@/ui/dropdown-menu";
 import { cn } from "@/utils/tailwind/cn";
+import { useGlobalConfigStore } from "@/utils/zustand/use-global-config";
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut, SunMoon } from "lucide-react";
@@ -59,10 +59,10 @@ const Sidebar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
 
   return (
     <motion.aside
+      className="bg-sidebar sticky top-0 left-0 flex h-screen shrink-0 flex-col border-r"
       initial={false}
       animate={{ width: isSidebarOpen ? 289 : 81 }}
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
-      className="bg-sidebar sticky top-0 left-0 flex h-screen shrink-0 flex-col border-r"
     >
       <header className={cn("px-4 pt-4 pb-1", isSidebarOpen && "pb-4")}>
         <Sidebar.Header />
@@ -86,10 +86,14 @@ const Header = () => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <Link
-          href="/"
           className="fvis flex items-center gap-2"
+          href="/"
         >
           <motion.div
+            className={cn(
+              "flex h-12 items-center gap-2",
+              isSidebarOpen ? "mt-0" : "my-4 mt-16 h-full border-y!"
+            )}
             initial={isFirstRender ? false : true}
             animate={{
               height: isSidebarOpen ? "auto" : "100px",
@@ -97,29 +101,25 @@ const Header = () => {
             }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             data-open={isSidebarOpen}
-            className={cn(
-              "flex h-12 items-center gap-2",
-              isSidebarOpen ? "mt-0" : "my-4 mt-16 h-full border-y!"
-            )}
           >
             <Image
+              className="min-w-12! shrink-0 dark:invert"
               src="/icons/main.svg"
               alt="WooZoo logo"
               width={48}
               height={48}
-              className="min-w-12! shrink-0 dark:invert"
             />
             <AnimatePresence>
               {isSidebarOpen && (
                 <motion.h1
                   key="sidebar-header"
+                  className="text-sidebar-foreground top-6 left-[72px] text-2xl font-light
+tracking-tight"
+                  aria-hidden={!isSidebarOpen}
                   variants={Vars}
                   initial={isFirstRender ? false : "hidden"}
                   animate="visible"
                   exit="hidden"
-                  aria-hidden={!isSidebarOpen}
-                  className="text-sidebar-foreground top-6 left-[72px] text-2xl font-light
-tracking-tight"
                 >
                   WooZoo
                 </motion.h1>
@@ -129,15 +129,15 @@ tracking-tight"
         </Link>
 
         <motion.div
+          className="absolute top-4 left-4"
           initial={isFirstRender ? false : { x: 0 }}
           animate={{ x: isSidebarOpen ? 208 : 0 }}
           transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
-          className="absolute top-4 left-4"
         >
           <Button
+            className="flex h-12 w-12 items-center justify-center"
             aria-label="Close sidebar"
             variant="ghost"
-            className="flex h-12 w-12 items-center justify-center"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           >
             {isSidebarOpen ? <ChevronsLeft /> : <ChevronsRight />}
@@ -159,12 +159,12 @@ const Nav = () => {
           className="flex w-full items-center text-sm"
         >
           <Button
-            variant="ghost"
-            aria-label={!isSidebarOpen ? item : undefined}
             className={cn(
               "flex h-12 w-12 flex-1 items-center justify-start gap-2",
               isSidebarOpen && "h-8"
             )}
+            aria-label={!isSidebarOpen ? item : undefined}
+            variant="ghost"
           >
             <div>{i === 0 ? <SquarePen aria-hidden={true} /> : <Search aria-hidden={true} />}</div>
 
@@ -172,11 +172,11 @@ const Nav = () => {
               {isSidebarOpen && (
                 <motion.span
                   key="sidebar-nav"
+                  className="font-normal"
                   variants={Vars}
                   initial={isFirstRender ? false : "hidden"}
                   animate="visible"
                   exit="hidden"
-                  className="font-normal"
                 >
                   {item}
                 </motion.span>
@@ -203,9 +203,9 @@ export const User = () => {
           asChild
         >
           <Button
-            variant="ghost"
             className="h-12 px-0! py-6!"
             aria-label="Open user account menu"
+            variant="ghost"
           >
             <UserProfile isSidebarOpen={isSidebarOpen} />
           </Button>
@@ -225,8 +225,8 @@ export const User = () => {
               </DropdownMenuSubTrigger>
 
               <DropdownMenuSubContent
-                sideOffset={4}
                 className="w-40"
+                sideOffset={4}
               >
                 <DropdownMenuRadioGroup
                   value={theme}
@@ -292,11 +292,11 @@ const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
         {isSidebarOpen && (
           <motion.div
             key="sidebar-user"
+            className="flex flex-1 items-center"
             variants={Vars}
             initial={isFirstRender ? false : "hidden"}
             animate="visible"
             exit="hidden"
-            className="flex flex-1 items-center"
           >
             <div className="flex flex-col items-start justify-between">
               <span className="text-sm font-medium">{user?.firstName}</span>
@@ -304,9 +304,9 @@ const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
             </div>
 
             <ChevronsUpDown
+              className="ml-auto"
               aria-hidden="true"
               focusable="false"
-              className="ml-auto"
             />
           </motion.div>
         )}

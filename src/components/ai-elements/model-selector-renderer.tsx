@@ -14,15 +14,15 @@ import {
   ModelSelectorTrigger
 } from "@/components/ai-elements/model-selector";
 import { MODELS_GOOGLE } from "@/constants/models";
-import { useModelStore } from "@/context/store";
 import { Button } from "@/ui/button";
+import { useModelStore } from "@/utils/zustand/use-model";
 
 import { CheckIcon } from "lucide-react";
 import { useState } from "react";
 
 const models = [...MODELS_GOOGLE];
 
-export default function ModelSelectorComponent() {
+export const ModelSelectorRenderer = () => {
   const [open, setOpen] = useState(false);
   const { model: selectedModel, setModel: setSelectedModel } = useModelStore();
 
@@ -52,8 +52,8 @@ export default function ModelSelectorComponent() {
             <ModelSelectorEmpty>No models found.</ModelSelectorEmpty>
             {chefs.map((chef) => (
               <ModelSelectorGroup
-                heading={chef}
                 key={chef}
+                heading={chef}
               >
                 {models
                   .filter((model) => model.chef === chef)
@@ -90,4 +90,4 @@ export default function ModelSelectorComponent() {
       </ModelSelector>
     </div>
   );
-}
+};

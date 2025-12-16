@@ -1,6 +1,6 @@
 import Sidebar from "@/components/sidebar";
-import ChatRuntimeProvider from "@/context/chat-runtime-provider";
-import { inter } from "@/styles/fonts";
+import ChatRuntimeProvider from "@/contexts/chat-runtime-context";
+import ThreadClientSideRenderer from "@/contexts/thread-client-side-renderer";
 import "@/styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
@@ -8,6 +8,7 @@ import { auth } from "@clerk/nextjs/server";
 import { shadcn } from "@clerk/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "WooZoo",
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
     icon: "/icons/main.svg"
   }
 };
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({
   children
@@ -39,12 +42,14 @@ export default async function RootLayout({
             enableColorScheme={false}
             attribute="class"
             disableTransitionOnChange
-            defaultTheme="system"
           >
-            <Sidebar isAuthenticated={isAuthenticated} />
-
             <ChatRuntimeProvider>
-              <main className="h-dvh w-dvw">{children}</main>
+              <Sidebar isAuthenticated={isAuthenticated} />
+
+              <main className="h-dvh w-dvw">
+                <ThreadClientSideRenderer />
+                {children}
+              </main>
             </ChatRuntimeProvider>
           </ThemeProvider>
         </body>

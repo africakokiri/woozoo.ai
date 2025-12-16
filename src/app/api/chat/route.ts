@@ -1,4 +1,4 @@
-import logger from "@/utils/debug/logger";
+import { logger } from "@/utils/debug/logger";
 
 import { google } from "@ai-sdk/google";
 import { convertToModelMessages, streamText } from "ai";
@@ -13,9 +13,7 @@ export async function POST(req: Request) {
     messages: convertToModelMessages(messages)
   });
 
-  logger({
-    message: "!"
-  });
+  logger.str("/chat/api 실행됨");
 
   return result.toUIMessageStreamResponse();
 }

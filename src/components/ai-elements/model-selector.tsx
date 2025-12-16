@@ -12,7 +12,6 @@ import {
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/ui/dialog";
 import { cn } from "@/utils/tailwind/cn";
 
-import { DialogDescription } from "@radix-ui/react-dialog";
 import type { ComponentProps, ReactNode } from "react";
 
 export type ModelSelectorProps = ComponentProps<typeof Dialog>;
@@ -38,7 +37,6 @@ export const ModelSelectorContent = ({
     {...props}
   >
     <DialogTitle className="sr-only">{title}</DialogTitle>
-    <DialogDescription className="sr-only">Select model</DialogDescription>
     <Command className="**:data-[slot=command-input-wrapper]:h-auto">{children}</Command>
   </DialogContent>
 );
@@ -148,8 +146,8 @@ export type ModelSelectorLogoProps = Omit<ComponentProps<"img">, "src" | "alt"> 
 export const ModelSelectorLogo = ({ provider, className, ...props }: ModelSelectorLogoProps) => (
   <img
     {...props}
-    alt={`${provider} logo`}
     className={cn("size-3 dark:invert", className)}
+    alt={`${provider} logo`}
     height={12}
     src={`https://models.dev/logos/${provider}.svg`}
     width={12}

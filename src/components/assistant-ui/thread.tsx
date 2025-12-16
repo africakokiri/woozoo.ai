@@ -36,10 +36,14 @@ export const Thread: FC = () => {
       }}
     >
       <ThreadPrimitive.Viewport
-        turnAnchor="top"
         className="aui-thread-viewport relative flex flex-1 flex-col overflow-x-auto overflow-y-scroll
 scroll-smooth px-4 pt-4"
+        turnAnchor="top"
       >
+        <AssistantIf condition={({ thread }) => thread.isEmpty}>
+          <ThreadWelcome />
+        </AssistantIf>
+
         <ThreadPrimitive.Messages
           components={{
             UserMessage,
@@ -53,10 +57,6 @@ scroll-smooth px-4 pt-4"
 max-w-(--thread-max-width) flex-col gap-4 overflow-visible rounded-t-3xl pb-4 md:pb-6"
         >
           <ThreadScrollToBottom />
-          <AssistantIf condition={({ thread }) => thread.isEmpty}>
-            <ThreadWelcome />
-          </AssistantIf>
-
           <Composer />
         </ThreadPrimitive.ViewportFooter>
       </ThreadPrimitive.Viewport>
@@ -68,10 +68,10 @@ const ThreadScrollToBottom: FC = () => {
   return (
     <ThreadPrimitive.ScrollToBottom asChild>
       <TooltipIconButton
-        tooltip="Scroll to bottom"
-        variant="outline"
         className="aui-thread-scroll-to-bottom dark:bg-background dark:hover:bg-accent absolute -top-12
 z-10 self-center rounded-full p-4 disabled:invisible"
+        tooltip="Scroll to bottom"
+        variant="outline"
       >
         <ArrowDownIcon />
       </TooltipIconButton>
@@ -81,7 +81,26 @@ z-10 self-center rounded-full p-4 disabled:invisible"
 
 const ThreadWelcome: FC = () => {
   return (
-    <div className="aui-thread-welcome-root mx-auto mt-auto flex w-full max-w-(--thread-max-width)">
+    <div
+      className="aui-thread-welcome-root mx-auto my-auto flex w-full max-w-(--thread-max-width) grow
+flex-col"
+    >
+      <div className="aui-thread-welcome-center flex w-full grow flex-col items-center justify-center">
+        <div className="aui-thread-welcome-message flex size-full flex-col justify-center px-4">
+          <h1
+            className="aui-thread-welcome-message-inner fade-in slide-in-from-bottom-1 animate-in
+text-2xl font-semibold duration-200"
+          >
+            Hello there!
+          </h1>
+          <p
+            className="aui-thread-welcome-message-inner fade-in slide-in-from-bottom-1 animate-in
+text-muted-foreground text-xl delay-75 duration-200"
+          >
+            How can I help you today?
+          </p>
+        </div>
+      </div>
       <ThreadSuggestions />
     </div>
   );
@@ -116,10 +135,10 @@ fill-mode-both duration-200 nth-[n+3]:hidden @md:nth-[n+3]:block"
             asChild
           >
             <Button
-              variant="ghost"
               className="aui-thread-welcome-suggestion hover:bg-muted h-auto w-full flex-wrap items-start
 justify-start gap-1 rounded-2xl border px-4 py-3 text-left text-sm transition-colors @md:flex-col"
               aria-label={suggestion.prompt}
+              variant="ghost"
             >
               <span className="aui-thread-welcome-suggestion-text-1 font-medium">
                 {suggestion.title}
@@ -176,12 +195,12 @@ w-full max-w-(--thread-max-width) py-3 duration-150"
 const AssistantActionBar: FC = () => {
   return (
     <ActionBarPrimitive.Root
-      hideWhenRunning
-      autohide="not-last"
-      autohideFloat="single-branch"
       className="aui-assistant-action-bar-root text-muted-foreground data-floating:bg-background
 col-start-3 row-start-2 -ml-1 flex gap-1 data-floating:absolute data-floating:rounded-md
 data-floating:border data-floating:p-1 data-floating:shadow-sm"
+      hideWhenRunning
+      autohide="not-last"
+      autohideFloat="single-branch"
     >
       <ActionBarPrimitive.Copy asChild>
         <TooltipIconButton tooltip="Copy">
@@ -242,14 +261,14 @@ wrap-break-word"
 const UserActionBar: FC = () => {
   return (
     <ActionBarPrimitive.Root
+      className="aui-user-action-bar-root flex flex-col items-end"
       hideWhenRunning
       autohide="not-last"
-      className="aui-user-action-bar-root flex flex-col items-end"
     >
       <ActionBarPrimitive.Edit asChild>
         <TooltipIconButton
-          tooltip="Edit"
           className="aui-user-action-edit p-4"
+          tooltip="Edit"
         >
           <PencilIcon />
         </TooltipIconButton>
@@ -293,11 +312,11 @@ p-4 text-sm outline-none"
 const BranchPicker: FC<BranchPickerPrimitive.Root.Props> = ({ className, ...rest }) => {
   return (
     <BranchPickerPrimitive.Root
-      hideWhenSingleBranch
       className={cn(
         "aui-branch-picker-root text-muted-foreground mr-2 -ml-2 inline-flex items-center text-xs",
         className
       )}
+      hideWhenSingleBranch
       {...rest}
     >
       <BranchPickerPrimitive.Previous asChild>

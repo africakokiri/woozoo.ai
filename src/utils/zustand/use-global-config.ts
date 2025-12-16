@@ -42,33 +42,3 @@ export const useGlobalConfigStore = create<GlobalConfigStore>()(
     }
   )
 );
-
-type ModelStore = {
-  model: string;
-  setModel: (selectedModel: string) => void;
-};
-
-export const useModelStore = create<ModelStore>()(
-  persist(
-    (set) => ({
-      model: "gemini-2.5-flash-lite",
-      setModel: (selectedModel) => set({ model: selectedModel })
-    }),
-    {
-      name: "selected-model"
-    }
-  )
-);
-
-type PromptStore = {
-  prompt: string;
-  setPrompt: (word: string) => void;
-};
-
-export const usePromptStore = create<PromptStore>((set, get) => ({
-  prompt: "",
-  setPrompt: (word) =>
-    set(() => ({
-      prompt: word
-    }))
-}));

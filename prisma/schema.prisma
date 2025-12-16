@@ -8,9 +8,90 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+model User {
+  /// Clerk userId
+  id             String          @id
+  email          String?         @unique
+
+  currentCredits Int             @default(0)
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  creditLedger   CreditLedger[]
+  chatSessions   ChatSession[]
+}
+
+model CreditLedger {
+  id            String            @id @default(cuid())
+
+  userId        String
+  user          User              @relation(fields: [userId], references: [id])
+
+  /// CHARGE / SPEND
+  type          CreditLedgerType
+
+  /// 항상 양수
+  amount        Int
+
+  /// 어떤 이유로 발생했는지 (ex. "Gemini usage", "Manual charge")
+  description   String?
+
+  /// 토큰 사용으로 발생한 경우 연결
+  tokenUsageId  String?           @unique
+  tokenUsage    TokenUsage?       @relation(fields: [tokenUsageId], references: [id])
+
+  createdAt     DateTime          @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
 enum CreditLedgerType {
   CHARGE
   SPEND
+}
+
+model ChatSession {
+  id             String        @id @default(cuid())
+
+  userId         String
+  user           User          @relation(fields: [userId], references: [id])
+
+  /// URL에 노출되는 UUID
+  publicId       String        @unique
+
+  title          String
+  /// 세션의 기본 모델 (ex. gpt-4.1, gemini-1.5-pro)
+  model          String
+
+  archived       Boolean       @default(false)
+
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  messages       Message[]
+  tokenUsages    TokenUsage[]
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Message {
+  id             String        @id @default(cuid())
+
+  chatSessionId  String
+  chatSession    ChatSession   @relation(fields: [chatSessionId], references: [id])
+
+  role           MessageRole
+  content        String
+
+  /// tool call, attachment, streaming metadata 확장용
+  metadata       Json?
+
+  createdAt      DateTime      @default(now())
+
+  @@index([chatSessionId, createdAt])
 }
 
 enum MessageRole {
@@ -19,56 +100,28 @@ enum MessageRole {
   SYSTEM
 }
 
-model User {
-  id              String          @id
-  email           String?         @unique
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  currentCredits  Int             @default(0)
-  creditLedger    CreditLedger[]
-  chatSessions    ChatSession[]
-}
-model CreditLedger {
-  id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
-  type        CreditLedgerType
-  amount      Int
-  createdAt   DateTime @default(now())
-}
-
-model ChatSession {
-  id          String       @id @default(cuid())
-  userId      String
-  user        User         @relation(fields: [userId], references: [id])
-  publicId    String       @unique
-  title       String
-  model       String
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  archived    Boolean      @default(false)
-  messages    Message[]
-  tokenUsages TokenUsage[]
-}
-
-model Message {
-  id            String      @id @default(cuid())
-  chatSessionId String
-  chatSession   ChatSession @relation(fields: [chatSessionId], references: [id])
-  role          MessageRole
-  content       String
-  createdAt     DateTime    @default(now())
-}
-
 model TokenUsage {
-  id               String      @id @default(cuid())
-  chatSessionId    String
-  chatSession      ChatSession @relation(fields: [chatSessionId], references: [id])
-  requestId        String?
-  model            String
-  promptTokens     Int
-  completionTokens Int
-  totalTokens      Int
-  spentCredits     Int
-  createdAt        DateTime @default(now())
+  id                 String        @id @default(cuid())
+
+  chatSessionId      String
+  chatSession        ChatSession   @relation(fields: [chatSessionId], references: [id])
+
+  /// AI SDK requestId
+  requestId          String?
+
+  model              String
+
+  promptTokens       Int
+  completionTokens   Int
+  totalTokens        Int
+
+  /// 차감된 크레딧 (항상 양수)
+  spentCredits       Int
+
+  creditLedger       CreditLedger?
+
+  createdAt          DateTime      @default(now())
+
+  @@index([chatSessionId])
+  @@index([createdAt])
 }

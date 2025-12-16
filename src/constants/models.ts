@@ -132,4 +132,4 @@ export const MODELS_GOOGLE = [
     chefSlug: "google",
     providers: ["google"]
   }
-];
+] as const;

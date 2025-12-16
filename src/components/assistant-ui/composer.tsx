@@ -2,14 +2,39 @@ import { ModelSelectorRenderer } from "@/components/ai-elements/model-selector-r
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
+import { useModelStore } from "@/utils/zustand/use-model";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
-import { type FC } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { type FC, type FormEvent, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const Composer: FC = () => {
+  const [prompt, setPrompt] = useState("");
+  const { model } = useModelStore();
+  const params = useParams<{ publicId: string }>();
+  const router = useRouter();
+
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+
+    formData.append("prompt", prompt);
+    formData.append("model", model);
+
+    setPrompt("");
+    if (params.publicId) return;
+
+    const publicId = uuidv4();
+
+    router.push(`/chat/${publicId}`);
+  };
+
   return (
-    <ComposerPrimitive.Root className="aui-composer-root relative flex w-full flex-col">
+    <ComposerPrimitive.Root
+      className="aui-composer-root relative flex w-full flex-col"
+      onSubmit={handleOnSubmit}
+    >
       <ComposerPrimitive.AttachmentDropzone
         className="aui-composer-attachment-dropzone border-input bg-background
 has-[textarea:focus-visible]:border-ring has-[textarea:focus-visible]:ring-ring/20

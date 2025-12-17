@@ -1,5 +1,6 @@
 import Sidebar from "@/components/sidebar";
 import ThreadClientSideRenderer from "@/components/thread-client-side-renderer";
+import { RuntimeProvider } from "@/contexts/runtime-provider";
 import "@/styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
@@ -32,26 +33,28 @@ export default async function RootLayout({
         theme: shadcn
       }}
     >
-      <html
-        lang="en"
-        suppressHydrationWarning
-      >
-        <body className={`${inter.className} flex antialiased`}>
-          <ThemeProvider
-            enableColorScheme={false}
-            attribute="class"
-            disableTransitionOnChange
-            defaultTheme="system"
-          >
-            <Sidebar isAuthenticated={isAuthenticated} />
+      <RuntimeProvider>
+        <html
+          lang="en"
+          suppressHydrationWarning
+        >
+          <body className={`${inter.className} flex antialiased`}>
+            <ThemeProvider
+              enableColorScheme={false}
+              attribute="class"
+              disableTransitionOnChange
+              defaultTheme="system"
+            >
+              <Sidebar isAuthenticated={isAuthenticated} />
 
-            <main className="w-dvw">
-              <ThreadClientSideRenderer isAuthenticated={isAuthenticated} />
-              {children}
-            </main>
-          </ThemeProvider>
-        </body>
-      </html>
+              <main className="w-dvw">
+                <ThreadClientSideRenderer isAuthenticated={isAuthenticated} />
+                {children}
+              </main>
+            </ThemeProvider>
+          </body>
+        </html>
+      </RuntimeProvider>
     </ClerkProvider>
   );
 }

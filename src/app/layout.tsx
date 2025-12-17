@@ -1,6 +1,6 @@
 import Sidebar from "@/components/sidebar";
 import ThreadClientSideRenderer from "@/components/thread-client-side-renderer";
-import ChatRuntimeProvider from "@/contexts/chat-runtime-provider";
+import ChatRuntimeProvider from "@/contexts/my-runtime-provider";
 import "@/styles/globals.css";
 import { ensureUser } from "@/utils/db/session";
 
@@ -36,28 +36,28 @@ export default async function RootLayout({
         theme: shadcn
       }}
     >
-      <html
-        lang="en"
-        suppressHydrationWarning
-      >
-        <body className={`${inter.className} flex antialiased`}>
-          <ThemeProvider
-            enableColorScheme={false}
-            attribute="class"
-            disableTransitionOnChange
-            defaultTheme="system"
-          >
-            <ChatRuntimeProvider>
+      <ChatRuntimeProvider>
+        <html
+          lang="en"
+          suppressHydrationWarning
+        >
+          <body className={`${inter.className} flex antialiased`}>
+            <ThemeProvider
+              enableColorScheme={false}
+              attribute="class"
+              disableTransitionOnChange
+              defaultTheme="system"
+            >
               <Sidebar isAuthenticated={isAuthenticated} />
 
               <main className="w-dvw">
                 <ThreadClientSideRenderer isAuthenticated={isAuthenticated} />
                 {children}
               </main>
-            </ChatRuntimeProvider>
-          </ThemeProvider>
-        </body>
-      </html>
+            </ThemeProvider>
+          </body>
+        </html>
+      </ChatRuntimeProvider>
     </ClerkProvider>
   );
 }

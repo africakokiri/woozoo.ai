@@ -18,3 +18,23 @@ export const createChatSession = async (data: CreateChatSession) => {
     }
   });
 };
+
+type GetChatSession = {
+  sessionId: string;
+  userId: string;
+};
+
+// 세션을 조회하는 함수
+export const getChatSession = async (data: GetChatSession) => {
+  return await prisma.chatSession.findFirst({
+    where: {
+      id: data.sessionId,
+      userId: data.userId // 본인 세션만
+    },
+    include: {
+      messages: {
+        orderBy: { createdAt: "asc" }
+      }
+    }
+  });
+};

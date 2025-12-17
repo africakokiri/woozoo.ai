@@ -3,35 +3,45 @@
 import { createChatMessage } from "@/utils/db/message";
 import { getSessionId } from "@/utils/db/session";
 
-import { google } from "@ai-sdk/google";
 import {
   AssistantRuntimeProvider,
   type ChatModelAdapter,
   type ThreadHistoryAdapter,
   useLocalRuntime
 } from "@assistant-ui/react";
-import { streamText } from "ai";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
 
-// ModelAdapter 정의
+// ModelAdapter는 서버 API 호출만 담당
 const MyModelAdapter: ChatModelAdapter = {
   async *run({ messages, abortSignal }) {
-    const result = streamText({
-      model: google("gemini-2.5-flash-lite"),
-      messages: messages.map((m) => ({
-        role: m.role,
-        content: m.content
-          .filter((c) => c.type === "text")
-          .map((c) => c.text)
-          .join("\n")
-      })),
-      abortSignal
+    // 서버 API 호출
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messages: messages.map((m) => ({
+          role: m.role,
+          content: m.content
+            .filter((c) => c.type === "text")
+            .map((c) => c.text)
+            .join("\n")
+        }))
+      }),
+      signal: abortSignal
     });
 
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder();
     let text = "";
-    for await (const chunk of result.textStream) {
+
+    while (reader) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value);
       text += chunk;
+
       yield {
         content: [{ type: "text", text }]
       };

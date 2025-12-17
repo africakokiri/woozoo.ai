@@ -6,12 +6,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { cn } from "@/utils/tailwind/cn";
 import { useSidebarStore } from "@/utils/zustand/use-sidebar-store";
 
-import { useAssistantApi } from "@assistant-ui/react";
 import { SignInButton } from "@clerk/nextjs";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
 export default function ThreadClientSideRenderer({ isAuthenticated }: { isAuthenticated: boolean }) {
   const { isSidebarRendered } = useSidebarStore();
@@ -56,22 +53,6 @@ export default function ThreadClientSideRenderer({ isAuthenticated }: { isAuthen
       </header>
 
       <Thread />
-      <ThreadClientSideRendererThreadSwitcher />
     </div>
   );
 }
-
-const ThreadClientSideRendererThreadSwitcher = () => {
-  const pathname = usePathname();
-  const api = useAssistantApi();
-
-  useEffect(() => {
-    if (pathname === "/") {
-      setTimeout(() => {
-        api.threads().switchToNewThread();
-      }, 0);
-    }
-  }, [pathname, api]);
-
-  return null;
-};

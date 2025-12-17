@@ -1,6 +1,6 @@
 import { google } from "@ai-sdk/google";
 import { auth } from "@clerk/nextjs/server";
-import { streamText } from "ai";
+import { convertToModelMessages, streamText } from "ai";
 
 export const maxDuration = 30;
 
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
   const result = streamText({
     model: google("gemini-2.5-flash-lite"),
-    messages
+    messages: convertToModelMessages(messages)
   });
 
   return result.toTextStreamResponse();

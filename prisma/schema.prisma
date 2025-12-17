@@ -78,7 +78,8 @@ model ChatSession {
 model ChatMessage {
   id            String    @id @default(uuid())
   sessionId     String
-  prompt        String
+    role        ChatRole
+  content       Json
 
   createdAt     DateTime  @default(now())
 

@@ -1,13 +1,9 @@
 import { google } from "@ai-sdk/google";
-import { auth } from "@clerk/nextjs/server";
 import { convertToModelMessages, streamText } from "ai";
 
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
-
   const { messages } = await req.json();
 
   const result = streamText({
@@ -15,5 +11,5 @@ export async function POST(req: Request) {
     messages: convertToModelMessages(messages)
   });
 
-  return result.toTextStreamResponse();
+  return result.toUIMessageStreamResponse();
 }

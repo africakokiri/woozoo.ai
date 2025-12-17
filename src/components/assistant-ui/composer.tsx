@@ -2,41 +2,14 @@ import { ModelSelectorRenderer } from "@/components/ai-elements/model-selector-r
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
-import { createChatSession } from "@/utils/server/db/chat";
-import { useModelStore } from "@/utils/zustand/use-model";
 
 import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import { type FC, useState } from "react";
+import { type FC } from "react";
 
 export const Composer: FC = () => {
-  const [prompt, setPrompt] = useState("");
-  const { model } = useModelStore();
-  const params = useParams<{ id: string }>();
-  const router = useRouter();
-
-  const handleOnSubmit = async () => {
-    const tempPrompt = prompt;
-    setPrompt("");
-
-    if (params.id) return;
-
-    const session = await createChatSession({
-      title: tempPrompt,
-      model
-    });
-
-    setPrompt("");
-
-    router.push(`/chat/${session.id}`);
-  };
-
   return (
-    <ComposerPrimitive.Root
-      className="aui-composer-root relative flex w-full flex-col"
-      onSubmit={handleOnSubmit}
-    >
+    <ComposerPrimitive.Root className="aui-composer-root relative flex w-full flex-col">
       <ComposerPrimitive.AttachmentDropzone
         className="aui-composer-attachment-dropzone border-input bg-background
 has-[textarea:focus-visible]:border-ring has-[textarea:focus-visible]:ring-ring/20
@@ -52,8 +25,6 @@ resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:rin
           placeholder="Send a message..."
           rows={1}
           autoFocus
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
         />
         <ComposerAction />
       </ComposerPrimitive.AttachmentDropzone>

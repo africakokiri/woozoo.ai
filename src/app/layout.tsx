@@ -1,6 +1,6 @@
 import Sidebar from "@/components/sidebar";
 import ThreadClientSideRenderer from "@/components/thread-client-side-renderer";
-import ChatRuntimeProvider from "@/contexts/chat-runtime-context";
+import ChatRuntimeProvider from "@/contexts/chat-runtime-provider";
 import "@/styles/globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";

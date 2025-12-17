@@ -25,7 +25,7 @@ type GetChatSession = {
 };
 
 // 세션을 조회하는 함수
-export const getChatSession = async (data: GetChatSession) => {
+export const getSessionId = async (data: GetChatSession) => {
   return await prisma.chatSession.findFirst({
     where: {
       id: data.sessionId,

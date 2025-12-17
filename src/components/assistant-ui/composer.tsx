@@ -3,7 +3,13 @@ import { ComposerAddAttachment, ComposerAttachments } from "@/components/assista
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
 
-import { AssistantIf, ComposerPrimitive, useAssistantApi } from "@assistant-ui/react";
+import {
+  AssistantIf,
+  ComposerPrimitive,
+  useAssistantApi,
+  useAssistantState,
+  useThreadList
+} from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { type FC } from "react";
@@ -13,13 +19,17 @@ export const Composer: FC = () => {
   const params = useParams();
   const api = useAssistantApi();
 
+  const test = useAssistantState(({ threads }) => threads.threadIds);
+
+  console.log(test);
+
   return (
     <ComposerPrimitive.Root
       className="aui-composer-root relative flex w-full flex-col"
       onSubmit={() => {
-        const currentThreadId = api.threads().getState().mainThreadId;
-
-        if (Object.keys(params).length === 0) router.push(`/chat/${currentThreadId}`);
+        const currentThreadId = api.threads().getState().threadIds;
+        console.log(currentThreadId);
+        // if (Object.keys(params).length === 0) router.push(`/chat/${currentThreadId}`);
       }}
     >
       <ComposerPrimitive.AttachmentDropzone

@@ -13,7 +13,8 @@ function ChatThreadClient() {
   const api = useAssistantApi();
 
   useEffect(() => {
-    api.threads().switchToThread(params.threadId);
+    api.threads().switchToThread("thread_0lhDFEaT33j0ZRQJebuZuQK0");
+    api.threads().getState().threadIds;
   }, [params.threadId, api]);
 
   return null;

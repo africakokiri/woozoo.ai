@@ -2,6 +2,7 @@ import Sidebar from "@/components/sidebar";
 import ThreadClientSideRenderer from "@/components/thread-client-side-renderer";
 import ChatRuntimeProvider from "@/contexts/chat-runtime-provider";
 import "@/styles/globals.css";
+import { ensureUser } from "@/utils/db/session";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
@@ -25,7 +26,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isAuthenticated } = await auth();
+  const { isAuthenticated, userId } = await auth();
+
+  await ensureUser(userId ?? "");
 
   return (
     <ClerkProvider

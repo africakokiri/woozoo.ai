@@ -2,6 +2,8 @@
 
 import { prisma } from "@/utils/prisma/prisma";
 
+import { auth } from "@clerk/nextjs/server";
+
 type CreateChatSession = {
   userId: string;
   title: string;
@@ -18,18 +20,16 @@ export const createChatSession = async (data: CreateChatSession) => {
     }
   });
 };
-
-type GetChatSession = {
-  sessionId: string;
-  userId: string;
-};
-
 // 세션을 조회하는 함수
-export const getSessionId = async (data: GetChatSession) => {
+export const getSessionId = async (sessionId: string) => {
+  const { userId } = await auth();
+
+  if (!userId) throw new Error("Unauthorized");
+
   return await prisma.chatSession.findFirst({
     where: {
-      id: data.sessionId,
-      userId: data.userId // 본인 세션만
+      id: sessionId,
+      userId // 본인 세션만
     },
     include: {
       messages: {

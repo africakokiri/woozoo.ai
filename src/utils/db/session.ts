@@ -2,7 +2,7 @@
 
 import { prisma } from "@/utils/prisma/prisma";
 
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 type CreateChatSession = {
   userId: string;
@@ -36,5 +36,21 @@ export const getSessionId = async (sessionId: string) => {
         orderBy: { createdAt: "asc" }
       }
     }
+  });
+};
+
+// 유저가 없으면 생성, 있으면 아무것도 하지 않는 함수
+export const ensureUser = async (userId: string) => {
+  const clerkUser = await currentUser();
+
+  return await prisma.user.upsert({
+    where: { id: userId },
+    create: {
+      id: userId,
+      email: clerkUser?.emailAddresses[0].emailAddress,
+      displayName: clerkUser?.firstName || clerkUser?.username,
+      imageUrl: clerkUser?.imageUrl
+    },
+    update: {}
   });
 };

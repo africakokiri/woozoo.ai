@@ -1,4 +1,5 @@
 import { Button } from "@/ui/button";
+import { useGlobalDataStore } from "@/utils/zustand/store";
 
 import { ArrowUp, Mic, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -7,11 +8,15 @@ import Textarea from "react-textarea-autosize";
 export const Composer = () => {
   const [prompt, setPrompt] = useState("");
   const [isMounted, setIsMounted] = useState(false);
+  const { setPrompt: setGlobalPrompt } = useGlobalDataStore();
   const formRef = useRef(null);
   const textareaRef = useRef(null);
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setGlobalPrompt(prompt);
+    setPrompt("");
   };
 
   useEffect(() => {

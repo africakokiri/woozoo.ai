@@ -9,7 +9,6 @@ import { useEffect } from "react";
 
 export const Conversation = () => {
   const { prompt } = useGlobalDataStore();
-  // TODO: 스트리밍 형식으로 응답 형태 변경
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/chat" // 기본값도 /api/chat

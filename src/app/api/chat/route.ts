@@ -14,6 +14,11 @@
 import { google } from "@ai-sdk/google";
 import { type UIMessage, convertToModelMessages, streamText } from "ai";
 
+// maxDuration만큼 요청이 살아있을 수 있다.
+// maxDuration 안에 모든 응답이 생성되어야 한다 X -> 첫 응답이 시작되어야 한다 O
+export const runtime = "edge";
+export const maxDuration = 30;
+
 export async function POST(res: Response) {
   // model은 나중에 사용
   const { messages }: { messages: UIMessage[] } = await res.json();

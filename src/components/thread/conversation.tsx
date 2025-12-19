@@ -16,6 +16,8 @@ export const Conversation = () => {
   });
 
   useEffect(() => {
+    if (prompt.length === 0) return;
+
     sendMessage({ text: prompt });
   }, [prompt, sendMessage]);
 

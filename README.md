@@ -7,8 +7,5 @@
     - UI 메시지 스트림 반환 (채팅 메시지 형식)
     - `useChat` 훅과 사용 (role, content, tool_calls 등 포함)
     - 채팅 UI에 필수
-  - `toUIMessage()`
-    - 비스트리밍 UI 메시지 반환 (단일 응답)
-    - `generateText` 결과에 사용
-    - 즉시 완료된 채팅 메시지 반환
-
+  - `toUIMessageStream()`
+    - `toUIMessageStreamResponse()`와 차이 없음

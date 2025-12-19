@@ -1,0 +1,109 @@
+//////////////////////////////////////////////////////
+// Prisma Client
+//////////////////////////////////////////////////////
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//////////////////////////////////////////////////////
+// Datasource
+//////////////////////////////////////////////////////
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+//////////////////////////////////////////////////////
+// ENUMS
+//////////////////////////////////////////////////////
+
+enum ChatRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+enum ChatSessionStatus {
+  ACTIVE
+  DELETED
+}
+
+enum Provider {
+  OPENAI
+  GOOGLE
+}
+
+//////////////////////////////////////////////////////
+// USER (Clerk 연동)
+//////////////////////////////////////////////////////
+
+model User {
+  /// Clerk userId (auth().userId)
+  id          String   @id
+  email       String?  @unique
+  displayName String?
+  imageUrl    String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sessions    ChatSession[]
+  messages    ChatMessage[]
+}
+
+//////////////////////////////////////////////////////
+// CHAT SESSION
+//////////////////////////////////////////////////////
+
+model ChatSession {
+  id        String             @id @default(cuid())
+
+  /// /chat/{publicId} 용 UUID
+  publicId  String             @unique @default(uuid())
+
+  status    ChatSessionStatus  @default(ACTIVE)
+
+  ownerId   String
+  owner     User               @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  title     String?
+  provider  Provider           @default(OPENAI)
+
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  messages  ChatMessage[]
+
+  @@index([ownerId, updatedAt])
+  @@index([status])
+}
+
+//////////////////////////////////////////////////////
+// CHAT MESSAGE
+//////////////////////////////////////////////////////
+
+model ChatMessage {
+  id        String    @id @default(cuid())
+
+  sessionId String
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  /// USER 메시지는 userId 있음
+  /// ASSISTANT/SYSTEM 메시지는 null
+  userId    String?
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  role      ChatRole
+  content   String
+
+  /// 정렬 안정성을 위한 옵션 (선택)
+  seq       Int?
+
+  createdAt DateTime  @default(now())
+
+  @@index([sessionId, createdAt])
+  @@index([sessionId, seq])
+}

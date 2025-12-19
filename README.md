@@ -1,0 +1,14 @@
+- [streamText](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text#to-ui-message-stream-response.response-init%20&%20ui-message-stream-options)
+  - `toTextStreamResponse()`
+    - 순수 텍스트 스트림 반환 (Server-Sent Events)
+    - `useCompletion` 훅과 사용
+    - 단순 텍스트 생성/스트리밍에 적합
+  - `toUIMessageStreamResponse()`
+    - UI 메시지 스트림 반환 (채팅 메시지 형식)
+    - `useChat` 훅과 사용 (role, content, tool_calls 등 포함)
+    - 채팅 UI에 필수
+  - `toUIMessage()`
+    - 비스트리밍 UI 메시지 반환 (단일 응답)
+    - `generateText` 결과에 사용
+    - 즉시 완료된 채팅 메시지 반환
+

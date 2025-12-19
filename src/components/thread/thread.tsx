@@ -5,7 +5,7 @@ import { Conversation } from "@/components/thread/conversation";
 
 export default function Thread() {
   return (
-    <div className="flex h-dvh flex-col justify-between p-10">
+    <div className="flex h-dvh flex-col justify-between py-10">
       <Conversation />
       <Composer />
     </div>

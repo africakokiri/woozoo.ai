@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import Textarea from "react-textarea-autosize";
 
 export const Composer = () => {
+  // FIXME: 개행 입력 안됨
   const [prompt, setPrompt] = useState("");
   const [isMounted, setIsMounted] = useState(false);
   const { setPrompt: setGlobalPrompt } = useGlobalDataStore();

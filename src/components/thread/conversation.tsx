@@ -9,6 +9,7 @@ import { useEffect } from "react";
 
 export const Conversation = () => {
   const { prompt } = useGlobalDataStore();
+  // TODO: 스트리밍 형식으로 응답 형태 변경
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/chat" // 기본값도 /api/chat
@@ -17,7 +18,7 @@ export const Conversation = () => {
 
   useEffect(() => {
     sendMessage({ text: prompt });
-  }, [prompt]);
+  }, [prompt, sendMessage]);
 
   return (
     <div className="space-y-10">
@@ -28,9 +29,19 @@ export const Conversation = () => {
               part.type === "text" && part.text !== "" ? (
                 <div
                   key={index}
-                  className={cn("flex w-full", m.role === "user" ? "justify-end" : "justify-start")}
+                  className="flex"
                 >
-                  {part.text}
+                  {m.role === "user" && <div className="min-w-1/4 flex-1 bg-white" />}
+
+                  <div
+                    className={cn(
+                      "flex w-full whitespace-pre-wrap",
+                      m.role === "user" &&
+                        "bg-muted border-muted-foreground ml-auto w-fit rounded-lg px-3 py-1.5"
+                    )}
+                  >
+                    {part.text}
+                  </div>
                 </div>
               ) : null
             )}

@@ -1,41 +1,36 @@
-"use client";
-
 import { ModelSelectorRenderer } from "@/components/ai-elements/model-selector-renderer";
 import { ComposerAddAttachment, ComposerAttachments } from "@/components/assistant-ui/attachment";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { Button } from "@/ui/button";
-import { useModelStore } from "@/utils/zustand/use-model";
 
-import { AssistantIf, ComposerPrimitive } from "@assistant-ui/react";
+import {
+  AssistantIf,
+  ComposerPrimitive,
+  useAssistantApi,
+  useAssistantState,
+  useThreadList
+} from "@assistant-ui/react";
 import { ArrowUpIcon, Mic, SquareIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { type FormEvent, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { type FC } from "react";
 
-export const Composer = () => {
-  const [prompt, setPrompt] = useState("");
-  const { model } = useModelStore();
-  const params = useParams<{ publicId: string }>();
+export const Composer: FC = () => {
   const router = useRouter();
+  const params = useParams();
+  const api = useAssistantApi();
 
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(e.currentTarget);
+  const test = useAssistantState(({ threads }) => threads.threadIds);
 
-    formData.append("prompt", prompt);
-    formData.append("model", model);
-
-    setPrompt("");
-    if (params.publicId) return;
-
-    const publicId = uuidv4();
-
-    router.push(`/chat/${publicId}`);
-  };
+  console.log(test);
 
   return (
     <ComposerPrimitive.Root
-      className="aui-composer-root relative mx-auto flex w-full flex-col"
-      onSubmit={handleOnSubmit}
+      className="aui-composer-root relative flex w-full flex-col"
+      onSubmit={() => {
+        const currentThreadId = api.threads().getState().threadIds;
+        console.log(currentThreadId);
+        // if (Object.keys(params).length === 0) router.push(`/chat/${currentThreadId}`);
+      }}
     >
       <ComposerPrimitive.AttachmentDropzone
         className="aui-composer-attachment-dropzone border-input bg-background
@@ -52,8 +47,6 @@ resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:rin
           placeholder="Send a message..."
           rows={1}
           autoFocus
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
         />
         <ComposerAction />
       </ComposerPrimitive.AttachmentDropzone>
@@ -61,22 +54,16 @@ resize-none bg-transparent px-4 pt-2 pb-3 text-sm outline-none focus-visible:rin
   );
 };
 
-const ComposerAction = () => {
+const ComposerAction: FC = () => {
   return (
-    <div
-      className="aui-composer-action-wrapper relative mx-1 mt-2 mb-2 flex items-center justify-between"
-    >
+    <div className="aui-composer-action-wrapper relative mx-2 mb-2 flex items-center justify-between">
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2">
           <ComposerAddAttachment />
           <TooltipIconButton
-            className="focus-visible:border-ring focus-visible:ring-ring/50
-aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive
-hover:text-accent-foreground aui-button-icon aui-composer-add-attachment hover:bg-muted-foreground/15
-dark:border-muted-foreground/15 dark:hover:bg-muted-foreground/30 inline-flex size-[34px] shrink-0
-items-center justify-center gap-2 rounded-full p-1 text-xs font-semibold whitespace-nowrap transition-all
-outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50
-[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+            className="aui-composer-add-attachment hover:bg-muted-foreground/15
+dark:border-muted-foreground/15 dark:hover:bg-muted-foreground/30 size-[34px] rounded-full p-1 text-xs
+font-semibold"
             aria-label="Voice input"
             tooltip="Voice input"
             side="top"
@@ -91,12 +78,12 @@ outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opac
       <AssistantIf condition={({ thread }) => !thread.isRunning}>
         <ComposerPrimitive.Send asChild>
           <TooltipIconButton
+            variant="default"
             className="aui-composer-send size-8 rounded-full"
             aria-label="Send message"
             tooltip="Send message"
             side="bottom"
             type="submit"
-            variant="default"
             size="icon"
           >
             <ArrowUpIcon className="aui-composer-send-icon size-4" />
@@ -107,10 +94,10 @@ outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opac
       <AssistantIf condition={({ thread }) => thread.isRunning}>
         <ComposerPrimitive.Cancel asChild>
           <Button
+            variant="default"
             className="aui-composer-cancel size-8 rounded-full"
             aria-label="Stop generating"
             type="button"
-            variant="default"
             size="icon"
           >
             <SquareIcon className="aui-composer-cancel-icon size-3 fill-current" />

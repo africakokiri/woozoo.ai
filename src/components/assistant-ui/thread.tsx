@@ -68,10 +68,10 @@ const ThreadScrollToBottom: FC = () => {
   return (
     <ThreadPrimitive.ScrollToBottom asChild>
       <TooltipIconButton
+        variant="outline"
         className="aui-thread-scroll-to-bottom dark:bg-background dark:hover:bg-accent absolute -top-12
 z-10 self-center rounded-full p-4 disabled:invisible"
         tooltip="Scroll to bottom"
-        variant="outline"
       >
         <ArrowDownIcon />
       </TooltipIconButton>
@@ -135,10 +135,10 @@ fill-mode-both duration-200 nth-[n+3]:hidden @md:nth-[n+3]:block"
             asChild
           >
             <Button
+              variant="ghost"
               className="aui-thread-welcome-suggestion hover:bg-muted h-auto w-full flex-wrap items-start
 justify-start gap-1 rounded-2xl border px-4 py-3 text-left text-sm transition-colors @md:flex-col"
               aria-label={suggestion.prompt}
-              variant="ghost"
             >
               <span className="aui-thread-welcome-suggestion-text-1 font-medium">
                 {suggestion.title}

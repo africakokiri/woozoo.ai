@@ -28,7 +28,21 @@ const prettierConfig = {
   requirePragma: false,
   useTabs: false,
 
-  attributeGroups: ["^(id|name)$", "^key$", "^className$", "^aria-", "$DEFAULT"],
+  attributeGroups: [
+    "^(id|name)$",
+    "^href$",
+    "^key$",
+    "^layout$",
+    "^variants$",
+    "^initial$",
+    "^animate$",
+    "^transition$",
+    "^exit$",
+    "^variant$",
+    "^className$",
+    "^aria-",
+    "$DEFAULT"
+  ],
 
   importOrder: ["^@/(.*)$", "^[./]", "<THIRD_PARTY_MODULES>"],
   importOrderSeparation: true,

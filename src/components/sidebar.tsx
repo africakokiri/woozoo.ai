@@ -26,19 +26,28 @@ import {
   DropdownMenuTrigger
 } from "@/ui/dropdown-menu";
 import { cn } from "@/utils/tailwind/cn";
-import { useGlobalConfigStore } from "@/utils/zustand/use-global-config";
+import { useGlobalConfigStore } from "@/utils/zustand/use-global-config-store";
+import { useSidebarStore } from "@/utils/zustand/use-sidebar-store";
 
 import { SignOutButton, useUser } from "@clerk/nextjs";
-import { BadgeCheck, ChevronsUpDown, CreditCard, LogOut, SunMoon } from "lucide-react";
-import { ChevronsLeft, ChevronsRight, Search, SquarePen } from "lucide-react";
+import {
+  BadgeCheck,
+  ChevronsLeft,
+  ChevronsRight,
+  ChevronsUpDown,
+  CreditCard,
+  LogOut,
+  Search,
+  SquarePen,
+  SunMoon
+} from "lucide-react";
 import { AnimatePresence, type Variants, motion } from "motion/react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
-import { type Dispatch, type SetStateAction, useState } from "react";
-import { useEffect } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 
-export const Vars: Variants = {
+const motionVars: Variants = {
   hidden: { opacity: 0, transition: { duration: 0.1 } },
   visible: {
     opacity: 1,
@@ -47,24 +56,31 @@ export const Vars: Variants = {
 };
 
 const Sidebar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
-  const { isSidebarOpen, isHydrated, setIsSidebarRendered, finishFirstRender } = useGlobalConfigStore();
+  const { isOpen, setIsSidebarRendered } = useSidebarStore();
+  const { isHydrated, finishFirstRender } = useGlobalConfigStore();
 
   useEffect(() => {
-    requestAnimationFrame(() => finishFirstRender());
+    if (!isHydrated) return;
 
+    const raf = requestAnimationFrame(() => finishFirstRender());
+
+    return () => cancelAnimationFrame(raf);
+  }, [isHydrated, finishFirstRender]);
+
+  useEffect(() => {
     setIsSidebarRendered();
-  }, []);
+  }, [setIsSidebarRendered]);
 
   if (!isHydrated || !isAuthenticated) return null;
 
   return (
     <motion.aside
-      className="bg-sidebar sticky top-0 left-0 flex h-screen shrink-0 flex-col border-r"
       initial={false}
-      animate={{ width: isSidebarOpen ? 289 : 81 }}
+      animate={{ width: isOpen ? 288 : 80 }}
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
+      className="bg-sidebar sticky top-0 left-0 flex h-screen shrink-0 flex-col border-r"
     >
-      <header className={cn("px-4 pt-4 pb-1", isSidebarOpen && "pb-4")}>
+      <header className="p-4">
         <Sidebar.Header />
       </header>
 
@@ -80,76 +96,70 @@ const Sidebar = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
 };
 
 const Header = () => {
-  const { isFirstRender, isSidebarOpen, setIsSidebarOpen } = useGlobalConfigStore();
+  const { isOpen, toggle } = useSidebarStore();
+  const { isFirstRender } = useGlobalConfigStore();
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
+    <div className="flex justify-between">
+      <motion.div
+        initial={isFirstRender ? false : true}
+        animate={{
+          height: isOpen ? "auto" : 100,
+          marginTop: isOpen ? 0 : 64
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className={cn("flex h-12 items-center gap-2", !isOpen && "border-y")}
+      >
         <Link
-          className="fvis flex items-center gap-2"
           href="/"
+          className="focus-visible flex items-center gap-2"
         >
-          <motion.div
-            className={cn(
-              "flex h-12 items-center gap-2",
-              isSidebarOpen ? "mt-0" : "my-4 mt-16 h-full border-y!"
+          <Image
+            className="min-size-icon shrink-0 dark:invert"
+            src="/icons/main.svg"
+            alt="Main logo"
+            width={48}
+            height={48}
+          />
+          <AnimatePresence>
+            {isOpen && (
+              <motion.h1
+                key="sidebar-header-h1"
+                variants={motionVars}
+                initial={isFirstRender ? false : "hidden"}
+                animate="visible"
+                exit="hidden"
+                className="text-sidebar-foreground text-2xl font-light tracking-tight"
+                aria-hidden={!isOpen}
+              >
+                WooZoo
+              </motion.h1>
             )}
-            initial={isFirstRender ? false : true}
-            animate={{
-              height: isSidebarOpen ? "auto" : "100px",
-              marginTop: isSidebarOpen ? 0 : 64
-            }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            data-open={isSidebarOpen}
-          >
-            <Image
-              className="min-w-12! shrink-0 dark:invert"
-              src="/icons/main.svg"
-              alt="WooZoo logo"
-              width={48}
-              height={48}
-            />
-            <AnimatePresence>
-              {isSidebarOpen && (
-                <motion.h1
-                  key="sidebar-header"
-                  className="text-sidebar-foreground top-6 left-[72px] text-2xl font-light
-tracking-tight"
-                  aria-hidden={!isSidebarOpen}
-                  variants={Vars}
-                  initial={isFirstRender ? false : "hidden"}
-                  animate="visible"
-                  exit="hidden"
-                >
-                  WooZoo
-                </motion.h1>
-              )}
-            </AnimatePresence>
-          </motion.div>
+          </AnimatePresence>
         </Link>
+      </motion.div>
 
-        <motion.div
-          className="absolute top-4 left-4"
-          initial={isFirstRender ? false : { x: 0 }}
-          animate={{ x: isSidebarOpen ? 208 : 0 }}
-          transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
+      <motion.div
+        initial={isFirstRender ? false : { x: 0 }}
+        animate={{ x: isOpen ? 208 : 0 }}
+        transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
+        className="absolute top-4 left-4"
+      >
+        <Button
+          variant="ghost"
+          className="min-size-icon"
+          onClick={() => toggle()}
         >
-          <Button
-            className="flex h-12 w-12 items-center justify-center"
-            aria-label="Close sidebar"
-            variant="ghost"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          >
-            {isSidebarOpen ? <ChevronsLeft /> : <ChevronsRight />}
-          </Button>
-        </motion.div>
-      </div>
+          {isOpen ? <ChevronsLeft /> : <ChevronsRight />}
+        </Button>
+      </motion.div>
     </div>
   );
 };
 
 const Nav = () => {
-  const { isFirstRender, isSidebarOpen } = useGlobalConfigStore();
+  const { isOpen } = useSidebarStore();
+  const { isFirstRender } = useGlobalConfigStore();
 
   return (
     <ul className="flex w-full flex-col items-center space-y-2">
@@ -159,24 +169,22 @@ const Nav = () => {
           className="flex w-full items-center text-sm"
         >
           <Button
-            className={cn(
-              "flex h-12 w-12 flex-1 items-center justify-start gap-2",
-              isSidebarOpen && "h-8"
-            )}
-            aria-label={!isSidebarOpen ? item : undefined}
             variant="ghost"
+            className={cn("flex h-12 w-12 flex-1 items-center justify-start gap-2", isOpen && "h-8")}
+            aria-label={!isOpen ? item : undefined}
           >
             <div>{i === 0 ? <SquarePen aria-hidden={true} /> : <Search aria-hidden={true} />}</div>
 
             <AnimatePresence>
-              {isSidebarOpen && (
+              {isOpen && (
                 <motion.span
                   key="sidebar-nav"
-                  className="font-normal"
-                  variants={Vars}
+                  variants={motionVars}
                   initial={isFirstRender ? false : "hidden"}
                   animate="visible"
+                  transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
                   exit="hidden"
+                  className="font-normal"
                 >
                   {item}
                 </motion.span>
@@ -191,8 +199,6 @@ const Nav = () => {
 
 export const User = () => {
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
-  const { isSidebarOpen } = useGlobalConfigStore();
-
   const { theme, setTheme } = useTheme();
 
   return (
@@ -203,11 +209,11 @@ export const User = () => {
           asChild
         >
           <Button
+            variant="ghost"
             className="h-12 px-0! py-6!"
             aria-label="Open user account menu"
-            variant="ghost"
           >
-            <UserProfile isSidebarOpen={isSidebarOpen} />
+            <UserProfile />
           </Button>
         </DropdownMenuTrigger>
 
@@ -267,10 +273,10 @@ export const User = () => {
   );
 };
 
-const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
-  const { user } = useUser();
-
+const UserProfile = () => {
+  const { isOpen } = useSidebarStore();
   const { isFirstRender } = useGlobalConfigStore();
+  const { user } = useUser();
 
   return (
     <div className="flex w-full items-center gap-2 p-2.5">
@@ -289,14 +295,14 @@ const UserProfile = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => {
       </Avatar>
 
       <AnimatePresence>
-        {isSidebarOpen && (
+        {isOpen && (
           <motion.div
             key="sidebar-user"
-            className="flex flex-1 items-center"
-            variants={Vars}
+            variants={motionVars}
             initial={isFirstRender ? false : "hidden"}
             animate="visible"
             exit="hidden"
+            className="flex flex-1 items-center"
           >
             <div className="flex flex-col items-start justify-between">
               <span className="text-sm font-medium">{user?.firstName}</span>

@@ -46,3 +46,5 @@ src/app/test
 /.clerk/
 
 /src/generated/prisma
+
+/src/generated/prisma

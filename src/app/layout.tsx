@@ -1,3 +1,4 @@
+import Thread from "@/components/thread/thread";
 import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
           defaultTheme="system"
         >
+          <Thread />
           {children}
         </ThemeProvider>
       </body>

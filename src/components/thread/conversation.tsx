@@ -34,7 +34,7 @@ export const Conversation = () => {
 
                   <div
                     className={cn(
-                      "flex w-full whitespace-pre-wrap",
+                      "flex w-full pb-24 whitespace-pre-wrap",
                       m.role === "user" &&
                         "bg-muted border-muted-foreground ml-auto w-fit rounded-lg px-3 py-1.5"
                     )}

@@ -1,60 +1,34 @@
-import Sidebar from "@/components/sidebar";
-import ThreadClientSideRenderer from "@/components/thread-client-side-renderer";
-import RuntimeProvider from "@/contexts/runtime-provider";
+import { inter } from "@/styles/fonts";
 import "@/styles/globals.css";
 
-import { ClerkProvider } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { shadcn } from "@clerk/themes";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "WooZoo",
-  description: "",
-  icons: {
-    icon: "/icons/main.svg"
-  }
+  title: "",
+  description: ""
 };
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default async function RootLayout({
+export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isAuthenticated } = await auth();
-
   return (
-    <ClerkProvider
-      appearance={{
-        theme: shadcn
-      }}
+    <html
+      lang="en"
+      suppressHydrationWarning
     >
-      <RuntimeProvider>
-        <html
-          lang="en"
-          suppressHydrationWarning
+      <body className={`${inter.className} antialiased`}>
+        <ThemeProvider
+          enableColorScheme={false}
+          attribute="class"
+          disableTransitionOnChange
+          defaultTheme="system"
         >
-          <body className={`${inter.className} flex antialiased`}>
-            <ThemeProvider
-              enableColorScheme={false}
-              attribute="class"
-              disableTransitionOnChange
-              defaultTheme="system"
-            >
-              <Sidebar isAuthenticated={isAuthenticated} />
-
-              <main className="w-dvw">
-                <ThreadClientSideRenderer isAuthenticated={isAuthenticated} />
-                {children}
-              </main>
-            </ThemeProvider>
-          </body>
-        </html>
-      </RuntimeProvider>
-    </ClerkProvider>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

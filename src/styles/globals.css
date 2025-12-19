@@ -121,13 +121,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-@layer utilities {
-  .min-size-icon {
-    @apply max-h-12! min-h-12! max-w-12! min-w-12!;
-  }
-
-  .focus-visible {
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive outline-none focus-visible:ring-[3px];
-  }
-}

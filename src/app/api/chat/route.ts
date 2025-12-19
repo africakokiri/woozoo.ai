@@ -4,18 +4,25 @@
  *
  * - streamText
  * https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text#to-ui-message-stream-response.response-init%20&%20ui-message-stream-options
+ *
+ * - Chatbot Tool Usage
+ * https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-tool-usage
+ *
+ * - Chatbot
+ * https://ai-sdk.dev/docs/ai-sdk-ui/chatbot
  */
 import { google } from "@ai-sdk/google";
-import { streamText } from "ai";
+import { type UIMessage, convertToModelMessages, streamText } from "ai";
 
 export async function POST(res: Response) {
   // model은 나중에 사용
-  const { messages, model } = await res.json();
+  const { messages }: { messages: UIMessage[] } = await res.json();
 
-  const stream = streamText({
-    model: google("gemini-2.5-flash-lite"),
-    messages
+  const result = streamText({
+    model: google("gemini-2.5-flash"),
+    // useChat에서 가져온 UI 메시지 배열을 AI 함수(streamText, generateText 등)에서 사용할 수 있는 ModelMessage 배열로 반환한다.
+    messages: convertToModelMessages(messages)
   });
 
-  return stream.toTextStreamResponse();
+  return result.toUIMessageStreamResponse();
 }

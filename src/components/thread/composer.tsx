@@ -37,7 +37,9 @@ md:text-sm"
       ref={formRef}
     >
       <Textarea
-        className="h-full w-full resize-none border-none px-4 pt-4 outline-none"
+        id="textarea"
+        className="focus-visible:outline-ring h-full w-full resize-none border-none px-4 pt-4 outline-0
+focus-visible:outline-offset-[-2px]"
         placeholder="Ask me anything..."
         minRows={2}
         maxRows={8}
@@ -62,6 +64,7 @@ md:text-sm"
         <div className="space-x-2">
           <Button
             variant="ghost"
+            aria-label="Attach file"
             type="button"
           >
             <Plus />
@@ -69,6 +72,7 @@ md:text-sm"
 
           <Button
             variant="ghost"
+            aria-label="Voice input"
             type="button"
           >
             <Mic />
@@ -77,6 +81,7 @@ md:text-sm"
 
         <Button
           variant={prompt.trim().length > 0 ? "default" : "ghost"}
+          aria-label="Send message"
           type="submit"
           disabled={prompt.trim().length > 0 ? false : true}
         >

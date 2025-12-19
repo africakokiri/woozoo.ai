@@ -6,6 +6,7 @@ import { useGlobalDataStore } from "@/utils/zustand/store";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useEffect } from "react";
+import { Streamdown } from "streamdown";
 
 export const Conversation = () => {
   const { prompt } = useGlobalDataStore();
@@ -34,15 +35,16 @@ export const Conversation = () => {
                 >
                   {m.role === "user" && <div className="min-w-1/4 flex-1 bg-white" />}
 
-                  <div
+                  <Streamdown
                     className={cn(
-                      "flex w-full pb-24 whitespace-pre-wrap",
+                      "flex w-full flex-col pb-24 whitespace-pre-wrap",
                       m.role === "user" &&
                         "bg-muted border-muted-foreground ml-auto w-fit rounded-lg px-3 py-1.5"
                     )}
+                    isAnimating={status === "streaming" && m.role === "assistant"}
                   >
                     {part.text}
-                  </div>
+                  </Streamdown>
                 </div>
               ) : null
             )}

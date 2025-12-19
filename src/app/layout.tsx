@@ -30,8 +30,12 @@ export default function RootLayout({
           disableTransitionOnChange
           defaultTheme="system"
         >
-          <Thread />
-          {children}
+          <main className="flex justify-center">
+            <div className="w-full max-w-3xl *:w-full">
+              <Thread />
+              {children}
+            </div>
+          </main>
         </ThemeProvider>
       </body>
     </html>

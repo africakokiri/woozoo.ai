@@ -3,5 +3,9 @@
 import { Composer } from "@/components/thread/composer";
 
 export default function Thread() {
-  return <Composer />;
+  return (
+    <div className="">
+      <Composer />
+    </div>
+  );
 }

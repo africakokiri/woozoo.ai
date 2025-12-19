@@ -1,32 +1,3 @@
-"use client";
-
-import { generateStreamValue } from "@/utils/server/generate-stream-value";
-
-import { readStreamableValue } from "@ai-sdk/rsc";
-import { useState } from "react";
-
-// maxDuration만큼 요청이 살아있을 수 있다.
-// maxDuration 안에 모든 응답이 생성되어야 한다 X -> 첫 응답이 시작되어야 한다 O
-export const maxDuration = 30;
-
-export default function Home() {
-  const [generation, setGeneration] = useState<string>("");
-
-  return (
-    <div>
-      <button
-        onClick={async () => {
-          const { output } = await generateStreamValue("Why is the sky blue?");
-
-          for await (const delta of readStreamableValue(output)) {
-            setGeneration((currentGeneration) => `${currentGeneration}${delta}`);
-          }
-        }}
-      >
-        Ask
-      </button>
-
-      <div>{generation}</div>
-    </div>
-  );
+export default function page() {
+  return null;
 }

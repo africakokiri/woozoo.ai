@@ -7,6 +7,7 @@ import Textarea from "react-textarea-autosize";
 export const Composer = () => {
   const [prompt, setPrompt] = useState("");
   const [isMounted, setIsMounted] = useState(false);
+  const formRef = useRef(null);
   const textareaRef = useRef(null);
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +24,7 @@ export const Composer = () => {
     <form
       className="relative"
       onSubmit={handleOnSubmit}
+      ref={formRef}
     >
       <Textarea
         className="border-input placeholder:text-muted-foreground focus-visible:border-ring
@@ -36,6 +38,18 @@ disabled:opacity-50 md:text-sm"
         value={prompt}
         ref={textareaRef}
         onChange={(e) => setPrompt(e.target.value)}
+        onKeyDown={(e) => {
+          // Enter + Shift일 때 아무런 동작하지 않음
+          if (e.key === "Enter" && !e.shiftKey) e.preventDefault();
+
+          // 마지막 글자가 폼 전송 때 포함되는 것 방지
+          if (e.nativeEvent.isComposing) return;
+
+          // Enter + prompt.length > 0일 때 폼 제출
+          if (formRef.current && e.key === "Enter" && !e.shiftKey && prompt.trim().length > 0) {
+            (formRef.current as HTMLFormElement).requestSubmit();
+          }
+        }}
       />
 
       <div
@@ -59,9 +73,9 @@ disabled:opacity-50 md:text-sm"
         </div>
 
         <Button
-          variant={prompt.length > 0 ? "default" : "ghost"}
+          variant={prompt.trim().length > 0 ? "default" : "ghost"}
           type="submit"
-          disabled={prompt.length > 0 ? false : true}
+          disabled={prompt.trim().length > 0 ? false : true}
         >
           <ArrowUp />
         </Button>

@@ -17,5 +17,5 @@ export async function POST(res: Response) {
     messages
   });
 
-  return stream.toUIMessageStreamResponse;
+  return stream.toTextStreamResponse();
 }

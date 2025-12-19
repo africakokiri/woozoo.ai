@@ -5,11 +5,7 @@ import { generateStreamValue } from "@/utils/server/generate-stream-value";
 import { readStreamableValue } from "@ai-sdk/rsc";
 import { useState } from "react";
 
-// maxDuration만큼 요청이 살아있을 수 있다.
-// maxDuration 안에 모든 응답이 생성되어야 한다 X -> 첫 응답이 시작되어야 한다 O
-export const maxDuration = 30;
-
-export default function Home() {
+export const Conversation = () => {
   const [generation, setGeneration] = useState<string>("");
 
   return (
@@ -29,4 +25,4 @@ export default function Home() {
       <div>{generation}</div>
     </div>
   );
-}
+};

@@ -5,6 +5,9 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
+export const runtime = "edge";
+export const maxDuration = 30;
+
 export const metadata: Metadata = {
   title: "WooZoo",
   description: "",

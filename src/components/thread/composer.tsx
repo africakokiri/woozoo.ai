@@ -42,6 +42,7 @@ md:text-sm"
 focus-visible:outline-offset-[-2px]"
         placeholder="Ask me anything..."
         minRows={2}
+        autoFocus
         maxRows={8}
         value={prompt}
         ref={textareaRef}

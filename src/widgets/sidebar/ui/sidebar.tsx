@@ -10,7 +10,9 @@ const MIN_SIDEBAR_WIDTH = "81px"; // 5rem + 1px(border)
 const MAX_SIDEBAR_WIDTH = "289px"; // 18rem + 1px(border)
 
 export default function Sidebar() {
-  const { isSidebarOpen } = useGlobalConfigStore();
+  const { isSidebarOpen, isHydrated } = useGlobalConfigStore();
+
+  if (!isHydrated) return null;
 
   return (
     <motion.aside

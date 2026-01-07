@@ -15,7 +15,7 @@ export const Header = () => {
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1">
         <Image
-          className="size-12"
+          className="min-h-12 min-w-12"
           src="/icons/main.svg"
           alt="WooZoo main logo"
           width={48}

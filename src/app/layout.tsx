@@ -1,5 +1,5 @@
-import { inter } from "@/styles/fonts";
-import "@/styles/globals.css";
+import { inter } from "@/shared/styles/fonts";
+import "@/shared/styles/globals.css";
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";

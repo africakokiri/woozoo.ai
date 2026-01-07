@@ -290,7 +290,7 @@ export const ModelSelectorRenderer = () => {
   const chefs = Array.from(new Set(models.map((model) => model.chef)));
 
   return (
-    <div className="flex size-full items-center justify-center p-8">
+    <div className="flex items-center justify-center">
       <ModelSelector
         onOpenChange={setOpen}
         open={open}
@@ -298,7 +298,7 @@ export const ModelSelectorRenderer = () => {
         <ModelSelectorTrigger asChild>
           <Button
             variant="outline"
-            className="w-[200px] justify-between"
+            className="w-fit justify-between"
           >
             {selectedModelData?.chefSlug && <ModelSelectorLogo provider={selectedModelData.chefSlug} />}
             {selectedModelData?.name && <ModelSelectorName>{selectedModelData.name}</ModelSelectorName>}

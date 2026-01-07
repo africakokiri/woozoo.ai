@@ -3,9 +3,14 @@
 import { Button } from "@/shared/ui/button";
 
 import { ArrowUp, Mic, Plus } from "lucide-react";
+import { useState } from "react";
 import Textarea from "react-textarea-autosize";
 
 export default function Prompt() {
+  const [prompt, setPrompt] = useState("");
+
+  const validPrompt = prompt.trim().length > 0;
+
   return (
     <form
       className="flex flex-col rounded-3xl border border-neutral-500 transition-all duration-200
@@ -16,6 +21,7 @@ focus-within:shadow-2xl"
         minRows={2}
         maxRows={10}
         placeholder="Ask me anything"
+        onChange={(e) => setPrompt(e.target.value)}
       />
 
       <div className="flex w-full justify-between px-4 pb-3 **:rounded-full">
@@ -40,6 +46,7 @@ focus-within:shadow-2xl"
         <Button
           type="submit"
           size="icon"
+          disabled={!validPrompt}
         >
           <ArrowUp />
         </Button>

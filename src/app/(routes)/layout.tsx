@@ -2,6 +2,7 @@ import { inter } from "@/shared/styles/fonts";
 import "@/shared/styles/globals.css";
 import Prompt from "@/widgets/prompt/ui/prompt";
 import Sidebar from "@/widgets/sidebar/ui/sidebar";
+import Thread from "@/widgets/thread/ui/thread";
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -33,8 +34,12 @@ export default function RootLayout({
         >
           <Sidebar />
 
-          <main className="mx-auto w-full max-w-3xl">
-            <Prompt />
+          <main className="mx-auto flex h-dvh w-full max-w-3xl flex-col p-8">
+            <Thread />
+
+            <div className="mt-auto">
+              <Prompt />
+            </div>
             {children}
           </main>
         </ThemeProvider>

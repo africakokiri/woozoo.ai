@@ -2,8 +2,10 @@
 
 import { useGlobalConfigStore } from "@/shared/libs/zustand/use-global-config-store";
 import { Button } from "@/shared/ui/button";
+import { motionVars } from "@/widgets/sidebar/model/motion";
 
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 
 export const Header = () => {
@@ -20,7 +22,19 @@ export const Header = () => {
           height={48}
         />
 
-        <span className="text-3xl font-light tracking-tight">WooZoo</span>
+        <AnimatePresence initial={false}>
+          {isSidebarOpen && (
+            <motion.span
+              variants={motionVars}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className="text-3xl font-light tracking-tight"
+            >
+              WooZoo
+            </motion.span>
+          )}
+        </AnimatePresence>
       </div>
 
       <Button

@@ -2,6 +2,7 @@
 
 import { useGlobalConfigStore } from "@/shared/libs/zustand/use-global-config-store";
 import { Button } from "@/shared/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 import { motionVars } from "@/widgets/sidebar/model/motion";
 
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
@@ -48,13 +49,20 @@ export const Header = () => {
         </Link>
       </motion.div>
 
-      <MotionButton
-        variant="ghost"
-        className="absolute top-4 right-4 size-12"
-        onClick={() => toggleSidebar()}
-      >
-        {isSidebarOpen ? <ChevronsLeft /> : <ChevronsRight />}
-      </MotionButton>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <MotionButton
+            variant="ghost"
+            className="absolute top-4 right-4 size-12"
+            onClick={() => toggleSidebar()}
+          >
+            {isSidebarOpen ? <ChevronsLeft /> : <ChevronsRight />}
+          </MotionButton>
+        </TooltipTrigger>
+        <TooltipContent side="right">
+          <p>{isSidebarOpen ? "Close sidebar" : "Open sidebar"}</p>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };

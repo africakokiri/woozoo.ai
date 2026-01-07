@@ -2,6 +2,7 @@
 
 import { Button } from "@/shared/ui/button";
 import { Tooltip, TooltipContent } from "@/shared/ui/tooltip";
+import { ModelSelectorRenderer } from "@/widgets/prompt/ui/model-selector-renderer";
 
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
 import { ArrowUp, Plus } from "lucide-react";
@@ -46,18 +47,22 @@ focus-within:shadow-2xl"
       />
 
       <div className="flex w-full justify-between px-4 pb-3 **:rounded-full">
-        <TooltipButton
-          tooltip="Attach files"
-          component={
-            <Button
-              variant="outline"
-              size="icon"
-              type="button"
-            >
-              <Plus />
-            </Button>
-          }
-        />
+        <div className="flex gap-2">
+          <TooltipButton
+            tooltip="Attach files"
+            component={
+              <Button
+                variant="outline"
+                size="icon"
+                type="button"
+              >
+                <Plus />
+              </Button>
+            }
+          />
+
+          <ModelSelectorRenderer />
+        </div>
 
         <TooltipButton
           tooltip="Send message"

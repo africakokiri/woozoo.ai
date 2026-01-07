@@ -12,17 +12,23 @@ export default function Prompt() {
 
   const validPrompt = prompt.trim().length > 0;
 
+  const handleOnSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <form
       className="flex flex-col rounded-3xl border border-neutral-500 transition-all duration-200
 focus-within:shadow-2xl"
       ref={formRef}
+      onSubmit={handleOnSubmit}
     >
       <Textarea
         className="w-full resize-none rounded-2xl px-4 py-3 outline-none"
         minRows={2}
         maxRows={10}
         autoFocus
+        value={prompt}
         placeholder="Ask me anything"
         onChange={(e) => setPrompt(e.target.value)}
         onKeyDown={(e) => {
@@ -30,7 +36,9 @@ focus-within:shadow-2xl"
             if (e.shiftKey) return;
             if (e.nativeEvent.isComposing) return;
 
+            e.preventDefault();
             formRef.current?.requestSubmit();
+            setPrompt("");
           }
         }}
       />

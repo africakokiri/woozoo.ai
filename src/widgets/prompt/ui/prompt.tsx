@@ -23,6 +23,7 @@ focus-within:shadow-2xl"
           <Button
             variant="outline"
             size="icon"
+            type="button"
           >
             <Plus />
           </Button>
@@ -30,12 +31,16 @@ focus-within:shadow-2xl"
           <Button
             variant="outline"
             size="icon"
+            type="button"
           >
             <Mic />
           </Button>
         </div>
 
-        <Button size="icon">
+        <Button
+          type="submit"
+          size="icon"
+        >
           <ArrowUp />
         </Button>
       </div>

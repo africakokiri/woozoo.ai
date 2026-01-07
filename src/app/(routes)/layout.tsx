@@ -1,5 +1,6 @@
 import { inter } from "@/shared/styles/fonts";
 import "@/shared/styles/globals.css";
+import Sidebar from "@/widgets/sidebar/ui/sidebar";
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
@@ -29,7 +30,9 @@ export default function RootLayout({
           disableTransitionOnChange
           defaultTheme="system"
         >
-          {children}
+          <Sidebar />
+
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>

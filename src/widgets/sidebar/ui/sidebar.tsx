@@ -1,6 +1,7 @@
 "use client";
 
 import { useGlobalConfigStore } from "@/shared/libs/zustand/use-global-config-store";
+import { Header } from "@/widgets/sidebar/ui/header";
 
 import { motion } from "motion/react";
 
@@ -18,7 +19,9 @@ export default function Sidebar() {
       className="bg-sidebar border-r"
     >
       {/* 페이지 로고 */}
-      <header></header>
+      <header>
+        <Header />
+      </header>
 
       {/* 새로운 채팅, 채팅 검색, 채팅 기록 등*/}
       <nav></nav>

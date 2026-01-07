@@ -12,39 +12,38 @@ import Link from "next/link";
 export const Header = () => {
   const { isSidebarOpen, toggleSidebar } = useGlobalConfigStore();
 
-  const MotionImage = motion(Image);
   const MotionButton = motion(Button);
 
   return (
     <div className="flex items-center justify-between">
-      <Link
-        href="/"
-        className="flex items-center gap-1"
-      >
-        <MotionImage
-          animate={{ marginTop: isSidebarOpen ? "0rem" : "4rem" }}
-          className="min-h-12 min-w-12"
-          layoutId="image"
-          src="/icons/main.svg"
-          alt="WooZoo main logo"
-          width={48}
-          height={48}
-        />
+      <motion.div animate={{ marginTop: isSidebarOpen ? "0rem" : "4rem" }}>
+        <Link
+          href="/"
+          className="flex items-center gap-1"
+        >
+          <Image
+            className="min-h-12 min-w-12"
+            src="/icons/main.svg"
+            alt="WooZoo main logo"
+            width={48}
+            height={48}
+          />
 
-        <AnimatePresence initial={false}>
-          {isSidebarOpen && (
-            <motion.span
-              variants={motionVars}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              className="text-3xl font-light tracking-tight"
-            >
-              WooZoo
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </Link>
+          <AnimatePresence initial={false}>
+            {isSidebarOpen && (
+              <motion.span
+                variants={motionVars}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                className="text-3xl font-light tracking-tight"
+              >
+                WooZoo
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </Link>
+      </motion.div>
 
       <MotionButton
         variant="ghost"

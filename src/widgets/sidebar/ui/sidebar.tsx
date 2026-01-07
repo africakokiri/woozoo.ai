@@ -16,7 +16,7 @@ export default function Sidebar() {
       initial={false}
       animate={isSidebarOpen ? { width: MAX_SIDEBAR_WIDTH } : { width: MIN_SIDEBAR_WIDTH }}
       transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
-      className="bg-sidebar sticky top-0 left-0 h-dvh border-r"
+      className="bg-sidebar sticky top-0 left-0 h-dvh space-y-4 border-r p-4"
     >
       {/* 페이지 로고 */}
       <header>

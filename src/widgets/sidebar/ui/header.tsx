@@ -25,13 +25,30 @@ export const Header = () => {
           href="/"
           className="flex items-center gap-1"
         >
-          <Image
-            className="min-h-12 min-w-12"
-            src="/icons/main.svg"
-            alt="WooZoo main logo"
-            width={48}
-            height={48}
-          />
+          {isSidebarOpen ? (
+            <Image
+              className="min-h-12 min-w-12"
+              src="/icons/main.svg"
+              alt="WooZoo main logo"
+              width={48}
+              height={48}
+            />
+          ) : (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Image
+                  className="min-h-12 min-w-12"
+                  src="/icons/main.svg"
+                  alt="WooZoo main logo"
+                  width={48}
+                  height={48}
+                />
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                <p>Go home</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
 
           <AnimatePresence initial={false}>
             {isSidebarOpen && (

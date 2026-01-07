@@ -12,7 +12,7 @@ import Link from "next/link";
 export const Header = () => {
   const { isSidebarOpen, toggleSidebar } = useGlobalConfigStore();
 
-  const MotionButton = motion(Button);
+  const MotionButton = motion.create(Button);
 
   return (
     <div className="flex items-center justify-between">

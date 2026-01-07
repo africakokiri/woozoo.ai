@@ -7,6 +7,7 @@ import { motionVars } from "@/widgets/sidebar/model/motion";
 import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Header = () => {
   const { isSidebarOpen, toggleSidebar } = useGlobalConfigStore();
@@ -16,7 +17,10 @@ export const Header = () => {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="flex items-center gap-1">
+      <Link
+        href="/"
+        className="flex items-center gap-1"
+      >
         <MotionImage
           animate={{ marginTop: isSidebarOpen ? "0rem" : "4rem" }}
           className="min-h-12 min-w-12"
@@ -40,7 +44,7 @@ export const Header = () => {
             </motion.span>
           )}
         </AnimatePresence>
-      </div>
+      </Link>
 
       <MotionButton
         variant="ghost"

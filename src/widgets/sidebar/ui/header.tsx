@@ -16,7 +16,10 @@ export const Header = () => {
 
   return (
     <div className="flex items-center justify-between">
-      <motion.div animate={{ marginTop: isSidebarOpen ? "0rem" : "4rem" }}>
+      <motion.div
+        initial={false}
+        animate={{ marginTop: isSidebarOpen ? "0rem" : "4rem" }}
+      >
         <Link
           href="/"
           className="flex items-center gap-1"

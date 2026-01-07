@@ -11,11 +11,16 @@ import Image from "next/image";
 export const Header = () => {
   const { isSidebarOpen, toggleSidebar } = useGlobalConfigStore();
 
+  const MotionImage = motion(Image);
+  const MotionButton = motion(Button);
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-1">
-        <Image
+        <MotionImage
+          animate={{ marginTop: isSidebarOpen ? "0rem" : "4rem" }}
           className="min-h-12 min-w-12"
+          layoutId="image"
           src="/icons/main.svg"
           alt="WooZoo main logo"
           width={48}
@@ -37,13 +42,13 @@ export const Header = () => {
         </AnimatePresence>
       </div>
 
-      <Button
+      <MotionButton
         variant="ghost"
-        className="size-12"
+        className="absolute top-4 right-4 size-12"
         onClick={() => toggleSidebar()}
       >
         {isSidebarOpen ? <ChevronsLeft /> : <ChevronsRight />}
-      </Button>
+      </MotionButton>
     </div>
   );
 };

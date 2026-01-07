@@ -1,5 +1,6 @@
 import { inter } from "@/shared/styles/fonts";
 import "@/shared/styles/globals.css";
+import Prompt from "@/widgets/prompt/ui/prompt";
 import Sidebar from "@/widgets/sidebar/ui/sidebar";
 
 import type { Metadata } from "next";
@@ -23,7 +24,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
     >
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} flex antialiased`}>
         <ThemeProvider
           enableColorScheme={false}
           attribute="class"
@@ -32,7 +33,10 @@ export default function RootLayout({
         >
           <Sidebar />
 
-          <main>{children}</main>
+          <main className="mx-auto w-full max-w-3xl">
+            <Prompt />
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>

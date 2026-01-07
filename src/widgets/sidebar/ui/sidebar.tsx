@@ -1,14 +1,20 @@
 "use client";
 
+import { useGlobalConfigStore } from "@/shared/libs/zustand/use-global-config-store";
+
 import { motion } from "motion/react";
 
 const MIN_SIDEBAR_WIDTH = "81px"; // 5rem + 1px(border)
 const MAX_SIDEBAR_WIDTH = "289px"; // 18rem + 1px(border)
 
 export default function Sidebar() {
+  const { isSidebarOpen } = useGlobalConfigStore();
+
   return (
     <motion.aside
       initial={false}
+      animate={isSidebarOpen ? { width: MAX_SIDEBAR_WIDTH } : { width: MIN_SIDEBAR_WIDTH }}
+      transition={{ type: "spring", stiffness: 350, damping: 40, bounce: 0 }}
       className="bg-sidebar border-r"
     >
       {/* 페이지 로고 */}

@@ -4,7 +4,7 @@ import { Button } from "@/shared/ui/button";
 import { Tooltip, TooltipContent } from "@/shared/ui/tooltip";
 
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
-import { ArrowUp, Mic, Plus } from "lucide-react";
+import { ArrowUp, Plus } from "lucide-react";
 import { useRef, useState } from "react";
 import Textarea from "react-textarea-autosize";
 
@@ -46,33 +46,18 @@ focus-within:shadow-2xl"
       />
 
       <div className="flex w-full justify-between px-4 pb-3 **:rounded-full">
-        <div className="flex gap-2">
-          <TooltipButton
-            tooltip="Attach files"
-            component={
-              <Button
-                variant="outline"
-                size="icon"
-                type="button"
-              >
-                <Plus />
-              </Button>
-            }
-          />
-
-          <TooltipButton
-            tooltip="Attach files"
-            component={
-              <Button
-                variant="outline"
-                size="icon"
-                type="button"
-              >
-                <Mic />
-              </Button>
-            }
-          />
-        </div>
+        <TooltipButton
+          tooltip="Attach files"
+          component={
+            <Button
+              variant="outline"
+              size="icon"
+              type="button"
+            >
+              <Plus />
+            </Button>
+          }
+        />
 
         <TooltipButton
           tooltip="Send message"
